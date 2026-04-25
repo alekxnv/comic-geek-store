@@ -2142,8 +2142,12 @@ function abrirModalProduto(card) {
 }
 
 async function abrirFormAviso(nomeProduto) {
-  const email = prompt("Digite seu e-mail para receber o aviso quando o produto voltar ao estoque:");
-  if (!email) return;
+  const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+  const email = usuario?.email;
+  if (!email) {
+    mostrarMensagem("Faça login para receber o aviso de reposição.", "erro");
+    return;
+  }
   try {
     const r = await fetch("/api/estoque/avisar", {
       method: "POST",
@@ -2151,8 +2155,8 @@ async function abrirFormAviso(nomeProduto) {
       body: JSON.stringify({ email, produto: nomeProduto }),
     });
     const d = await r.json();
-    alert(d.mensagem || d.erro);
-  } catch { alert("Erro ao registrar aviso. Tente novamente."); }
+    mostrarMensagem(d.mensagem || d.erro || "Aviso registrado!", d.erro ? "erro" : "sucesso");
+  } catch { mostrarMensagem("Erro ao registrar aviso. Tente novamente.", "erro"); }
 }
 
 function fecharModalProduto(e) {
