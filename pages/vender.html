@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Produtos — Comic Geek Store</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/vender.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar">
+            <span>Buscar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li><a href="/">Tudo</a></li>
+      <li><a href="/?filtro=lancamentos">Lançamentos</a></li>
+      <li><a href="/?filtro=prevenda">Pré-Venda</a></li>
+      <li><a href="/?filtro=marvel"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></a></li>
+      <li><a href="/?filtro=dc"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></a></li>
+      <li><a href="/?filtro=especiais">Especiais</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="vender-main">
+
+    <div id="vender-bloqueado" class="vender-bloqueado" style="display:none">
+      <h2>Acesso restrito</h2>
+      <p>Somente contas Pessoa Jurídica podem acessar esta área.</p>
+      <a href="/" class="btn-vender-acao">Voltar para a loja</a>
+    </div>
+
+    <div id="vender-pendente" class="vender-bloqueado vender-pendente" style="display:none">
+      <div class="vender-pendente__icone">⏳</div>
+      <h2>Cadastro em análise</h2>
+      <p>Seu cadastro de Pessoa Jurídica está aguardando aprovação do administrador.<br>Você receberá acesso assim que for aprovado.</p>
+      <a href="/" class="btn-vender-acao">Voltar para a loja</a>
+    </div>
+
+    <div id="vender-rejeitado" class="vender-bloqueado vender-rejeitado" style="display:none">
+      <div class="vender-pendente__icone">❌</div>
+      <h2>Cadastro não aprovado</h2>
+      <p>Seu cadastro de Pessoa Jurídica não foi aprovado pelo administrador.<br>Entre em contato: loja@comicgeekstore.com.br</p>
+      <a href="/" class="btn-vender-acao">Voltar para a loja</a>
+    </div>
+
+    <div id="vender-conteudo">
+      <div class="vender-header">
+        <h1 class="vender-titulo">Minha Loja</h1>
+        <button class="btn-novo-produto" id="btn-novo-produto" onclick="abrirFormProduto()">+ Cadastrar Produto</button>
+      </div>
+
+      <!-- Tabs de navegação -->
+      <div class="vender-tabs">
+        <button class="vender-tab ativo" id="tab-anuncios" onclick="mostrarAbaVender('anuncios')">Meus Anúncios</button>
+        <button class="vender-tab" id="tab-vendas" onclick="mostrarAbaVender('vendas')">Minhas Vendas</button>
+        <button class="vender-tab" id="tab-envios" onclick="mostrarAbaVender('envios')">Envios &amp; NF</button>
+      </div>
+
+      <!-- Formulário de cadastro de produto -->
+      <div id="form-produto-box" class="form-produto-box" style="display:none">
+        <h2>Cadastrar Novo Produto</h2>
+        <form id="form-produto" class="form-produto">
+          <div class="form-produto__grupo">
+            <label>Nome do Produto *</label>
+            <input type="text" id="prod-nome" placeholder="Ex: Batman Vol.1" required>
+          </div>
+          <div class="form-produto__grupo">
+            <label>Categoria *</label>
+            <select id="prod-categoria">
+              <option value="marvel">Marvel</option>
+              <option value="dc">DC</option>
+              <option value="lancamentos">Lançamentos</option>
+              <option value="especiais">Especiais</option>
+            </select>
+          </div>
+          <div class="form-produto__grupo">
+            <label>Preço Original (R$) *</label>
+            <input type="number" id="prod-preco-original" placeholder="0.00" min="0" step="0.01" required oninput="calcularPrecoVendedor()">
+          </div>
+          <div class="form-produto__grupo">
+            <label>Desconto (%) <span class="label-opcional">opcional</span></label>
+            <input type="number" id="prod-desconto" placeholder="0" min="0" max="99" step="1" oninput="calcularPrecoVendedor()">
+          </div>
+          <div class="form-produto__grupo">
+            <label>Preço de Venda (R$)</label>
+            <input type="number" id="prod-preco" placeholder="— calculado —" min="0" step="0.01" class="input-preco-venda" readonly>
+          </div>
+          <div class="form-produto__grupo">
+            <label>URL da Imagem *</label>
+            <input type="url" id="prod-img" placeholder="https://..." required oninput="atualizarPreviewImgVendedor(this.value)">
+            <div class="img-preview-wrap" id="vender-img-preview-wrap">
+              <div class="img-preview-placeholder" id="vender-img-placeholder">
+                <span class="img-preview-icon">📚</span>
+                <span class="img-preview-texto">Prévia da capa</span>
+              </div>
+              <img id="vender-img-preview" src="" alt="Prévia" class="img-preview-img" style="display:none" onerror="this.style.display='none';document.getElementById('vender-img-placeholder').style.display='flex'">
+            </div>
+          </div>
+          <div class="form-produto__grupo">
+            <label>Descrição</label>
+            <input type="text" id="prod-descricao" placeholder="Breve descrição do produto">
+          </div>
+          <div class="form-produto__acoes">
+            <button type="submit" class="btn-salvar-produto">Cadastrar</button>
+            <button type="button" class="btn-cancelar-produto" onclick="fecharFormProduto()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Aba: Meus Anúncios -->
+      <div id="aba-anuncios">
+        <div id="lista-meus-produtos" class="lista-meus-produtos"></div>
+      </div>
+
+      <!-- Aba: Minhas Vendas -->
+      <div id="aba-vendas" style="display:none">
+        <div id="lista-minhas-vendas"></div>
+      </div>
+
+      <!-- Aba: Envios & NF -->
+      <div id="aba-envios" style="display:none">
+        <div id="lista-envios"></div>
+      </div>
+    </div>
+
+    <!-- Modal: Registrar Envio -->
+    <div id="modal-envio" class="modal-envio-overlay" style="display:none" onclick="fecharModalEnvio(event)">
+      <div class="modal-envio-box">
+        <h2>Registrar Envio</h2>
+        <input type="hidden" id="envio-pedido-id">
+        <div class="form-produto__grupo">
+          <label>Transportadora *</label>
+          <select id="envio-transportadora">
+            <option value="Correios PAC">Correios PAC</option>
+            <option value="Correios SEDEX">Correios SEDEX</option>
+            <option value="Jadlog">Jadlog</option>
+            <option value="Total Express">Total Express</option>
+            <option value="Azul Cargo">Azul Cargo</option>
+            <option value="Outra">Outra</option>
+          </select>
+        </div>
+        <div class="form-produto__grupo">
+          <label>Código de Rastreio *</label>
+          <input type="text" id="envio-rastreio" placeholder="Ex: AA123456789BR" style="text-transform:uppercase">
+        </div>
+        <div class="form-produto__grupo">
+          <label>Número da Nota Fiscal *</label>
+          <input type="text" id="envio-nf" placeholder="Ex: 000123456">
+        </div>
+        <div class="form-produto__grupo">
+          <label>Chave de Acesso NF-e <span style="font-weight:400;font-size:0.85em">(opcional)</span></label>
+          <input type="text" id="envio-chave-nfe" placeholder="44 dígitos" maxlength="44">
+        </div>
+        <div class="form-produto__acoes">
+          <button class="btn-salvar-produto" onclick="confirmarEnvio()">Confirmar Envio</button>
+          <button class="btn-cancelar-produto" onclick="fecharModalEnvio()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2>Minha Conta</h2></li>
+          <li><h2>Cupons/Descontos</h2></li>
+          <li><h2>Contato</h2></li>
+          <li><h2>Fale Conosco</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

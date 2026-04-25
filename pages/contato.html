@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fale Conosco — Comic Geek Store</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+  <style>
+    .contato-container {
+      max-width: 560px;
+      margin: 0 auto;
+      background: #18181b;
+      border-radius: 12px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .contato-container h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 36px;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .contato-container p.sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .contato-grupo {
+      margin-bottom: 16px;
+    }
+    .contato-label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .contato-input, .contato-textarea, .contato-select {
+      width: 100%;
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .contato-input:focus, .contato-textarea:focus, .contato-select:focus {
+      outline: none;
+      border-color: #6c3fc5;
+    }
+    .contato-textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+    .contato-linha { display: flex; gap: 12px; }
+    .contato-linha .contato-grupo { flex: 1; }
+    .contato-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #6c3fc5, #8a56e0);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s;
+    }
+    .contato-btn:hover { opacity: 0.9; }
+    .contato-btn:disabled { opacity: 0.5; cursor: default; }
+    .contato-sucesso {
+      display: none;
+      text-align: center;
+      padding: 32px 0 8px;
+    }
+    .contato-sucesso .icone { font-size: 48px; margin-bottom: 12px; }
+    .contato-sucesso h2 { font-family: 'Bangers', cursive; font-size: 28px; color: #fff; margin-bottom: 8px; }
+    .contato-sucesso p { font-family: 'Montserrat', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); }
+    .contato-info {
+      margin-top: 28px;
+      border-top: 1px solid #2a2a2a;
+      padding-top: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contato-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .contato-info-item span.icon { font-size: 20px; }
+    .contato-info-item strong { color: rgba(255,255,255,0.8); display: block; font-size: 12px; margin-bottom: 2px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender"><h3>Meus Produtos</h3><img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos"></a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos"><h3>Meus pedidos</h3><img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos"></a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho"><h3>Meu carrinho</h3><img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras"><span class="carrinho-badge" id="carrinho-badge">0</span></a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <main class="login">
+    <h1>Fale Conosco</h1>
+    <div class="login-container" style="max-width:600px">
+      <div class="contato-container">
+
+        <div id="contato-form-area">
+          <h1>Envie sua mensagem</h1>
+          <p class="sub">Respondemos em até 2 dias úteis.</p>
+
+          <form id="form-contato" onsubmit="enviarContato(event)">
+            <div class="contato-linha">
+              <div class="contato-grupo">
+                <label class="contato-label" for="contato-nome">Seu nome *</label>
+                <input class="contato-input" type="text" id="contato-nome" placeholder="João Silva" required>
+              </div>
+              <div class="contato-grupo">
+                <label class="contato-label" for="contato-email">E-mail *</label>
+                <input class="contato-input" type="email" id="contato-email" placeholder="joao@email.com" required>
+              </div>
+            </div>
+
+            <div class="contato-grupo">
+              <label class="contato-label" for="contato-assunto">Assunto</label>
+              <select class="contato-select" id="contato-assunto">
+                <option value="">Selecione um assunto</option>
+                <option value="Dúvida sobre pedido">Dúvida sobre pedido</option>
+                <option value="Troca ou devolução">Troca ou devolução</option>
+                <option value="Problema com produto">Problema com produto</option>
+                <option value="Sugestão">Sugestão</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="contato-grupo">
+              <label class="contato-label" for="contato-mensagem">Mensagem *</label>
+              <textarea class="contato-textarea" id="contato-mensagem" placeholder="Descreva sua dúvida ou comentário..." required minlength="10"></textarea>
+            </div>
+
+            <button type="submit" class="contato-btn" id="btn-contato-enviar">Enviar mensagem</button>
+          </form>
+
+          <div class="contato-info">
+            <div class="contato-info-item">
+              <span class="icon">📧</span>
+              <div><strong>E-mail</strong>comicgeekstore@email.com</div>
+            </div>
+            <div class="contato-info-item">
+              <span class="icon">⏰</span>
+              <div><strong>Horário</strong>Seg–Sex, 9h–18h</div>
+            </div>
+            <div class="contato-info-item">
+              <span class="icon">📦</span>
+              <div><strong>Pedidos</strong><a href="/pedidos" style="color:#6c3fc5">Acompanhe aqui</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contato-sucesso" id="contato-sucesso">
+          <div class="icone">✅</div>
+          <h2>Mensagem enviada!</h2>
+          <p>Recebemos sua mensagem e retornaremos em breve.</p>
+          <a href="/" style="display:inline-block;margin-top:20px;color:#6c3fc5;font-family:'Montserrat',sans-serif;font-weight:700;text-decoration:none">← Voltar à loja</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    async function enviarContato(e) {
+      e.preventDefault();
+      const nome     = document.getElementById("contato-nome").value.trim();
+      const email    = document.getElementById("contato-email").value.trim();
+      const assunto  = document.getElementById("contato-assunto").value;
+      const mensagem = document.getElementById("contato-mensagem").value.trim();
+      const btn      = document.getElementById("btn-contato-enviar");
+
+      if (btn) btn.disabled = true;
+
+      try {
+        const res  = await fetch("/api/contato", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome, email, assunto, mensagem }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById("contato-form-area").style.display = "none";
+          document.getElementById("contato-sucesso").style.display  = "block";
+        } else {
+          alert(data.erro || "Erro ao enviar mensagem.");
+          if (btn) btn.disabled = false;
+        }
+      } catch {
+        alert("Erro ao conectar com o servidor.");
+        if (btn) btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

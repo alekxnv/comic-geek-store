@@ -1,0 +1,314 @@
+﻿/* =========================
+   PEDIDOS — LAYOUT
+========================= */
+
+.pedidos-main {
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 20px 60px;
+}
+
+.pedidos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.pedidos-titulo {
+  font-family: 'Bangers', cursive;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cor-primaria);
+  margin: 0;
+}
+
+.btn-voltar-loja {
+  font-size: 14px;
+  color: var(--cor-primaria);
+  font-weight: 600;
+  border: 2px solid var(--cor-primaria);
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-voltar-loja:hover {
+  background: var(--cor-primaria);
+  color: white;
+}
+
+/* =========================
+   CARD DE PEDIDO
+========================= */
+
+.pedido-card {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.pedido-card:hover {
+  box-shadow: 0 4px 18px rgba(108, 92, 231, 0.15);
+}
+
+.pedido-card__header {
+  background: var(--cor-fundo);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pedido-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pedido-numero {
+  color: var(--cor-destaque);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.pedido-data {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.pedido-card__direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.pedido-total {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pedido-status {
+  background: #2ecc71;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pedido-status--pendente,
+.pedido-status--aguardando_pagamento {
+  background: #f39c12;
+}
+
+.pedido-status--cancelado {
+  background: #e74c3c;
+}
+
+.btn-cancelar-pedido {
+  margin-top: 6px;
+  background: transparent;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-cancelar-pedido:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+/* =========================
+   ITENS DO PEDIDO
+========================= */
+
+.pedido-itens {
+  padding: 12px 20px;
+}
+
+.pedido-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.pedido-item:last-child {
+  border-bottom: none;
+}
+
+.pedido-item__img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.pedido-item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pedido-item__nome {
+  color: var(--cor-primaria);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pedido-item__qtd {
+  color: #888;
+  font-size: 13px;
+}
+
+.pedido-item__preco {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  flex-shrink: 0;
+}
+
+/* =========================
+   ESTADO VAZIO / LOGIN
+========================= */
+
+.pedidos-vazio {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.pedidos-vazio h2 {
+  color: #555;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.pedidos-vazio p {
+  color: #888;
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+.btn-pedidos-acao {
+  display: inline-block;
+  padding: 13px 32px;
+  background: var(--cor-primaria);
+  color: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.2s;
+}
+
+.btn-pedidos-acao:hover {
+  background: var(--cor-destaque);
+  color: #000;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+  .pedidos-main {
+    padding: 0 12px 40px;
+    margin: 20px auto;
+  }
+
+  .pedidos-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pedido-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pedido-card__direita {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .pedidos-titulo {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .pedido-item {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pedido-item__preco {
+    width: 100%;
+    text-align: right;
+  }
+
+  .pedido-itens {
+    padding: 10px 14px;
+  }
+
+  .pedido-card__header {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pedidos-main {
+    padding: 0 8px 30px;
+  }
+
+  .pedido-item__img {
+    width: 40px;
+    height: 55px;
+  }
+
+  .pedido-card {
+    border-radius: 10px;
+  }
+}
+
+/* Telas grandes / Projetores */
+@media (min-width: 1400px) {
+  .pedidos-main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 40px 60px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .pedidos-main {
+    max-width: 1300px;
+    padding: 0 60px 80px;
+  }
+}
+

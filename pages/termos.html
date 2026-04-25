@@ -1,0 +1,637 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>Termos de Uso | Comic Geek Store</title>
+  <meta name="description" content="Termos e Condições de Uso da Comic Geek Store. Leia antes de utilizar a plataforma.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+
+  <style>
+    .termos-wrap {
+      max-width: 900px;
+      margin: 48px auto 100px;
+      padding: 0 32px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .termos-topo {
+      margin-bottom: 40px;
+    }
+
+    .termos-topo h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 46px;
+      letter-spacing: 3px;
+      color: var(--cor-destaque);
+      margin: 0 0 6px;
+    }
+
+    .termos-topo__meta {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .termos-topo__badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .termos-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .termos-badge--lgpd {
+      background: rgba(46,204,113,0.1);
+      border: 1px solid rgba(46,204,113,0.3);
+      color: #2ecc71;
+    }
+
+    .termos-badge--cdc {
+      background: rgba(255,216,77,0.1);
+      border: 1px solid rgba(255,216,77,0.3);
+      color: var(--cor-destaque);
+    }
+
+    .termos-badge--idade {
+      background: rgba(231,76,60,0.1);
+      border: 1px solid rgba(231,76,60,0.35);
+      color: #e74c3c;
+    }
+
+    .termos-sumario {
+      background: rgba(139,47,201,0.07);
+      border: 1px solid rgba(139,47,201,0.2);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .termos-sumario h3 {
+      font-family: 'Bangers', cursive;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      color: var(--cor-primaria);
+      margin: 0 0 14px;
+    }
+
+    .termos-sumario ol {
+      columns: 2;
+      gap: 16px;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .termos-sumario ol li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .termos-sumario ol li a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .termos-sumario ol li a:hover {
+      color: var(--cor-destaque);
+    }
+
+    .termos-sec {
+      margin-bottom: 44px;
+      scroll-margin-top: 24px;
+    }
+
+    .termos-sec h2 {
+      font-family: 'Bangers', cursive;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: var(--cor-primaria);
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(139,47,201,0.25);
+    }
+
+    .termos-sec p, .termos-sec li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.85;
+      letter-spacing: 0.3px;
+    }
+
+    .termos-sec p {
+      margin-bottom: 12px;
+    }
+
+    .termos-sec ul, .termos-sec ol {
+      margin: 8px 0 14px 20px;
+    }
+
+    .termos-sec li {
+      margin-bottom: 8px;
+    }
+
+    .termos-alerta {
+      background: rgba(231,76,60,0.08);
+      border-left: 3px solid #e74c3c;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    .termos-info {
+      background: rgba(139,47,201,0.08);
+      border-left: 3px solid var(--cor-primaria);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    .termos-destaque {
+      background: rgba(255,216,77,0.06);
+      border: 1px solid rgba(255,216,77,0.18);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    .termos-destaque strong {
+      color: var(--cor-destaque);
+    }
+
+    .termos-contato-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 22px 26px;
+    }
+
+    .termos-contato-box p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .termos-contato-box strong {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .termos-rodape {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .termos-wrap { padding: 0 18px; margin-top: 28px; }
+      .termos-topo h1 { font-size: 34px; }
+      .termos-sumario ol { columns: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+    <ul>
+      <li id="li-perfil"><a href="/login" id="link-perfil"><h3 id="perfil-nome">Entre ou Cadastre-se</h3><img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil"></a></li>
+      <li id="li-logout" style="display:none"><button class="btn-logout" onclick="logout()">Sair</button></li>
+      <li id="li-vender" style="display:none"><a href="/vender"><h3>Meus Produtos</h3><img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos"></a></li>
+      <li id="li-admin" style="display:none"><a href="/admin" class="btn-admin-header">⚙ Admin</a></li>
+      <li><a href="/pedidos"><h3>Meus pedidos</h3><img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Pedidos"></a></li>
+      <li id="li-carrinho"><a href="/carrinho"><h3>Meu carrinho</h3><img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho"><span class="carrinho-badge" id="carrinho-badge">0</span></a></li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <nav aria-label="Categorias">
+    <ul>
+      <li onclick="window.location='/'">Tudo</li>
+      <li onclick="window.location='/lancamentos'">Lançamentos</li>
+      <li onclick="window.location='/prevenda'">Pré-Venda</li>
+      <li onclick="window.location='/marvel'"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
+      <li onclick="window.location='/dc'"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></li>
+      <li onclick="window.location='/especiais'">Especiais</li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="termos-wrap">
+
+      <div class="termos-topo">
+        <h1>Termos e Condições de Uso</h1>
+        <p class="termos-topo__meta">Versão 1.0 — Vigência a partir de 16 de abril de 2025 | Comic Geek Store LTDA — CNPJ 12.345.678/0001-90</p>
+        <div class="termos-topo__badges">
+          <span class="termos-badge termos-badge--idade">🔞 Acesso restrito a maiores de 18 anos</span>
+          <span class="termos-badge termos-badge--lgpd">🛡️ Conformidade LGPD — Lei 13.709/2018</span>
+          <span class="termos-badge termos-badge--cdc">⚖️ CDC — Lei 8.078/1990</span>
+        </div>
+      </div>
+
+      <!-- SUMÁRIO -->
+      <div class="termos-sumario">
+        <h3>Sumário</h3>
+        <ol>
+          <li><a href="#sec1">Definições</a></li>
+          <li><a href="#sec2">Aceitação e Maioridade</a></li>
+          <li><a href="#sec3">Cadastro e Conta de Usuário</a></li>
+          <li><a href="#sec4">Compras e Pagamentos</a></li>
+          <li><a href="#sec5">Frete e Entrega</a></li>
+          <li><a href="#sec6">Cancelamento e Devoluções</a></li>
+          <li><a href="#sec7">Plataforma de Vendedores</a></li>
+          <li><a href="#sec8">Transações de Alto Valor</a></li>
+          <li><a href="#sec9">Propriedade Intelectual</a></li>
+          <li><a href="#sec10">Privacidade e LGPD</a></li>
+          <li><a href="#sec11">Condutas Proibidas</a></li>
+          <li><a href="#sec12">Limitação de Responsabilidade</a></li>
+          <li><a href="#sec13">Vigência e Alterações</a></li>
+          <li><a href="#sec14">Foro e Legislação</a></li>
+        </ol>
+      </div>
+
+      <!-- 1 -->
+      <div class="termos-sec" id="sec1">
+        <h2>1. Definições</h2>
+        <p>Para fins destes Termos e Condições de Uso, as expressões abaixo terão o seguinte significado:</p>
+        <ul>
+          <li><strong>"Plataforma"</strong> — o sítio eletrônico Comic Geek Store, acessível em <em>www.comicgeek.com.br</em>, incluindo todos os seus subdomínios, aplicações e serviços associados;</li>
+          <li><strong>"Usuário"</strong> — toda pessoa física maior de 18 (dezoito) anos que acesse, navegue ou utilize os serviços disponibilizados na Plataforma;</li>
+          <li><strong>"Comprador"</strong> — Usuário cadastrado como Pessoa Física que realiza aquisição de produtos na Plataforma;</li>
+          <li><strong>"Vendedor"</strong> — pessoa jurídica regularmente inscrita no CNPJ que, após aprovação pela Administração, utiliza a Plataforma para ofertar produtos;</li>
+          <li><strong>"Administração"</strong> — equipe responsável pela gestão operacional, técnica e comercial da Comic Geek Store;</li>
+          <li><strong>"Conta"</strong> — registro pessoal e intransferível que viabiliza o acesso às funcionalidades da Plataforma;</li>
+          <li><strong>"Produtos"</strong> — quadrinhos, HQs, mangás, edições especiais, box sets e demais itens disponibilizados para venda na Plataforma;</li>
+          <li><strong>"Pedido"</strong> — solicitação de compra formalizada pelo Comprador, com pagamento confirmado.</li>
+        </ul>
+      </div>
+
+      <!-- 2 -->
+      <div class="termos-sec" id="sec2">
+        <h2>2. Aceitação dos Termos e Requisito de Maioridade</h2>
+
+        <div class="termos-alerta">
+          <strong>⚠️ ATENÇÃO — ACESSO EXCLUSIVO PARA MAIORES DE 18 ANOS:</strong> A utilização desta Plataforma, incluindo navegação, cadastro e realização de compras, é <strong>exclusivamente permitida a pessoas com 18 (dezoito) anos ou mais</strong>. Ao se cadastrar, o Usuário declara, sob as penas da lei, ser maior de 18 anos e ter plena capacidade civil para contratar, conforme os artigos 3º e 4º do Código Civil Brasileiro (Lei 10.406/2002).
+        </div>
+
+        <p>
+          O acesso e uso da Plataforma implica, de forma automática e vinculante, a leitura, compreensão e aceitação integral e irrestrita de todos os termos, condições, políticas e avisos aqui contidos, bem como da <a href="/privacidade" style="color:var(--cor-destaque)">Política de Privacidade</a> da Comic Geek Store.
+        </p>
+        <p>
+          Caso o Usuário não concorde, no todo ou em parte, com qualquer disposição destes Termos, deverá abster-se imediatamente de acessar ou utilizar a Plataforma.
+        </p>
+        <p>
+          Menores de 18 anos <strong>não estão autorizados</strong> a criar conta, realizar compras, cadastrar produtos ou utilizar qualquer funcionalidade desta Plataforma. Caso a Administração identifique cadastros de menores de idade, a conta será imediatamente encerrada, os pedidos eventualmente realizados serão cancelados e os valores reembolsados ao responsável legal, sem prejuízo das medidas legais cabíveis.
+        </p>
+        <div class="termos-info">
+          Ao marcar a opção <em>"Declaro que sou maior de 18 anos e aceito os Termos de Uso"</em> no ato do cadastro, o Usuário confirma, eletronicamente, a veracidade desta declaração. A declaração falsa de maioridade sujeita o Usuário às penalidades previstas no artigo 299 do Código Penal Brasileiro (falsidade ideológica).
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="termos-sec" id="sec3">
+        <h2>3. Cadastro e Conta de Usuário</h2>
+        <p>
+          O cadastro na Plataforma é gratuito, pessoal e intransferível. Para criar uma Conta, o Usuário deverá fornecer informações verdadeiras, completas e atualizadas, sendo responsável civil e criminalmente por quaisquer informações falsas prestadas.
+        </p>
+        <ul>
+          <li>Cada CPF (Pessoa Física) ou CNPJ (Pessoa Jurídica) permite apenas um cadastro ativo na Plataforma;</li>
+          <li>O Usuário é o único responsável pela guarda de sua senha de acesso, sendo vedado o compartilhamento com terceiros;</li>
+          <li>A Comic Geek Store jamais solicitará a senha do Usuário por e-mail, telefone, WhatsApp ou qualquer outro canal;</li>
+          <li>Em caso de suspeita de acesso não autorizado à Conta, o Usuário deverá comunicar imediatamente a Administração pelo e-mail <strong>suporte@comicgeekstore.com.br</strong>;</li>
+          <li>A Administração reserva-se o direito de suspender ou encerrar Contas que violem estes Termos, sem aviso prévio e sem direito a indenização;</li>
+          <li>Contas inativas por período superior a 24 (vinte e quatro) meses poderão ser desativadas, com notificação prévia ao e-mail cadastrado.</li>
+        </ul>
+
+        <p><strong>3.1. Veracidade das Informações</strong></p>
+        <p>
+          O Usuário declara e garante que todas as informações fornecidas no cadastro são verídicas e que manterá tais informações atualizadas. A prestação de informações falsas caracteriza infração a estes Termos e poderá ensejar responsabilização civil e criminal, incluindo, mas não se limitando, ao disposto no artigo 171 do Código Penal (estelionato) e artigo 299 (falsidade ideológica).
+        </p>
+
+        <p><strong>3.2. Segurança da Conta</strong></p>
+        <p>
+          As senhas são armazenadas utilizando algoritmo criptográfico SHA-256 com sal (<em>salt</em>), de modo que nenhum colaborador da Comic Geek Store tem acesso à senha em texto simples. O Usuário é responsável por qualquer atividade realizada mediante o uso de suas credenciais.
+        </p>
+      </div>
+
+      <!-- 4 -->
+      <div class="termos-sec" id="sec4">
+        <h2>4. Compras e Pagamentos</h2>
+        <p>
+          Ao finalizar um Pedido, o Comprador formaliza uma proposta de aquisição de produto, que se torna contrato vinculante após a confirmação do pagamento pela instituição financeira ou processadora escolhida.
+        </p>
+        <ul>
+          <li>Os preços exibidos na Plataforma já incluem os tributos aplicáveis e são válidos na data de finalização do Pedido;</li>
+          <li>A Comic Geek Store reserva-se o direito de cancelar Pedidos em caso de erro manifesto de precificação, comunicando o Comprador e realizando o reembolso integral;</li>
+          <li>O pagamento poderá ser realizado via <strong>PIX</strong> (aprovação imediata), <strong>Cartão de Crédito</strong> (parcelamento em até 3x sem juros para compras acima de R$ 150,00) ou <strong>Boleto Bancário</strong> (vencimento em 3 dias úteis);</li>
+          <li>Pedidos com boleto não pago no prazo serão automaticamente cancelados, sem ônus ao Comprador;</li>
+          <li>Em caso de recusa do pagamento pela operadora, o Pedido não será confirmado e o Comprador deverá utilizar outro meio de pagamento;</li>
+          <li>A Comic Geek Store não armazena dados completos de cartão de crédito. O processamento de dados sensíveis de pagamento é realizado por processadoras certificadas PCI-DSS.</li>
+        </ul>
+
+        <p><strong>4.1. Parcelamento</strong></p>
+        <p>
+          O parcelamento em até 3 (três) vezes sem acréscimo está disponível exclusivamente para compras cujo valor total, após descontos, frete e cupons, seja igual ou superior a R$ 150,00 (cento e cinquenta reais). Parcelamentos em mais de 3 vezes, quando disponíveis, poderão estar sujeitos a encargos financeiros informados no momento da finalização.
+        </p>
+      </div>
+
+      <!-- 5 -->
+      <div class="termos-sec" id="sec5">
+        <h2>5. Frete e Entrega</h2>
+        <p>
+          O prazo de entrega é estimado a partir da confirmação do pagamento e pode variar de acordo com a localização do destinatário, o modal de envio selecionado (PAC ou SEDEX) e a disponibilidade dos Correios.
+        </p>
+        <ul>
+          <li>O frete grátis é concedido automaticamente para compras acima de R$ 200,00 (duzentos reais), considerando o valor total dos produtos após descontos e cupons;</li>
+          <li>Os prazos indicados são estimativas dos Correios e não constituem garantia contratual de entrega na data exata;</li>
+          <li>Após o despacho, o Comprador receberá o código de rastreamento para acompanhar o envio;</li>
+          <li>A Comic Geek Store não se responsabiliza por atrasos decorrentes de greves, catástrofes naturais, feriados regionais ou outros eventos de força maior (artigo 393 do Código Civil);</li>
+          <li>Produtos não entregues por ausência do destinatário poderão ser devolvidos à origem. Neste caso, o reenvio estará sujeito à cobrança de novo frete.</li>
+        </ul>
+      </div>
+
+      <!-- 6 -->
+      <div class="termos-sec" id="sec6">
+        <h2>6. Cancelamento, Devoluções e Reembolsos</h2>
+
+        <p><strong>6.1. Direito de Arrependimento (Art. 49 do CDC)</strong></p>
+        <div class="termos-destaque">
+          <strong>Direito garantido por lei:</strong> O Comprador poderá cancelar a compra no prazo de até 7 (sete) dias corridos contados do recebimento do produto, sem necessidade de qualquer justificativa, com direito a reembolso integral, incluindo o valor do frete, conforme o artigo 49 da Lei nº 8.078/1990 (Código de Defesa do Consumidor).
+        </div>
+        <ul>
+          <li>Para exercer o direito de arrependimento, o Comprador deve solicitar o cancelamento pelo e-mail <strong>trocas@comicgeekstore.com.br</strong> dentro do prazo de 7 dias;</li>
+          <li>O produto deverá ser devolvido em sua embalagem original, sem indícios de uso, com todos os acessórios e manuais incluídos;</li>
+          <li>O custo do frete de devolução, em caso de arrependimento sem defeito do produto, é de responsabilidade do Comprador;</li>
+          <li>O reembolso será processado em até 10 (dez) dias úteis após o recebimento e conferência do produto devolvido.</li>
+        </ul>
+
+        <p><strong>6.2. Produtos com Defeito ou Avariados no Transporte</strong></p>
+        <ul>
+          <li>Produtos com defeito de fabricação têm prazo de reclamação de 30 (trinta) dias para produtos não duráveis e 90 (noventa) dias para produtos duráveis, conforme artigo 26 do CDC;</li>
+          <li>Danos ocorridos durante o transporte devem ser fotografados e reportados em até 48 (quarenta e oito) horas após o recebimento, via e-mail com fotos anexadas;</li>
+          <li>Nesses casos, o custo do frete de devolução é integralmente arcado pela Comic Geek Store;</li>
+          <li>O Comprador poderá optar pelo reenvio de novo produto, crédito na Conta ou reembolso integral.</li>
+        </ul>
+      </div>
+
+      <!-- 7 -->
+      <div class="termos-sec" id="sec7">
+        <h2>7. Plataforma de Vendedores (Marketplace)</h2>
+        <p>
+          A Comic Geek Store disponibiliza espaço em sua Plataforma para que pessoas jurídicas devidamente habilitadas possam oferecer produtos aos Compradores, atuando como intermediária (<em>marketplace</em>), nos termos do Decreto nº 7.962/2013.
+        </p>
+
+        <p><strong>7.1. Habilitação do Vendedor</strong></p>
+        <ul>
+          <li>Somente pessoas jurídicas com CNPJ ativo e em situação regular perante a Receita Federal poderão se cadastrar como Vendedores;</li>
+          <li>O cadastro de Vendedor está sujeito à aprovação prévia pela Administração, que poderá ser recusada a seu exclusivo critério;</li>
+          <li>Documentos comprobatórios poderão ser solicitados a qualquer tempo para verificação da regularidade da pessoa jurídica.</li>
+        </ul>
+
+        <p><strong>7.2. Obrigações do Vendedor</strong></p>
+        <ul>
+          <li>Ofertar exclusivamente produtos originais, sem violação de direitos autorais, marcas registradas ou quaisquer outros direitos de propriedade intelectual;</li>
+          <li>Manter descrições, preços, imagens e estoque atualizados e condizentes com a realidade;</li>
+          <li>Responsabilizar-se integralmente pelo cumprimento dos prazos de envio e pela qualidade dos produtos anunciados;</li>
+          <li>Emitir nota fiscal para todas as transações realizadas, conforme a legislação tributária aplicável;</li>
+          <li>Cumprir integralmente o Código de Defesa do Consumidor em suas relações com os Compradores.</li>
+        </ul>
+
+        <p><strong>7.3. Responsabilidade da Plataforma</strong></p>
+        <p>
+          A Comic Geek Store não é fabricante, importadora ou distribuidora dos produtos ofertados por Vendedores terceiros, atuando exclusivamente como intermediária tecnológica. A responsabilidade pela qualidade, autenticidade e entrega de tais produtos é do Vendedor cadastrado. A Plataforma se compromete a mediar conflitos entre Compradores e Vendedores, buscando solução dentro de 5 (cinco) dias úteis após o acionamento.
+        </p>
+      </div>
+
+      <!-- 8 -->
+      <div class="termos-sec" id="sec8">
+        <h2>8. Transações de Alto Valor</h2>
+
+        <div class="termos-alerta">
+          <strong>Transações acima de R$ 10.000,00:</strong> Em cumprimento às normas do Conselho de Controle de Atividades Financeiras (COAF — Resolução nº 36/2021) e da Receita Federal do Brasil, a Comic Geek Store está obrigada a registrar e, quando necessário, comunicar às autoridades competentes operações financeiras que atinjam ou superem o valor de R$ 10.000,00 (dez mil reais), seja em transação única ou em operações fracionadas realizadas no mesmo mês.
+        </div>
+
+        <ul>
+          <li>Para transações iguais ou superiores a R$ 10.000,00, a Plataforma poderá solicitar ao Usuário documentação complementar de identificação e comprovação de origem lícita dos recursos;</li>
+          <li>A documentação poderá incluir: documento de identidade com foto (RG ou CNH), CPF, comprovante de renda ou extratos bancários, declaração de Imposto de Renda (pessoa física) ou demonstrativos contábeis (pessoa jurídica);</li>
+          <li>A recusa em apresentar a documentação solicitada poderá resultar no cancelamento da transação e na suspensão da Conta;</li>
+          <li>Essas medidas têm caráter exclusivamente preventivo e de conformidade legal, não implicando qualquer juízo de valor sobre a idoneidade do Usuário;</li>
+          <li>A Comic Geek Store está sujeita às penalidades previstas na Lei nº 9.613/1998 (Lei de Lavagem de Dinheiro) em caso de descumprimento das obrigações de comunicação.</li>
+        </ul>
+
+        <div class="termos-info">
+          Operações legítimas não são bloqueadas; apenas passam por verificação adicional, conforme exigência legal. O sigilo das informações prestadas é garantido, salvo quando requisitado por autoridade competente.
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="termos-sec" id="sec9">
+        <h2>9. Propriedade Intelectual</h2>
+        <p>
+          Todo o conteúdo da Plataforma — incluindo, mas não se limitando a, logotipos, marcas, layout, design, código-fonte, textos, imagens, banners e demais elementos visuais — é de titularidade da Comic Geek Store ou é por ela licenciado, sendo protegido pela Lei nº 9.610/1998 (Lei de Direitos Autorais) e pela Lei nº 9.279/1996 (Lei de Propriedade Industrial).
+        </p>
+        <ul>
+          <li>É vedada a reprodução, cópia, modificação, distribuição ou qualquer forma de exploração do conteúdo da Plataforma sem autorização expressa e prévia da Administração;</li>
+          <li>As marcas <strong>Marvel®</strong> e <strong>DC Comics®</strong> são de titularidade de suas respectivas detentoras. A Comic Geek Store é revendedora autorizada e não possui vínculo societário ou editorial com tais empresas;</li>
+          <li>O Usuário que violar direitos de propriedade intelectual na Plataforma poderá ser responsabilizado civil e criminalmente, nos termos dos artigos 184 e 185 do Código Penal.</li>
+        </ul>
+      </div>
+
+      <!-- 10 -->
+      <div class="termos-sec" id="sec10">
+        <h2>10. Privacidade e Proteção de Dados (LGPD)</h2>
+        <p>
+          O tratamento de dados pessoais na Plataforma é realizado em estrita conformidade com a <strong>Lei Geral de Proteção de Dados — LGPD (Lei nº 13.709/2018)</strong>. As condições detalhadas de coleta, uso, armazenamento, compartilhamento e exclusão de dados constam na <a href="/privacidade" style="color:var(--cor-destaque)">Política de Privacidade</a>, cujos termos integram estes Termos de Uso por referência.
+        </p>
+        <p>
+          O Usuário poderá, a qualquer momento, exercer seus direitos de titular de dados (acesso, correção, portabilidade, eliminação, revogação do consentimento, entre outros) mediante solicitação ao Encarregado de Proteção de Dados (DPO) pelo e-mail <strong>privacidade@comicgeekstore.com.br</strong>.
+        </p>
+      </div>
+
+      <!-- 11 -->
+      <div class="termos-sec" id="sec11">
+        <h2>11. Condutas Proibidas</h2>
+        <p>É expressamente vedado ao Usuário, sob pena de suspensão imediata da Conta e responsabilização civil e criminal:</p>
+        <ul>
+          <li>Acessar ou tentar acessar áreas restritas da Plataforma sem autorização;</li>
+          <li>Utilizar ferramentas automatizadas (<em>bots</em>, <em>scrapers</em>, <em>crawlers</em>) para extração de dados da Plataforma;</li>
+          <li>Cadastrar, oferecer ou comercializar produtos falsificados, pirateados ou que violem direitos de propriedade intelectual;</li>
+          <li>Criar múltiplos cadastros com o mesmo CPF, CNPJ ou dados equivalentes para burlar restrições;</li>
+          <li>Utilizar a Plataforma para fins de lavagem de dinheiro, financiamento ao terrorismo ou qualquer atividade ilícita;</li>
+          <li>Praticar qualquer forma de fraude, incluindo estorno indevido de pagamento (<em>chargeback</em> fraudulento);</li>
+          <li>Publicar conteúdo ofensivo, discriminatório, pornográfico ou que viole a legislação brasileira;</li>
+          <li>Realizar engenharia reversa do código-fonte da Plataforma ou tentar comprometer sua segurança;</li>
+          <li>Declarar falsamente ser maior de 18 anos para acessar a Plataforma.</li>
+        </ul>
+      </div>
+
+      <!-- 12 -->
+      <div class="termos-sec" id="sec12">
+        <h2>12. Limitação de Responsabilidade</h2>
+        <p>
+          Na máxima extensão permitida pela legislação aplicável, a Comic Geek Store não será responsável por:
+        </p>
+        <ul>
+          <li>Danos indiretos, incidentais, especiais ou punitivos decorrentes do uso ou impossibilidade de uso da Plataforma;</li>
+          <li>Falhas de terceiros, incluindo processadoras de pagamento, transportadoras e provedores de internet;</li>
+          <li>Conteúdo, qualidade ou autenticidade de produtos anunciados por Vendedores terceiros;</li>
+          <li>Interrupções temporárias da Plataforma para manutenção, atualizações ou por motivo de força maior;</li>
+          <li>Perdas decorrentes de uso não autorizado da Conta do Usuário, quando resultante de negligência deste na guarda de suas credenciais.</li>
+        </ul>
+        <p>
+          A responsabilidade total da Comic Geek Store perante qualquer Usuário, em qualquer hipótese, fica limitada ao valor pago pelo Usuário nas transações realizadas nos últimos 12 (doze) meses na Plataforma.
+        </p>
+      </div>
+
+      <!-- 13 -->
+      <div class="termos-sec" id="sec13">
+        <h2>13. Vigência e Alterações</h2>
+        <p>
+          Estes Termos entram em vigor na data indicada no cabeçalho e vigoram por prazo indeterminado, podendo ser alterados pela Comic Geek Store a qualquer momento.
+        </p>
+        <ul>
+          <li>Alterações substanciais serão comunicadas por e-mail ao endereço cadastrado pelo Usuário com antecedência mínima de 10 (dez) dias corridos;</li>
+          <li>Alterações decorrentes de imposição legal ou regulatória poderão ter eficácia imediata;</li>
+          <li>A continuidade do uso da Plataforma após a entrada em vigor das alterações implica a aceitação tácita dos novos Termos;</li>
+          <li>Versões anteriores dos Termos ficam arquivadas e disponíveis mediante solicitação à Administração.</li>
+        </ul>
+      </div>
+
+      <!-- 14 -->
+      <div class="termos-sec" id="sec14">
+        <h2>14. Foro, Legislação Aplicável e Resolução de Conflitos</h2>
+        <p>
+          Estes Termos são regidos exclusivamente pelas leis da República Federativa do Brasil, em especial pelo <strong>Código Civil (Lei nº 10.406/2002)</strong>, pelo <strong>Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong>, pelo <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong> e pela <strong>LGPD (Lei nº 13.709/2018)</strong>.
+        </p>
+        <p>
+          As partes elegem o foro da <strong>Comarca de Curitiba, Estado do Paraná</strong>, como competente para dirimir quaisquer controvérsias oriundas destes Termos, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+        </p>
+        <p>
+          Antes de acionar o Judiciário, as partes comprometem-se a buscar solução amigável mediante comunicação à Administração pelo canal de atendimento, no prazo de 15 (quinze) dias. Reclamações também poderão ser registradas no portal <strong>consumidor.gov.br</strong> ou junto ao PROCON do estado do Usuário.
+        </p>
+      </div>
+
+      <!-- CONTATO -->
+      <div class="termos-sec">
+        <h2>Contato e Atendimento</h2>
+        <div class="termos-contato-box">
+          <p><strong>Razão Social:</strong> Comic Geek Store LTDA</p>
+          <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+          <p><strong>Endereço:</strong> Curitiba — PR, Brasil</p>
+          <p><strong>Atendimento:</strong> Segunda a Sexta, das 9h às 11h e das 13h às 17h</p>
+          <p><strong>E-mail geral:</strong> loja@comicgeekstore.com.br</p>
+          <p><strong>Trocas e devoluções:</strong> trocas@comicgeekstore.com.br</p>
+          <p><strong>DPO / Privacidade:</strong> privacidade@comicgeekstore.com.br</p>
+          <p><strong>Telefone:</strong> (41) 4002-8922</p>
+          <p><strong>Ouvidoria (consumidor.gov.br):</strong> www.consumidor.gov.br</p>
+          <p><strong>ANPD:</strong> www.gov.br/anpd</p>
+        </div>
+      </div>
+
+      <div class="termos-rodape">
+        Comic Geek Store LTDA — CNPJ 12.345.678/0001-90 — Curitiba, PR<br>
+        Estes Termos e Condições de Uso constituem o acordo integral entre as partes em relação ao objeto aqui tratado,<br>
+        prevalecendo sobre quaisquer entendimentos anteriores, verbais ou escritos.<br><br>
+        Versão 1.0 — Vigência: 16 de abril de 2025
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega"><h2>ENTREGA</h2><h3>Enviamos para todo o Brasil</h3></li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca"><h2>TROCA DE PRODUTOS</h2><h3>Fale conosco</h3></li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento"><h2>EM ATÉ 3X SEM JUROS</h2><h3>Para compras acima de R$150</h3></li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Pix"><h2>BOLETO E PIX</h2><h3>Pague com toda comodidade</h3></li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2><a href="/privacidade">Política de Privacidade</a></h2></li>
+          <li><h2><a href="/termos">Termos de Uso</a></h2></li>
+          <li><h2>Fale Conosco</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

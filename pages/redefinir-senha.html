@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefinir Senha — Comic Geek Store</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender"><h3>Meus Produtos</h3><img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos"></a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos"><h3>Meus pedidos</h3><img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos"></a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho"><h3>Meu carrinho</h3><img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras"><span class="carrinho-badge" id="carrinho-badge">0</span></a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- MAIN -->
+  <main class="login">
+    <h1>Redefinir Senha</h1>
+    <div class="login-container redefinir-container">
+
+      <!-- Estado: token inválido / expirado -->
+      <div id="reset-invalido" style="display:none" class="redefinir-box">
+        <div class="redefinir-icone">❌</div>
+        <h2>Link inválido ou expirado</h2>
+        <p>Este link de redefinição não é válido ou já expirou.</p>
+        <a href="/login" class="btn redefinir-btn-voltar">Voltar ao login</a>
+      </div>
+
+      <!-- Estado: formulário de nova senha -->
+      <div id="reset-form-box" class="redefinir-box" style="display:none">
+        <div class="redefinir-icone">🔒</div>
+        <h2>Criar nova senha</h2>
+        <p class="redefinir-email-info">Definindo nova senha para: <strong id="reset-email-display"></strong></p>
+        <form id="form-redefinir-senha" onsubmit="confirmarRedefinicaoSenha(event)">
+          <label class="modal-esqueci-label">Nova senha</label>
+          <input type="password" id="reset-senha-nova" class="modal-esqueci-input" placeholder="Mínimo 6 caracteres" required minlength="6">
+          <label class="modal-esqueci-label" style="margin-top:12px">Confirmar senha</label>
+          <input type="password" id="reset-senha-confirmar" class="modal-esqueci-input" placeholder="Repita a nova senha" required>
+          <button type="submit" class="modal-esqueci-btn" style="margin-top:16px">Salvar nova senha</button>
+        </form>
+      </div>
+
+      <!-- Estado: sucesso -->
+      <div id="reset-sucesso" style="display:none" class="redefinir-box">
+        <div class="redefinir-icone">✅</div>
+        <h2>Senha redefinida!</h2>
+        <p>Sua senha foi atualizada com sucesso.</p>
+        <a href="/login" class="btn redefinir-btn-voltar">Ir para o login</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+
+      const elInvalido = document.getElementById("reset-invalido");
+      const elForm    = document.getElementById("reset-form-box");
+      const elSucesso = document.getElementById("reset-sucesso");
+
+      if (!token) {
+        elInvalido.style.display = "block";
+        return;
+      }
+
+      // Mostra o formulário com o token
+      elForm.style.display = "block";
+
+      const form = document.getElementById("form-redefinir-senha");
+      if (form) {
+        form.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          const novaSenha    = document.getElementById("reset-senha-nova").value;
+          const confirmarSenha = document.getElementById("reset-senha-confirmar").value;
+
+          if (novaSenha.length < 6) { alert("A senha deve ter pelo menos 6 caracteres."); return; }
+          if (novaSenha !== confirmarSenha) { alert("As senhas não coincidem!"); return; }
+
+          const btn = form.querySelector("button[type=submit]");
+          if (btn) btn.disabled = true;
+
+          try {
+            const res = await fetch("/api/auth/reset-senha", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token, novaSenha }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+              elForm.style.display = "none";
+              elSucesso.style.display = "block";
+            } else {
+              alert(data.erro || "Erro ao redefinir a senha.");
+              if (btn) btn.disabled = false;
+              if (data.erro && data.erro.includes("expirado")) {
+                elForm.style.display = "none";
+                elInvalido.style.display = "block";
+              }
+            }
+          } catch {
+            alert("Erro ao conectar com o servidor.");
+            if (btn) btn.disabled = false;
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

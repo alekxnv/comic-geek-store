@@ -1,0 +1,360 @@
+﻿/* =========================
+   PÁGINA DE PERFIL
+========================= */
+
+.perfil-page {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* =========================
+   BANNER / HERO
+========================= */
+
+.perfil-banner {
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1054 50%, #1a0a2e 100%);
+  border-bottom: 1px solid rgba(139,47,201,0.3);
+  padding: 48px 40px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+
+.perfil-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #8B2FC9, #ffd84d, #8B2FC9, transparent);
+}
+
+.perfil-banner__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B2FC9, #c97aff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(139,47,201,0.3), 0 8px 24px rgba(139,47,201,0.4);
+}
+
+.perfil-banner__info {
+  flex: 1;
+}
+
+.perfil-banner__info h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.perfil-banner__tipo {
+  display: inline-block;
+  background: rgba(139,47,201,0.25);
+  border: 1px solid rgba(139,47,201,0.5);
+  color: #c97aff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.perfil-banner__voltar {
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.perfil-banner__voltar:hover {
+  color: #c97aff;
+}
+
+/* =========================
+   CONTEÚDO / FORM
+========================= */
+
+.perfil-content {
+  max-width: 760px;
+  margin: 36px auto 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================
+   CARDS DE SEÇÃO
+========================= */
+
+.perfil-card {
+  background: #13091e;
+  border: 1px solid rgba(139,47,201,0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.perfil-card:focus-within {
+  border-color: rgba(139,47,201,0.45);
+}
+
+.perfil-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+
+.perfil-card__icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.perfil-card__titulo {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   GRID DE CAMPOS
+========================= */
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 24px;
+}
+
+.perfil-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.perfil-campo--full  { grid-column: 1 / -1; }
+.perfil-campo--cep   { grid-column: span 1; max-width: 160px; }
+.perfil-campo--rua   { grid-column: 1 / -1; }
+.perfil-campo--num   { max-width: 100px; }
+.perfil-campo--uf    { max-width: 80px; }
+
+.perfil-campo label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.perfil-opcional {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.25);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+
+.perfil-campo input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Bangers', cursive;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.perfil-campo input:hover {
+  border-color: rgba(139,47,201,0.3);
+}
+
+.perfil-campo input:focus {
+  border-color: #8B2FC9;
+  background: rgba(139,47,201,0.07);
+  box-shadow: 0 0 0 3px rgba(139,47,201,0.15);
+}
+
+.perfil-campo input::placeholder {
+  color: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   BOTÃO SALVAR
+========================= */
+
+.perfil-acoes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.perfil-btn-salvar {
+  flex: 1;
+  padding: 15px;
+  background: linear-gradient(135deg, #8B2FC9, #b05ee0);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(139,47,201,0.4);
+}
+
+.perfil-btn-salvar:hover {
+  background: linear-gradient(135deg, #7a28b5, #a04bd4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(139,47,201,0.55) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+.perfil-btn-senha {
+  padding: 15px 20px;
+  background: transparent;
+  color: #aaa;
+  border: 1px solid #444;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.perfil-btn-senha:hover {
+  border-color: #8B2FC9;
+  color: #c47de8;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+  .perfil-banner {
+    padding: 32px 24px 24px;
+  }
+
+  .perfil-banner__info h1 {
+    font-size: 20px;
+  }
+
+  .perfil-banner__avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+  }
+
+  .perfil-content {
+    margin: 24px auto 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .perfil-banner {
+    flex-wrap: wrap;
+    padding: 24px 16px 20px;
+    gap: 14px;
+  }
+
+  .perfil-banner__info h1 {
+    font-size: 18px;
+  }
+
+  .perfil-banner__voltar {
+    width: 100%;
+  }
+
+  .perfil-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .perfil-campo--full,
+  .perfil-campo--rua,
+  .perfil-campo--cep,
+  .perfil-campo--num,
+  .perfil-campo--uf {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  .perfil-card__header {
+    padding: 14px 16px;
+  }
+
+  .perfil-acoes {
+    flex-direction: column;
+  }
+
+  .perfil-btn-salvar,
+  .perfil-btn-senha {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .perfil-page {
+    padding-bottom: 30px;
+  }
+
+  .perfil-banner__avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+  }
+
+  .perfil-banner__info h1 {
+    font-size: 16px;
+  }
+
+  .perfil-card {
+    border-radius: 10px;
+  }
+}
+
+/* Telas grandes / Projetores */
+@media (min-width: 1400px) {
+  .perfil-content {
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .perfil-content {
+    max-width: 1000px;
+  }
+
+  .perfil-banner {
+    padding: 60px 80px 50px;
+  }
+}
+

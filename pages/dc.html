@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DC Comics | Comic Geek Store</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Os melhores quadrinhos DC na Comic Geek Store. Batman, Superman, Liga da Justiça, Flash e muito mais com os melhores preços.">
+  <meta name="keywords" content="quadrinhos DC, HQ DC Comics, Batman, Superman, Liga da Justiça, Flash, comprar DC">
+  <meta name="author" content="Comic Geek Store">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.comicgeek.com.br/dc">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.comicgeek.com.br/dc">
+  <meta property="og:title" content="DC Comics | Comic Geek Store">
+  <meta property="og:description" content="Os melhores quadrinhos DC na Comic Geek Store. Batman, Superman, Liga da Justiça e mais.">
+  <meta property="og:image" content="https://www.comicgeek.com.br/img/logos/logo.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Comic Geek Store">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.comicgeek.com.br/dc">
+  <meta name="twitter:title" content="DC Comics | Comic Geek Store">
+  <meta name="twitter:description" content="Os melhores quadrinhos DC na Comic Geek Store.">
+  <meta name="twitter:image" content="https://www.comicgeek.com.br/img/logos/logo.png">
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="../index.html"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form id="form-pesquisa" autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" id="input-pesquisa" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar">
+            <span>Buscar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="../pages/login.html" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+
+      <li id="li-vender" style="display:none">
+        <a href="vender.html">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+
+      <li id="li-admin" style="display:none">
+        <a href="admin.html" class="btn-admin-header">⚙ Admin</a>
+      </li>
+
+      <li>
+        <a href="../pages/pedidos.html">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+
+      <li id="li-carrinho">
+        <a href="../pages/carrinho.html">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li data-filtro="tudo" onclick="window.location='../index.html'">Tudo</li>
+      <li data-filtro="lancamentos" onclick="window.location='lancamentos.html'">Lançamentos</li>
+      <li data-filtro="prevenda" onclick="window.location='prevenda.html'">Pré-Venda</li>
+      <li data-filtro="marvel" onclick="window.location='marvel.html'"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
+      <li data-filtro="dc" class="nav-ativo"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></li>
+      <li data-filtro="especiais" onclick="window.location='especiais.html'">Especiais</li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Hero da seção -->
+    <div class="secao-hero secao-hero--dc animar-up">
+      <div class="secao-hero__inner">
+        <img src="../img/icons/superman.png" alt="Superman" class="secao-hero__icone">
+        <div>
+          <h1 class="secao-hero__titulo">Apenas DC</h1>
+          <p class="secao-hero__sub">Batman, Superman, Liga da Justiça e muito mais do universo DC.</p>
+        </div>
+        <img src="../img/icons/batman.png" alt="Batman" class="secao-hero__icone">
+      </div>
+    </div>
+
+    <!-- APENAS DC -->
+    <div class="secao-grupo">
+      <section class="lista-cards" aria-label="Apenas DC">
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Reino do Amanhã"
+          data-preco="14.90"
+          data-img="../img/quadrinhos/reinodoamanha.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/reinodoamanha.jpg" alt="Reino do Amanhã">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Reino do Amanhã</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$14,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Batman - A Piada Mortal"
+          data-preco="29.90"
+          data-img="../img/quadrinhos/batmanapiadamortal.webp">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/batmanapiadamortal.webp" alt="Batman - A Piada Mortal">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Batman - A Piada Mortal</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h3>R$39,90</h3>
+            <h2>R$29,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Lanterna Verde - A Guerra Dos Anéis"
+          data-preco="19.90"
+          data-img="../img/quadrinhos/lanternaverde.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/lanternaverde.jpg" alt="Lanterna Verde - A Guerra Dos Anéis">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Lanterna Verde - A Guerra Dos Anéis</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$19,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Crise nas Infinitas Terras"
+          data-preco="25.90"
+          data-img="../img/quadrinhos/crisesinfinitas.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/crisesinfinitas.jpg" alt="Crise nas Infinitas Terras">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Crise nas Infinitas Terras</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$25,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Flashpoint (Ponto de Ignição)"
+          data-preco="24.90"
+          data-img="../img/quadrinhos/flash.png">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/flash.png" alt="Flashpoint (Ponto de Ignição)">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Flashpoint (Ponto de Ignição)</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$24,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="A Morte do Superman - Vol.1"
+          data-preco="29.90"
+          data-img="../img/quadrinhos/superman.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/superman.jpg" alt="A Morte do Superman - Vol.1">
+          </div>
+          <div class="card-produto__nome">
+            <h3>A Morte do Superman - Vol.1</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h3>R$34,90</h3>
+            <h2>R$29,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Esquadrão Suicida: Ponto Zero"
+          data-preco="22.90"
+          data-img="../img/quadrinhos/coringa.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/coringa.jpg" alt="Esquadrão Suicida: Ponto Zero">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Esquadrão Suicida: Ponto Zero</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$22,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Mulher-Maravilha: Terra Um"
+          data-preco="28.90"
+          data-img="../img/quadrinhos/crisesombria.jpg">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/crisesombria.jpg" alt="Mulher-Maravilha: Terra Um">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Mulher-Maravilha: Terra Um</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$28,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto animar-up"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Shazam!: A Origem"
+          data-preco="24.90"
+          data-img="../img/quadrinhos/batman.png">
+          <div class="card-produto__imagem">
+            <img src="../img/quadrinhos/batman.png" alt="Shazam!: A Origem">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Shazam!: A Origem</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$24,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2>Minha Conta</h2></li>
+          <li><h2>Cupons/Descontos</h2></li>
+          <li><h2>Contato</h2></li>
+          <li><h2>Fale Conosco</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <!-- MODAL DETALHE DO PRODUTO -->
+  <div id="modal-produto" class="produto-modal-overlay" style="display:none" onclick="fecharModalProduto(event)">
+    <div class="produto-modal">
+      <button class="produto-modal__fechar" onclick="fecharModalProduto()">✕</button>
+
+      <div class="produto-modal__inner">
+        <div class="produto-modal__corpo">
+
+          <div class="produto-modal__esquerda">
+            <div class="produto-modal__badge-off" id="modal-badge-off"></div>
+            <div class="produto-modal__img-box">
+              <img id="modal-img" src="" alt="">
+            </div>
+          </div>
+
+          <div class="produto-modal__direita">
+            <h1 id="modal-nome"></h1>
+            <p id="modal-descricao" class="produto-modal__descricao"></p>
+
+            <div class="produto-modal__divisor"></div>
+
+            <div class="produto-modal__preco-box">
+              <div class="produto-modal__preco">
+                <span class="preco-original">De: <s id="modal-preco-original"></s></span>
+                <span class="preco-venda">Por: <strong id="modal-preco-venda"></strong></span>
+              </div>
+            </div>
+
+            <div class="produto-modal__qtd-row">
+              <div class="produto-modal__qtd-label">Quantidade:</div>
+              <div class="produto-modal__qtd">
+                <button onclick="mudarQtdModal(-1)">−</button>
+                <span id="modal-qtd">1</span>
+                <button onclick="mudarQtdModal(1)">+</button>
+              </div>
+              <div class="produto-modal__total">
+                Total: <strong id="modal-total-preco"></strong>
+              </div>
+            </div>
+
+            <div class="produto-modal__botoes">
+              <button class="btn-comprar-modal" onclick="comprarModal()">COMPRAR AGORA</button>
+              <button class="btn-carrinho-modal" onclick="adicionarCarrinhoModal()">+ Adicionar ao Carrinho</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

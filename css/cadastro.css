@@ -1,0 +1,309 @@
+/* =========================
+   CADASTRO – PÁGINA
+========================= */
+
+main.cadastro {
+  background: #fff;
+  min-height: 70vh;
+  padding: 40px 0 60px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.cadastro-page {
+  width: 90%;
+  max-width: 620px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.cadastro-titulo {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 28px;
+  font-weight: 300;
+  color: #222;
+  margin-bottom: 30px;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* =========================
+   SEÇÕES
+========================= */
+
+.cad-secao {
+  margin-bottom: 36px;
+}
+
+.cad-secao__titulo {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  color: #5c7cfa;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.cad-subsecao {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin: 20px 0 12px;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* =========================
+   TIPO DE CONTA (RADIO)
+========================= */
+
+.cad-tipo-conta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.cad-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.cad-radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #5c7cfa;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+
+.cad-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.cad-label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.cad-obrig {
+  color: #c00;
+  font-size: 13px;
+}
+
+.cad-opcional {
+  font-weight: 400;
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 4px;
+}
+
+.cad-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif !important;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  color: #222;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.cad-input:focus {
+  outline: none;
+  border-color: #5c7cfa;
+  box-shadow: 0 0 0 2px rgba(92,124,250,0.15);
+}
+
+.cad-hint {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* =========================
+   SENHA — MOSTRAR/OCULTAR
+========================= */
+
+.cad-senha-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  transition: border-color 0.2s;
+  overflow: hidden;
+}
+
+.cad-senha-wrap:focus-within {
+  border-color: #5c7cfa;
+  box-shadow: 0 0 0 2px rgba(92,124,250,0.15);
+}
+
+.cad-senha-wrap .cad-input {
+  flex: 1;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  padding-right: 4px;
+}
+
+.cad-senha-wrap .cad-input:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+.cad-toggle-senha {
+  flex-shrink: 0;
+  padding: 0 10px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #aaa;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.cad-toggle-senha:hover { color: #555; transform: none; }
+
+/* Esconde o botão nativo de revelar senha do Edge/Chrome */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* =========================
+   ENDEREÇO
+========================= */
+
+.cad-linha {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cad-campo--flex { flex: 1; min-width: 140px; }
+.cad-campo--cep  { max-width: 160px; }
+.cad-campo--num  { max-width: 90px; }
+.cad-campo--uf   { max-width: 70px; }
+
+.cep-msg {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+/* =========================
+   VALIDAÇÃO
+========================= */
+
+.campo-erro {
+  display: block;
+  color: #c00;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 16px;
+}
+
+.input-erro { border-color: #c00 !important; }
+.input-ok   { border-color: #4caf50 !important; }
+
+/* =========================
+   RODAPÉ DO FORMULÁRIO
+========================= */
+
+.cad-rodape {
+  border-top: 1px solid #ddd;
+  padding-top: 24px;
+  margin-top: 10px;
+}
+
+.cad-obrig-nota {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #c00;
+  margin-bottom: 16px;
+}
+
+.cad-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 11px 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.3px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.cad-btn:hover { background: #444; }
+
+.cad-ja-conta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+.cad-ja-conta a {
+  color: #5c7cfa;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cad-ja-conta a:hover { text-decoration: underline; }
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 680px) {
+  .cadastro-page { width: 95%; }
+  .cad-linha { flex-direction: column; }
+  .cad-campo--cep,
+  .cad-campo--num,
+  .cad-campo--uf { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .cadastro-titulo { font-size: 22px; }
+  .cad-btn { width: 100%; text-align: center; }
+}

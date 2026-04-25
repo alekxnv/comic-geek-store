@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3)",
+      "Bash(sed '$ d')",
+      "Read(//tmp/**)",
+      "Bash(sed -i \"s/font-family: 'Montserrat', sans-serif;/font-family: 'Bangers', cursive;/g\" \"c:\\\\Users\\\\olive\\\\OneDrive\\\\Área de Trabalho\\\\faculdade\\\\css\\\\admin.css\")",
+      "Bash(sed -i \"s/font-family: Montserrat;/font-family: 'Bangers', cursive;/g\" \"c:\\\\Users\\\\olive\\\\OneDrive\\\\Área de Trabalho\\\\faculdade\\\\css\\\\admin.css\")",
+      "Bash(sed -i \"s/font-family: 'Libre Baskerville', serif;/font-family: 'Bangers', cursive;/g\" \"c:\\\\Users\\\\olive\\\\OneDrive\\\\Área de Trabalho\\\\faculdade\\\\css\\\\admin.css\")",
+      "Bash(powershell -Command ':*)",
+      "Bash(sed -i 's/class=\"card-produto__badge-desconto\">TRENDING/class=\"card-produto__badge-desconto badge-trending\">TRENDING/g' index.html)",
+      "Bash(sed -i 's/class=\"card-produto__badge-desconto\">PRÉ-VENDA/class=\"card-produto__badge-desconto badge-prevenda\">PRÉ-VENDA/g' index.html)",
+      "Bash(grep -n \"badge-desconto\\\\|<h3>R\\\\$\\\\|<h2>R\\\\$\" index.html)",
+      "WebFetch(domain:www.comix.com.br)",
+      "Bash(powershell -Command \"\\(Get-Content 'index.html'\\) -replace '<script src=\\\\\"js/main.js\\\\\"></script>', '<script src=\\\\\"js/config.js\\\\\"></script>\\\\`n  <script src=\\\\\"js/apis.js\\\\\"></script>\\\\`n  <script src=\\\\\"js/main.js\\\\\"></script>' | Set-Content 'index.html' -Encoding UTF8\")",
+      "PowerShell(cd \"c:\\\\Users\\\\olive\\\\OneDrive\\\\Área de Trabalho\\\\faculdade\"; git checkout HEAD -- index.html teste-admin.html pages/admin.html pages/cadastro.html pages/carrinho.html pages/dc.html pages/especiais.html pages/lancamentos.html pages/login.html pages/marvel.html pages/pedidos.html pages/perfil.html pages/prevenda.html pages/privacidade.html pages/redefinir-senha.html pages/termos.html pages/vender.html 2>&1)",
+      "Bash(xargs grep *)",
+      "Bash(node -e ' *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "WebFetch(domain:comic-geek-store-production.up.railway.app)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{content_type}\" https://comic-geek-store-production.up.railway.app/css/global.css)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{content_type}\" https://comic-geek-store-production.up.railway.app/pages/login.html)",
+      "Bash(git fetch *)"
+    ]
+  }
+}

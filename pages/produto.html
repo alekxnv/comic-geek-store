@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Produto | Comic Geek Store</title>
+  <meta name="description" id="page-desc" content="Compre quadrinhos Marvel e DC na Comic Geek Store.">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+  <style>
+    main.produto-page {
+      background: #fff;
+      min-height: 70vh;
+      padding: 40px 0 60px;
+    }
+    .produto-page-inner {
+      width: 90%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .produto-breadcrumb {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+    .produto-breadcrumb a { color: #888; text-decoration: none; }
+    .produto-breadcrumb a:hover { text-decoration: underline; }
+    .produto-layout {
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .produto-img-col {
+      flex-shrink: 0;
+      width: 280px;
+      position: relative;
+    }
+    .produto-img-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #e74c3c;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 3px;
+      display: none;
+    }
+    .produto-img-col img {
+      width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    .produto-info-col {
+      flex: 1;
+    }
+    .produto-titulo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+    .produto-editora {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+    }
+    .produto-preco-box {
+      margin-bottom: 22px;
+    }
+    .produto-preco-original {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #aaa;
+      text-decoration: line-through;
+      display: none;
+    }
+    .produto-preco-venda {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #111;
+    }
+    .produto-descricao {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .produto-acoes {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .produto-btn {
+      padding: 12px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .produto-btn--comprar { background: #222; color: #fff; }
+    .produto-btn--comprar:hover { background: #444; }
+    .produto-btn--carrinho { background: #fff; color: #222; border: 2px solid #222; }
+    .produto-btn--carrinho:hover { background: #f5f5f5; }
+    .produto-qtd-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .produto-qtd-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .produto-qtd {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 4px 12px;
+    }
+    .produto-qtd button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #222;
+      padding: 0;
+    }
+    .produto-qtd span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center;
+    }
+    /* Avaliações */
+    .produto-avaliacoes {
+      margin-top: 48px;
+      border-top: 1px solid #eee;
+      padding-top: 32px;
+    }
+    .produto-avaliacoes h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    .aval-form-area { margin-bottom: 24px; }
+    .aval-login-aviso { font-family:'Montserrat',sans-serif; font-size:13px; color:#888; margin-bottom:12px; }
+    .aval-login-aviso a { color:#5c7cfa; }
+    .aval-stars-input { display:flex; gap:4px; margin-bottom:10px; }
+    .aval-star { background:none; border:none; font-size:28px; color:#ccc; cursor:pointer; padding:0; line-height:1; transition:color .15s, transform .1s; }
+    .aval-star:hover, .aval-star.ativa { color:#f5c518; }
+    .aval-star:hover { transform:scale(1.15); }
+    .aval-textarea { width:100%; padding:8px 10px; font-family:'Montserrat',sans-serif; font-size:13px; border:1px solid #ccc; border-radius:3px; resize:vertical; box-sizing:border-box; margin-bottom:10px; }
+    .aval-textarea:focus { outline:none; border-color:#888; }
+    .aval-btn-enviar { padding:9px 22px; background:#222; color:#fff; border:none; border-radius:3px; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700; cursor:pointer; }
+    .aval-btn-enviar:hover { background:#444; }
+    .aval-btn-enviar:disabled { opacity:.5; cursor:default; }
+    .aval-lista { display:flex; flex-direction:column; gap:12px; }
+    .aval-vazio { font-family:'Montserrat',sans-serif; font-size:13px; color:#aaa; }
+    .aval-item { border:1px solid #eee; border-radius:6px; padding:14px 16px; }
+    .aval-item__header { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+    .aval-item__autor { font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700; color:#333; }
+    .aval-item__data { font-family:'Montserrat',sans-serif; font-size:11px; color:#aaa; }
+    .aval-item__estrelas { font-size:16px; color:#f5c518; margin-bottom:4px; }
+    .aval-item__comentario { font-family:'Montserrat',sans-serif; font-size:13px; color:#666; margin:0; line-height:1.5; }
+    .produto-nao-encontrado { text-align:center; padding:60px 20px; }
+    .produto-nao-encontrado h2 { font-family:'Montserrat',sans-serif; font-size:22px; color:#222; margin-bottom:12px; }
+    .produto-nao-encontrado a { color:#5c7cfa; }
+    @media (max-width: 700px) {
+      .produto-layout { flex-direction: column; gap: 24px; }
+      .produto-img-col { width: 100%; max-width: 320px; }
+      .produto-titulo { font-size: 20px; }
+      .produto-preco-venda { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender"><h3>Meus Produtos</h3><img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos"></a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos"><h3>Meus pedidos</h3><img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos"></a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li><a href="/">Tudo</a></li>
+      <li><a href="/?filtro=lancamentos">Lançamentos</a></li>
+      <li><a href="/?filtro=prevenda">Pré-Venda</a></li>
+      <li><a href="/?filtro=marvel"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></a></li>
+      <li><a href="/?filtro=dc"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></a></li>
+      <li><a href="/?filtro=especiais">Especiais</a></li>
+    </ul>
+  </nav>
+
+  <main class="produto-page">
+    <div class="produto-page-inner" id="produto-page-inner">
+      <!-- conteúdo injetado pelo JS -->
+      <p style="font-family:'Montserrat',sans-serif;color:#888;text-align:center;padding:40px">Carregando produto...</p>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (function () {
+      function slugify(str) {
+        return str.toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9\s-]/g, "")
+          .trim().replace(/\s+/g, "-").replace(/-+/g, "-");
+      }
+
+      // Suporta tanto /produto/slug quanto /produto?nome=...
+      const pathSlug = window.location.pathname.split("/produto/")[1] || "";
+      const params = new URLSearchParams(window.location.search);
+      const nomeBuscado = params.get("nome") || "";
+      const container = document.getElementById("produto-page-inner");
+
+      function getDescricaoProduto(editora, nome) {
+        const desc = {
+          marvel: "Uma incrível aventura no universo Marvel. Mergulhe nas histórias épicas dos heróis e vilões mais amados dos quadrinhos.",
+          dc: "Uma história épica do universo DC. Explore as aventuras dos maiores heróis da DC Comics.",
+        };
+        return desc[editora] || "Um quadrinho imperdível para fãs e colecionadores. Adquira já a sua cópia na Comic Geek Store.";
+      }
+
+      function renderProduto(produto) {
+        document.getElementById("page-title").textContent = produto.nome + " | Comic Geek Store";
+        document.getElementById("page-desc").content = "Compre " + produto.nome + " na Comic Geek Store.";
+
+        const temDesconto = produto.precoOriginal && produto.precoOriginal > produto.preco;
+        const desconto = temDesconto ? Math.round((1 - produto.preco / produto.precoOriginal) * 100) : 0;
+
+        container.innerHTML = `
+          <p class="produto-breadcrumb">
+            <a href="/">Início</a> &rsaquo;
+            <a href="/?filtro=${produto.editora}">${produto.editora.toUpperCase()}</a> &rsaquo;
+            ${produto.nome}
+          </p>
+          <div class="produto-layout">
+            <div class="produto-img-col">
+              ${desconto > 0 ? `<div class="produto-img-badge" style="display:block">-${desconto}% OFF</div>` : ""}
+              <img src="../${produto.img}" alt="${produto.nome}">
+            </div>
+            <div class="produto-info-col">
+              <h1 class="produto-titulo">${produto.nome}</h1>
+              <p class="produto-editora">${produto.editora.toUpperCase()}</p>
+              <div class="produto-preco-box">
+                ${temDesconto ? `<p class="produto-preco-original">De: R$ ${produto.precoOriginal.toFixed(2).replace(".", ",")}</p>` : ""}
+                <p class="produto-preco-venda">R$ ${produto.preco.toFixed(2).replace(".", ",")}</p>
+              </div>
+              <p class="produto-descricao">${getDescricaoProduto(produto.editora, produto.nome)}</p>
+              <div class="produto-qtd-row">
+                <span class="produto-qtd-label">Quantidade:</span>
+                <div class="produto-qtd">
+                  <button onclick="mudarQtdPagina(-1)">−</button>
+                  <span id="qtd-pagina">1</span>
+                  <button onclick="mudarQtdPagina(1)">+</button>
+                </div>
+              </div>
+              <div class="produto-acoes">
+                <button class="produto-btn produto-btn--comprar" onclick="comprarPaginaProduto()">COMPRAR AGORA</button>
+                <button class="produto-btn produto-btn--carrinho" onclick="adicionarCarrinhoPaginaProduto()">+ Carrinho</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avaliações -->
+          <div class="produto-avaliacoes">
+            <h2>Avaliações</h2>
+            <div class="aval-form-area" id="aval-form-area"></div>
+            <div class="aval-lista" id="aval-lista"><p class="aval-vazio">Seja o primeiro a avaliar!</p></div>
+          </div>
+        `;
+
+        window._produtoPaginaAtual = produto;
+        window._qtdPaginaProduto = 1;
+        _setupAvaliacoesPagina(produto.nome);
+        _carregarAvaliacoesPagina(produto.nome);
+      }
+
+      // Busca o produto a partir dos dados da home via fetch estático
+      fetch("/")
+        .then(r => r.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+          const cards = doc.querySelectorAll(".card-produto");
+          let produto = null;
+          cards.forEach(card => {
+            const cardNome = card.dataset.nome || "";
+            const match = pathSlug
+              ? slugify(cardNome) === decodeURIComponent(pathSlug)
+              : cardNome.toLowerCase() === nomeBuscado.toLowerCase();
+            if (match) {
+              const precoOrigEl = card.querySelector(".card-produto__preco h3");
+              const precoOrigText = precoOrigEl ? precoOrigEl.textContent.replace("R$","").replace(",",".").trim() : null;
+              const precoOriginal = precoOrigText ? parseFloat(precoOrigText) : null;
+              produto = {
+                nome: card.dataset.nome,
+                preco: parseFloat(card.dataset.preco),
+                img: card.dataset.img,
+                editora: card.dataset.editora || "marvel",
+                secao: card.dataset.secao || "",
+                precoOriginal: precoOriginal && precoOriginal > parseFloat(card.dataset.preco) ? precoOriginal : null,
+              };
+            }
+          });
+          if (produto) {
+            renderProduto(produto);
+          } else {
+            container.innerHTML = `
+              <div class="produto-nao-encontrado">
+                <h2>Produto não encontrado</h2>
+                <p><a href="/">Voltar para a loja</a></p>
+              </div>`;
+          }
+        })
+        .catch(() => {
+          container.innerHTML = `<div class="produto-nao-encontrado"><h2>Erro ao carregar produto.</h2><p><a href="/">Voltar</a></p></div>`;
+        });
+
+      window.mudarQtdPagina = function(delta) {
+        window._qtdPaginaProduto = Math.max(1, (window._qtdPaginaProduto || 1) + delta);
+        const el = document.getElementById("qtd-pagina");
+        if (el) el.textContent = window._qtdPaginaProduto;
+      };
+
+      window.comprarPaginaProduto = function() {
+        if (!window._produtoPaginaAtual) return;
+        const p = window._produtoPaginaAtual;
+        adicionarAoCarrinho(p.nome, p.preco, p.img, window._qtdPaginaProduto || 1, p.precoOriginal);
+        setTimeout(() => window.location.href = "/carrinho", 600);
+      };
+
+      window.adicionarCarrinhoPaginaProduto = function() {
+        if (!window._produtoPaginaAtual) return;
+        const p = window._produtoPaginaAtual;
+        adicionarAoCarrinho(p.nome, p.preco, p.img, window._qtdPaginaProduto || 1, p.precoOriginal);
+      };
+
+      let _avalNotaPagina = 0;
+
+      window._setupAvaliacoesPagina = function(nomeProduto) {
+        const area = document.getElementById("aval-form-area");
+        if (!area) return;
+        const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+        if (!usuarioLogado) {
+          area.innerHTML = `<p class="aval-login-aviso"><a href="/login">Faça login</a> para deixar sua avaliação.</p>`;
+          return;
+        }
+        area.innerHTML = `
+          <form id="aval-form" onsubmit="window._enviarAvaliacaoPagina(event, '${nomeProduto.replace(/'/g,"\\'")}')">
+            <div class="aval-stars-input" id="aval-stars-input">
+              <button type="button" class="aval-star" data-val="1">★</button>
+              <button type="button" class="aval-star" data-val="2">★</button>
+              <button type="button" class="aval-star" data-val="3">★</button>
+              <button type="button" class="aval-star" data-val="4">★</button>
+              <button type="button" class="aval-star" data-val="5">★</button>
+            </div>
+            <input type="hidden" id="aval-nota" value="0">
+            <textarea id="aval-comentario" class="aval-textarea" placeholder="Deixe seu comentário (opcional)" maxlength="300" rows="3"></textarea>
+            <button type="submit" class="aval-btn-enviar">Enviar avaliação</button>
+          </form>`;
+        document.querySelectorAll(".aval-star").forEach(btn => {
+          btn.onclick = () => {
+            _avalNotaPagina = parseInt(btn.dataset.val);
+            document.getElementById("aval-nota").value = _avalNotaPagina;
+            document.querySelectorAll(".aval-star").forEach(b => {
+              b.classList.toggle("ativa", parseInt(b.dataset.val) <= _avalNotaPagina);
+            });
+          };
+        });
+      };
+
+      window._carregarAvaliacoesPagina = function(nomeProduto) {
+        const lista = document.getElementById("aval-lista");
+        if (!lista) return;
+        if (typeof _backendUrl === "function" && !_backendUrl()) {
+          lista.innerHTML = '<p class="aval-vazio">Avaliações disponíveis apenas online.</p>';
+          return;
+        }
+        api("/api/avaliacoes/" + encodeURIComponent(nomeProduto)).then(avaliacoes => {
+          if (!Array.isArray(avaliacoes) || !avaliacoes.length) {
+            lista.innerHTML = '<p class="aval-vazio">Seja o primeiro a avaliar este produto!</p>';
+            return;
+          }
+          lista.innerHTML = avaliacoes.map(a => {
+            const stars = "★".repeat(a.nota) + "☆".repeat(5 - a.nota);
+            const data = new Date(a.data).toLocaleDateString("pt-BR");
+            return `<div class="aval-item">
+              <div class="aval-item__header">
+                <span class="aval-item__autor">${a.nome}</span>
+                <span class="aval-item__data">${data}</span>
+              </div>
+              <div class="aval-item__estrelas">${stars}</div>
+              ${a.comentario ? `<p class="aval-item__comentario">${a.comentario}</p>` : ""}
+            </div>`;
+          }).join("");
+        });
+      };
+
+      window._enviarAvaliacaoPagina = function(e, nomeProduto) {
+        e.preventDefault();
+        const nota = parseInt(document.getElementById("aval-nota").value);
+        const comentario = (document.getElementById("aval-comentario").value || "").trim();
+        if (!nota || nota < 1) { mostrarMensagem("Selecione de 1 a 5 estrelas.", "erro"); return; }
+        const btn = document.querySelector(".aval-btn-enviar");
+        if (btn) btn.disabled = true;
+        api("/api/avaliacoes/" + encodeURIComponent(nomeProduto), "POST", { nota, comentario })
+          .then(res => {
+            if (res && !res.erro) {
+              mostrarMensagem("Avaliação enviada! Obrigado.");
+              document.getElementById("aval-form-area").innerHTML = '<p class="aval-login-aviso">Obrigado pela sua avaliação!</p>';
+              _carregarAvaliacoesPagina(nomeProduto);
+            } else {
+              mostrarMensagem(res?.erro || "Erro ao enviar.", "erro");
+              if (btn) btn.disabled = false;
+            }
+          }).catch(() => { mostrarMensagem("Erro ao enviar.", "erro"); if (btn) btn.disabled = false; });
+      };
+    })();
+  </script>
+</body>
+</html>

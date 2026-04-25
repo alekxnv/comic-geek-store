@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>Política de Privacidade | Comic Geek Store</title>
+  <meta name="description" content="Política de Privacidade da Comic Geek Store. Saiba como seus dados são coletados, utilizados e protegidos conforme a LGPD.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+
+  <style>
+    .politica-container {
+      max-width: 860px;
+      margin: 48px auto 80px;
+      padding: 0 32px;
+      color: rgba(255,255,255,0.82);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .politica-titulo {
+      font-family: 'Bangers', cursive;
+      font-size: 42px;
+      letter-spacing: 3px;
+      color: var(--cor-destaque);
+      margin-bottom: 4px;
+    }
+
+    .politica-subtitulo {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 40px;
+      letter-spacing: 0.5px;
+    }
+
+    .politica-secao {
+      margin-bottom: 36px;
+    }
+
+    .politica-secao h2 {
+      font-family: 'Bangers', cursive;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: var(--cor-primaria);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(139,47,201,0.25);
+    }
+
+    .politica-secao p {
+      margin-bottom: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.3px;
+    }
+
+    .politica-secao ul {
+      margin: 8px 0 12px 20px;
+    }
+
+    .politica-secao ul li {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.68);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+      list-style: disc;
+    }
+
+    .politica-destaque {
+      background: rgba(139,47,201,0.1);
+      border-left: 3px solid var(--cor-primaria);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .politica-contato {
+      background: rgba(255,216,77,0.06);
+      border: 1px solid rgba(255,216,77,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 8px;
+    }
+
+    .politica-contato p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .politica-contato strong {
+      color: var(--cor-destaque);
+    }
+
+    .politica-badge-lgpd {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(46,204,113,0.08);
+      border: 1px solid rgba(46,204,113,0.22);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #2ecc71;
+      margin-bottom: 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    @media (max-width: 600px) {
+      .politica-container { padding: 0 16px; margin-top: 32px; }
+      .politica-titulo { font-size: 32px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li onclick="window.location='/'">Tudo</li>
+      <li onclick="window.location='/lancamentos'">Lançamentos</li>
+      <li onclick="window.location='/prevenda'">Pré-Venda</li>
+      <li onclick="window.location='/marvel'"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
+      <li onclick="window.location='/dc'"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></li>
+      <li onclick="window.location='/especiais'">Especiais</li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="politica-container">
+
+      <h1 class="politica-titulo">Política de Privacidade</h1>
+      <p class="politica-subtitulo">Última atualização: abril de 2025</p>
+
+      <div class="politica-badge-lgpd">
+        🛡️ Em conformidade com a LGPD — Lei nº 13.709/2018
+      </div>
+
+      <div class="politica-secao">
+        <h2>1. Quem somos</h2>
+        <p>
+          A <strong>Comic Geek Store</strong> é uma loja virtual especializada em quadrinhos, HQs e edições especiais de Marvel, DC e outras editoras.
+          Somos responsáveis pelo tratamento dos seus dados pessoais, atuando como Controlador conforme a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).
+        </p>
+        <div class="politica-contato">
+          <p><strong>Razão Social:</strong> Comic Geek Store LTDA</p>
+          <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+          <p><strong>E-mail DPO:</strong> privacidade@comicgeekstore.com.br</p>
+          <p><strong>Telefone:</strong> (41) 4002-8922</p>
+        </div>
+      </div>
+
+      <div class="politica-secao">
+        <h2>2. Quais dados coletamos</h2>
+        <p>Coletamos apenas os dados necessários para a prestação dos nossos serviços:</p>
+        <ul>
+          <li><strong>Dados de cadastro:</strong> nome completo, e-mail, CPF/CNPJ, data de nascimento e senha (armazenada com hash SHA-256).</li>
+          <li><strong>Dados de contato e entrega:</strong> endereço, CEP, cidade, estado e telefone.</li>
+          <li><strong>Dados de navegação:</strong> cookies de sessão para manter seu carrinho e preferências.</li>
+          <li><strong>Dados de transação:</strong> histórico de pedidos e forma de pagamento escolhida (não armazenamos dados de cartão de crédito completo).</li>
+          <li><strong>Dados de vendedores (PJ):</strong> razão social, CNPJ, informações de produtos cadastrados.</li>
+        </ul>
+      </div>
+
+      <div class="politica-secao">
+        <h2>3. Para que usamos seus dados</h2>
+        <p>Utilizamos suas informações para:</p>
+        <ul>
+          <li>Processar e entregar seus pedidos;</li>
+          <li>Gerenciar sua conta e autenticação;</li>
+          <li>Enviar confirmações de compra e atualizações de pedido;</li>
+          <li>Melhorar a experiência de navegação e personalizar conteúdo;</li>
+          <li>Cumprir obrigações legais e regulatórias;</li>
+          <li>Prevenir fraudes e garantir a segurança da plataforma.</li>
+        </ul>
+        <div class="politica-destaque">
+          Nunca vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros para fins de marketing sem o seu consentimento explícito.
+        </div>
+      </div>
+
+      <div class="politica-secao">
+        <h2>4. Base legal para o tratamento</h2>
+        <p>Tratamos seus dados com base nas seguintes hipóteses legais previstas na LGPD (Art. 7º):</p>
+        <ul>
+          <li><strong>Execução de contrato:</strong> para processar pedidos e cadastros;</li>
+          <li><strong>Legítimo interesse:</strong> para segurança da plataforma e prevenção a fraudes;</li>
+          <li><strong>Consentimento:</strong> para envio de comunicações opcionais e cookies não essenciais;</li>
+          <li><strong>Cumprimento de obrigação legal:</strong> para emissão de notas fiscais e retenção de registros.</li>
+        </ul>
+      </div>
+
+      <div class="politica-secao">
+        <h2>5. Cookies</h2>
+        <p>Utilizamos cookies para:</p>
+        <ul>
+          <li><strong>Cookies essenciais:</strong> manter sua sessão ativa, carrinho de compras e preferências de idioma. Não podem ser desativados.</li>
+          <li><strong>Cookies analíticos:</strong> entender como os usuários navegam no site para melhorias. Ativados apenas com seu consentimento.</li>
+        </ul>
+        <p>Você pode gerenciar suas preferências de cookies a qualquer momento através do banner exibido na primeira visita ao site.</p>
+      </div>
+
+      <div class="politica-secao">
+        <h2>6. Segurança dos dados</h2>
+        <p>Adotamos medidas técnicas e organizacionais para proteger seus dados:</p>
+        <ul>
+          <li>Senhas armazenadas com hash criptográfico (SHA-256 + salt);</li>
+          <li>Bloqueio temporário após múltiplas tentativas de login incorretas;</li>
+          <li>Transmissão de dados via conexão criptografada (HTTPS/SSL);</li>
+          <li>Acesso restrito aos dados por equipes autorizadas;</li>
+          <li>Monitoramento contínuo de atividades suspeitas.</li>
+        </ul>
+      </div>
+
+      <div class="politica-secao">
+        <h2>7. Seus direitos como titular</h2>
+        <p>Conforme a LGPD, você tem direito a:</p>
+        <ul>
+          <li>Confirmar a existência de tratamento dos seus dados;</li>
+          <li>Acessar seus dados pessoais;</li>
+          <li>Corrigir dados incompletos, inexatos ou desatualizados;</li>
+          <li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+          <li>Revogar o consentimento a qualquer momento;</li>
+          <li>Solicitar a portabilidade dos seus dados;</li>
+          <li>Obter informações sobre com quem compartilhamos seus dados.</li>
+        </ul>
+        <p>Para exercer seus direitos, entre em contato com nosso DPO pelo e-mail <strong>privacidade@comicgeekstore.com.br</strong> ou pelo telefone (41) 4002-8922.</p>
+      </div>
+
+      <div class="politica-secao">
+        <h2>8. Retenção de dados</h2>
+        <p>
+          Mantemos seus dados pelo tempo necessário para cumprir as finalidades descritas nesta política, respeitando os prazos legais de retenção.
+          Após o encerramento da conta, dados de transação podem ser mantidos por até 5 anos para fins fiscais e legais.
+        </p>
+      </div>
+
+      <div class="politica-secao">
+        <h2>9. Transações de alto valor</h2>
+        <p>
+          Para transações acima de R$ 10.000,00, podemos solicitar documentação adicional de verificação de identidade conforme exigências da legislação financeira brasileira e normas do Banco Central do Brasil.
+          Isso garante a segurança de vendedores e compradores na plataforma.
+        </p>
+        <div class="politica-destaque">
+          Todas as transações acima de R$ 10.000,00 são registradas conforme as normas da Receita Federal e do COAF (Conselho de Controle de Atividades Financeiras) quando aplicável.
+        </div>
+      </div>
+
+      <div class="politica-secao">
+        <h2>10. Alterações nesta política</h2>
+        <p>
+          Esta Política de Privacidade pode ser atualizada periodicamente. Notificaremos você sobre mudanças relevantes por e-mail ou por aviso destacado no site.
+          Recomendamos revisitar esta página periodicamente.
+        </p>
+      </div>
+
+      <div class="politica-secao">
+        <h2>Dúvidas?</h2>
+        <div class="politica-contato">
+          <p><strong>E-mail:</strong> privacidade@comicgeekstore.com.br</p>
+          <p><strong>Telefone:</strong> (41) 4002-8922</p>
+          <p><strong>Horário:</strong> Segunda a Sexta, 9h às 11h e 13h às 17h</p>
+          <p>Você também pode registrar uma reclamação junto à <strong>ANPD (Autoridade Nacional de Proteção de Dados)</strong> em <strong>gov.br/anpd</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2><a href="/privacidade">Política de Privacidade</a></h2></li>
+          <li><h2><a href="/termos">Termos de Uso</a></h2></li>
+          <li><h2>Contato</h2></li>
+          <li><h2>Fale Conosco</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

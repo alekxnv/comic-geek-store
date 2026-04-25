@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada | Comic Geek Store</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="../css/global.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+  <style>
+    main.not-found {
+      background: #fff;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .not-found-box {
+      text-align: center;
+      max-width: 520px;
+    }
+    .not-found-codigo {
+      font-family: 'Bangers', cursive;
+      font-size: 120px;
+      color: #222;
+      line-height: 1;
+      margin-bottom: 0;
+      letter-spacing: 4px;
+    }
+    .not-found-titulo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #222;
+      margin: 12px 0 10px;
+    }
+    .not-found-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .not-found-acoes {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .not-found-btn {
+      display: inline-block;
+      padding: 11px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .not-found-btn--primario {
+      background: #222;
+      color: #fff;
+      border: none;
+    }
+    .not-found-btn--primario:hover { background: #444; }
+    .not-found-btn--secundario {
+      background: #fff;
+      color: #222;
+      border: 1px solid #ccc;
+    }
+    .not-found-btn--secundario:hover { background: #f5f5f5; }
+    @media (max-width: 480px) {
+      .not-found-codigo { font-size: 80px; }
+      .not-found-titulo { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li><a href="/">Tudo</a></li>
+      <li><a href="/?filtro=lancamentos">Lançamentos</a></li>
+      <li><a href="/?filtro=prevenda">Pré-Venda</a></li>
+      <li><a href="/?filtro=marvel"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></a></li>
+      <li><a href="/?filtro=dc"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></a></li>
+      <li><a href="/?filtro=especiais">Especiais</a></li>
+    </ul>
+  </nav>
+
+  <main class="not-found">
+    <div class="not-found-box">
+      <p class="not-found-codigo">404</p>
+      <h1 class="not-found-titulo">Página não encontrada</h1>
+      <p class="not-found-desc">Ops! A página que você está procurando não existe ou foi movida. Volte para a loja e continue sua aventura nos quadrinhos.</p>
+      <div class="not-found-acoes">
+        <a href="/" class="not-found-btn not-found-btn--primario">Ir para a Loja</a>
+        <a href="javascript:history.back()" class="not-found-btn not-found-btn--secundario">Voltar</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

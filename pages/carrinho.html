@@ -1,0 +1,644 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Carrinho | Comic Geek Store</title>
+  <meta name="description" content="Finalize sua compra de quadrinhos na Comic Geek Store.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://www.comicgeek.com.br/carrinho">
+  <meta property="og:title" content="Meu Carrinho | Comic Geek Store">
+  <meta property="og:url" content="https://www.comicgeek.com.br/carrinho">
+  <meta property="og:site_name" content="Comic Geek Store">
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/carrinho.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar">
+            <span>Buscar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li><a href="/?filtro=tudo">Tudo</a></li>
+      <li><a href="/?filtro=lancamentos">Lançamentos</a></li>
+      <li><a href="/?filtro=prevenda">Pré-Venda</a></li>
+      <li><a href="/?filtro=marvel"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></a></li>
+      <li><a href="/?filtro=dc"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></a></li>
+      <li><a href="/?filtro=especiais">Especiais</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="carrinho-main">
+
+    <div class="carrinho-header">
+      <h1 class="carrinho-titulo">Meu Carrinho</h1>
+      <a href="/" class="btn-continuar-topo">← Continuar Comprando</a>
+    </div>
+
+    <div class="carrinho-conteudo">
+      <div id="carrinho-lista" class="carrinho-lista"></div>
+
+      <aside id="carrinho-resumo" class="carrinho-resumo" style="display:none">
+        <h2>Resumo do Pedido</h2>
+        <div class="carrinho-resumo__linha">
+          <span>Subtotal</span>
+          <span id="subtotal-valor">R$ 0,00</span>
+        </div>
+
+        <div id="linha-desconto" class="carrinho-resumo__linha carrinho-resumo__desconto" style="display:none">
+          <span>Desconto</span>
+          <span id="desconto-valor" class="desconto-valor">- R$ 0,00</span>
+        </div>
+
+        <!-- BANNER FRETE GRÁTIS -->
+        <div id="banner-frete-gratis" class="banner-frete-gratis" style="display:none">
+          🚚 Frete <strong>GRÁTIS</strong> aplicado!
+        </div>
+        <div id="banner-frete-progresso" class="banner-frete-progresso" style="display:none"></div>
+
+        <!-- FRETE -->
+        <div class="frete-box">
+          <label class="frete-label">Calcular Frete</label>
+          <div class="frete-input-row">
+            <input type="text" id="frete-cep" class="frete-cep-input" placeholder="00000-000" maxlength="9">
+            <button type="button" class="btn-calcular-frete" onclick="calcularFrete()">Calcular</button>
+          </div>
+          <p id="frete-msg" class="frete-msg"></p>
+          <div id="frete-opcoes" class="frete-opcoes" style="display:none">
+            <label class="frete-opcao">
+              <input type="radio" name="frete" value="pac" id="frete-pac">
+              <div class="frete-opcao__info">
+                <span class="frete-opcao__nome">📦 PAC</span>
+                <span class="frete-opcao__prazo" id="frete-pac-prazo"></span>
+                <span class="frete-opcao__preco" id="frete-pac-preco"></span>
+              </div>
+            </label>
+            <label class="frete-opcao">
+              <input type="radio" name="frete" value="sedex" id="frete-sedex">
+              <div class="frete-opcao__info">
+                <span class="frete-opcao__nome">🚀 SEDEX</span>
+                <span class="frete-opcao__prazo" id="frete-sedex-prazo"></span>
+                <span class="frete-opcao__preco" id="frete-sedex-preco"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div id="linha-frete" class="carrinho-resumo__linha" style="display:none">
+          <span>Frete</span>
+          <span id="frete-valor">R$ 0,00</span>
+        </div>
+
+        <div class="carrinho-resumo__linha">
+          <span>Total</span>
+          <span id="total-valor" class="total-valor">R$ 0,00</span>
+        </div>
+
+        <div class="cupom-box">
+          <label class="cupom-label">Tem um cupom?</label>
+          <div class="cupom-input-row">
+            <input type="text" id="cupom-input" class="cupom-input" placeholder="Digite o cupom">
+            <button type="button" class="btn-aplicar-cupom" onclick="aplicarCupom()">Aplicar</button>
+          </div>
+          <p id="cupom-msg" class="cupom-msg"></p>
+        </div>
+
+        <p class="carrinho-parcelamento">Em até 3x sem juros para compras acima de R$150</p>
+
+        <div class="compra-segura-badge">
+          <span class="compra-segura-badge__icone">🔒</span>
+          <div class="compra-segura-badge__texto">
+            <span class="compra-segura-badge__titulo">Compra 100% Segura</span>
+            <span class="compra-segura-badge__sub">Seus dados e pagamento estão protegidos</span>
+          </div>
+        </div>
+
+        <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+        <a href="/" class="btn-continuar">Continuar Comprando</a>
+      </aside>
+    </div>
+
+  </main>
+
+  <!-- MODAL DE PAGAMENTO -->
+  <div id="modal-pagamento" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <button class="modal-fechar" onclick="fecharModalPagamento()">✕</button>
+
+      <!-- ETAPA 1: Resumo e pagamento -->
+      <div id="pag-step-1">
+        <h2 class="modal-titulo">Finalizar Pedido</h2>
+
+        <div class="mp-metodos">
+          <span><img src="../img/icons/pix.png" alt="PIX" class="mp-metodo-icone"> PIX</span>
+          <span><img src="../img/icons/cartao.png" alt="Cartão" class="mp-metodo-icone"> Cartão</span>
+          <span><img src="../img/icons/cartao.png" alt="Boleto" class="mp-metodo-icone"> Boleto</span>
+        </div>
+        <p class="mp-info">Escolha a forma de pagamento na próxima etapa (MercadoPago)</p>
+
+        <div id="pagamento-resumo" class="pagamento-resumo">
+          <span>Total a pagar:</span>
+          <strong id="modal-total">R$ 0,00</strong>
+        </div>
+
+        <!-- input oculto para compatibilidade com confirmarPagamento() -->
+        <input type="radio" name="pagamento" value="mercadopago" checked style="display:none">
+
+        <button class="btn-confirmar-pagamento" onclick="confirmarPagamento()">
+          Pagar com MercadoPago
+        </button>
+      </div>
+
+      <!-- ETAPA 2: Dados para PIX -->
+      <div id="pag-step-2" style="display:none">
+        <div class="pix-steps-header">
+          <button class="pix-voltar" onclick="voltarStep1()">← Voltar</button>
+          <h2 class="modal-titulo" style="margin:0">Dados para PIX</h2>
+        </div>
+
+        <div class="pix-total-destaque">
+          <img src="../img/icons/pix.png" alt="PIX" class="pix-logo-destaque">
+          <div>
+            <span class="pix-total-label">Total a pagar</span>
+            <span class="pix-total-valor" id="pix-total-display">R$ 0,00</span>
+          </div>
+        </div>
+
+        <form id="form-dados-pix" class="form-pix" onsubmit="gerarQRCodePix(event)">
+          <div class="form-pix__grupo form-pix__grupo--full">
+            <label>Nome completo *</label>
+            <input type="text" id="pix-nome" placeholder="Seu nome completo" required>
+          </div>
+
+          <div class="form-pix__grupo">
+            <label id="pix-doc-label">CPF *</label>
+            <input type="text" id="pix-doc" placeholder="000.000.000-00" maxlength="18" required>
+          </div>
+
+          <div class="form-pix__grupo">
+            <label>CEP *</label>
+            <input type="text" id="pix-cep" placeholder="00000-000" maxlength="9" required>
+          </div>
+
+          <div class="form-pix__grupo form-pix__grupo--full">
+            <label>Rua / Logradouro *</label>
+            <input type="text" id="pix-rua" placeholder="Nome da rua" required>
+          </div>
+
+          <div class="form-pix__grupo form-pix__grupo--num">
+            <label>Número *</label>
+            <input type="text" id="pix-numero" placeholder="Nº" required>
+          </div>
+
+          <div class="form-pix__grupo">
+            <label>Bairro *</label>
+            <input type="text" id="pix-bairro" placeholder="Seu bairro" required>
+          </div>
+
+          <div class="form-pix__grupo">
+            <label>Cidade *</label>
+            <input type="text" id="pix-cidade" placeholder="Sua cidade" required>
+          </div>
+
+          <div class="form-pix__grupo form-pix__grupo--uf">
+            <label>UF *</label>
+            <input type="text" id="pix-estado" placeholder="PR" maxlength="2" required>
+          </div>
+
+          <button type="submit" class="btn-confirmar-pagamento" style="margin-top:8px">Gerar QR Code PIX</button>
+        </form>
+      </div>
+
+      <!-- ETAPA CARTÃO -->
+      <div id="pag-step-card" style="display:none">
+        <div class="pix-steps-header">
+          <button class="pix-voltar" onclick="voltarStep1()">← Voltar</button>
+          <h2 class="modal-titulo" style="margin:0">Dados do Cartão</h2>
+        </div>
+
+        <!-- Preview visual do cartão -->
+        <div class="cartao-preview-wrap">
+          <div class="cartao-preview" id="cartao-preview">
+            <div class="cartao-frente">
+              <div class="cartao-frente__top">
+                <span class="cartao-chip">▬▬</span>
+                <div class="cartao-tipo-badge-wrap">
+                  <span class="cartao-tipo-badge" id="prev-tipo"></span>
+                </div>
+              </div>
+              <div class="cartao-numero-preview" id="prev-numero">•••• •••• •••• ••••</div>
+              <div class="cartao-frente__bottom">
+                <div>
+                  <div class="cartao-label">Titular</div>
+                  <div class="cartao-valor" id="prev-nome">SEU NOME</div>
+                </div>
+                <div>
+                  <div class="cartao-label">Validade</div>
+                  <div class="cartao-valor" id="prev-validade">MM/AA</div>
+                </div>
+                <div class="cartao-bandeira-preview" id="prev-bandeira-nome"></div>
+              </div>
+            </div>
+            <div class="cartao-verso">
+              <div class="cartao-tarja"></div>
+              <div class="cartao-cvv-box">
+                <div class="cartao-cvv-faixa">
+                  <span class="cartao-label">CVV</span>
+                  <span class="cartao-cvv-valor" id="prev-cvv">•••</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form id="form-dados-cartao" class="form-cartao" onsubmit="confirmarPagamentoCartao(event)">
+
+          <div class="form-cartao__grupo form-cartao__grupo--full">
+            <label>Número do Cartão *</label>
+            <div class="cartao-input-numero-wrap">
+              <input type="text" id="cartao-numero" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+              <span class="cartao-bandeira-inline" id="cartao-bandeira-inline"></span>
+            </div>
+            <div class="cartao-detectado" id="cartao-detectado"></div>
+          </div>
+
+          <div class="form-cartao__grupo form-cartao__grupo--full">
+            <label>Nome do Titular *</label>
+            <input type="text" id="cartao-nome" placeholder="NOME COMO NO CARTÃO" style="text-transform:uppercase" autocomplete="cc-name" required>
+          </div>
+
+          <div class="form-cartao__grupo">
+            <label>Validade *</label>
+            <input type="text" id="cartao-validade" placeholder="MM/AA" maxlength="5" inputmode="numeric" required>
+          </div>
+
+          <div class="form-cartao__grupo">
+            <label>CVV *</label>
+            <input type="text" id="cartao-cvv" placeholder="•••" maxlength="4" inputmode="numeric" required>
+          </div>
+
+          <div class="pagamento-resumo" style="margin-top:8px">
+            <span>Total a pagar:</span>
+            <strong id="cartao-total-display">R$ 0,00</strong>
+          </div>
+
+          <button type="submit" class="btn-confirmar-pagamento">Confirmar Pagamento</button>
+        </form>
+      </div>
+
+      <!-- ETAPA BOLETO -->
+      <div id="pag-step-boleto" style="display:none">
+
+        <!-- Fase 1: Formulário de dados -->
+        <div id="boleto-form-section">
+          <div class="pix-steps-header">
+            <button class="pix-voltar" onclick="voltarStep1()">← Voltar</button>
+            <h2 class="modal-titulo" style="margin:0">Dados para Boleto</h2>
+          </div>
+
+          <div class="boleto-total-destaque">
+            <div>
+              <span class="pix-total-label">Total a pagar</span>
+              <span class="pix-total-valor" id="boleto-total-display">R$ 0,00</span>
+            </div>
+          </div>
+
+          <form id="form-dados-boleto" class="form-pix" onsubmit="gerarBoleto(event)">
+            <div class="form-pix__grupo form-pix__grupo--full">
+              <label>Nome completo *</label>
+              <input type="text" id="boleto-nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-pix__grupo">
+              <label>CPF *</label>
+              <input type="text" id="boleto-cpf" placeholder="000.000.000-00" maxlength="14" required>
+            </div>
+            <div class="form-pix__grupo">
+              <label>CEP *</label>
+              <input type="text" id="boleto-cep" placeholder="00000-000" maxlength="9" required>
+            </div>
+            <div class="form-pix__grupo form-pix__grupo--full">
+              <label>Rua / Logradouro *</label>
+              <input type="text" id="boleto-rua" placeholder="Nome da rua" required>
+            </div>
+            <div class="form-pix__grupo form-pix__grupo--num">
+              <label>Número *</label>
+              <input type="text" id="boleto-numero" placeholder="Nº" required>
+            </div>
+            <div class="form-pix__grupo">
+              <label>Bairro *</label>
+              <input type="text" id="boleto-bairro" placeholder="Seu bairro" required>
+            </div>
+            <div class="form-pix__grupo">
+              <label>Cidade *</label>
+              <input type="text" id="boleto-cidade" placeholder="Sua cidade" required>
+            </div>
+            <div class="form-pix__grupo form-pix__grupo--uf">
+              <label>UF *</label>
+              <input type="text" id="boleto-estado" placeholder="PR" maxlength="2" required>
+            </div>
+            <button type="submit" class="btn-confirmar-pagamento" style="margin-top:8px">Gerar Boleto</button>
+          </form>
+        </div>
+
+        <!-- Fase 2: Boleto gerado -->
+        <div id="boleto-display-section" style="display:none">
+          <div class="boleto-doc" id="boleto-doc">
+
+            <!-- Cabeçalho -->
+            <div class="boleto-header">
+              <div class="boleto-banco">
+                <span class="boleto-banco-nome">Comic Geek Bank</span>
+                <span class="boleto-banco-cod">001-9</span>
+              </div>
+              <div class="boleto-linha-digitavel" id="boleto-linha-digitavel">00190.00000 00000.000000 00000.000000 6 000000000000</div>
+            </div>
+
+            <!-- Corpo: col principal + col lateral -->
+            <div class="boleto-body">
+              <div class="boleto-col-main">
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">Beneficiário</span>
+                  <span class="boleto-campo-valor">Comic Geek Store LTDA — CNPJ: 12.345.678/0001-90</span>
+                </div>
+                <div class="boleto-row-3">
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Agência / Cód. Beneficiário</span>
+                    <span class="boleto-campo-valor">0001 / 00123456-7</span>
+                  </div>
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Espécie</span>
+                    <span class="boleto-campo-valor">R$</span>
+                  </div>
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Quantidade</span>
+                    <span class="boleto-campo-valor">—</span>
+                  </div>
+                </div>
+                <div class="boleto-row-3">
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Nosso Número</span>
+                    <span class="boleto-campo-valor" id="boleto-nosso-numero"></span>
+                  </div>
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Número do Documento</span>
+                    <span class="boleto-campo-valor" id="boleto-num-doc"></span>
+                  </div>
+                  <div class="boleto-campo">
+                    <span class="boleto-campo-label">Data de Emissão</span>
+                    <span class="boleto-campo-valor" id="boleto-emissao"></span>
+                  </div>
+                </div>
+                <div class="boleto-campo boleto-campo--instrucoes">
+                  <span class="boleto-campo-label">Instruções ao Caixa</span>
+                  <span class="boleto-campo-valor">Não receber após o vencimento. Após vencimento cobrar multa de 2% e juros de 0,033% ao dia.<br>Dúvidas: (41) 4002-8922 — loja@comicgeekstore.com.br</span>
+                </div>
+                <div class="boleto-campo boleto-campo--pagador">
+                  <span class="boleto-campo-label">Pagador</span>
+                  <span class="boleto-campo-valor" id="boleto-pagador-nome"></span>
+                  <span class="boleto-campo-valor boleto-campo-valor--sub" id="boleto-pagador-end"></span>
+                  <span class="boleto-campo-valor boleto-campo-valor--sub" id="boleto-pagador-doc"></span>
+                </div>
+              </div>
+
+              <div class="boleto-col-side">
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">Vencimento</span>
+                  <span class="boleto-campo-valor boleto-campo-valor--destaque" id="boleto-vencimento"></span>
+                </div>
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">Valor do Documento</span>
+                  <span class="boleto-campo-valor boleto-campo-valor--destaque" id="boleto-valor"></span>
+                </div>
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">(-) Desconto / Abatimento</span>
+                  <span class="boleto-campo-valor">—</span>
+                </div>
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">(+) Mora / Multa</span>
+                  <span class="boleto-campo-valor">—</span>
+                </div>
+                <div class="boleto-campo">
+                  <span class="boleto-campo-label">Valor Cobrado</span>
+                  <span class="boleto-campo-valor boleto-campo-valor--destaque" id="boleto-valor-cobrado"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Linha de tesoura -->
+            <div class="boleto-tesoura">✂ ─────────────────────────────────────────────────────────────────</div>
+
+            <!-- Código de barras -->
+            <div class="boleto-barcode-section">
+              <div class="boleto-barcode" id="boleto-barcode"></div>
+            </div>
+
+          </div><!-- /.boleto-doc -->
+
+          <div class="boleto-acoes">
+            <button class="btn-copiar-pix" onclick="copiarLinhaDigitavel()">📋 Copiar Linha Digitável</button>
+            <button class="btn-confirmar-pagamento pix-btn-paguei" onclick="confirmarPagamentoBoleto()">Já Paguei ✓</button>
+          </div>
+          <p class="pix-aviso">Boleto com vencimento em 3 dias úteis. Após pagar, clique em "Já Paguei".</p>
+        </div>
+
+      </div>
+
+      <!-- ETAPA 3: QR Code PIX -->
+      <div id="pag-step-3" style="display:none">
+        <h2 class="modal-titulo">Pague via PIX</h2>
+
+        <div class="pix-qr-box">
+          <img id="pix-qrcode-img" src="" alt="QR Code PIX" class="pix-qrcode">
+          <div class="pix-instrucoes">
+            <p class="pix-inst-item">📱 Abra o app do seu banco</p>
+            <p class="pix-inst-item">📷 Escaneie o QR Code</p>
+            <p class="pix-inst-item">✅ Confirme o pagamento</p>
+          </div>
+        </div>
+
+        <div class="pix-chave-box">
+          <span class="pix-chave-label">Chave PIX (CNPJ)</span>
+          <div class="pix-chave-row">
+            <span class="pix-chave-valor" id="pix-chave-exibida">12.345.678/0001-90</span>
+            <button class="btn-copiar-pix" onclick="copiarChavePix()">Copiar</button>
+          </div>
+        </div>
+
+        <div class="pagamento-resumo" style="margin-top:16px">
+          <span>Total:</span>
+          <strong id="pix-total-final">R$ 0,00</strong>
+        </div>
+
+        <button class="btn-confirmar-pagamento pix-btn-paguei" onclick="confirmarPagamentoPix()">Já Paguei ✓</button>
+        <p class="pix-aviso">Clique em "Já Paguei" após efetuar o pagamento para confirmar o pedido.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2>Minha Conta</h2></li>
+          <li><h2>Cupons/Descontos</h2></li>
+          <li><h2>Contato</h2></li>
+          <li><h2>Fale Conosco</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // ViaCEP — autocomplete de endereço
+    async function buscarCEP(cep, prefixo) {
+      const c = cep.replace(/\D/g, "");
+      if (c.length !== 8) return;
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
+        const d = await r.json();
+        if (d.erro) return;
+        const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+        set(prefixo + "-rua",    d.logradouro);
+        set(prefixo + "-bairro", d.bairro);
+        set(prefixo + "-cidade", d.localidade);
+        set(prefixo + "-estado", d.uf);
+        document.getElementById(prefixo + "-numero")?.focus();
+      } catch {}
+    }
+
+    function mascararCEP(el) {
+      let v = el.value.replace(/\D/g, "").slice(0, 8);
+      if (v.length > 5) v = v.slice(0,5) + "-" + v.slice(5);
+      el.value = v;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      [["pix-cep","pix"], ["boleto-cep","boleto"]].forEach(([id, pref]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", () => mascararCEP(el));
+        el.addEventListener("blur",  () => buscarCEP(el.value, pref));
+      });
+    });
+  </script>
+</body>
+
+</html>
