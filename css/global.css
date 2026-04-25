@@ -538,6 +538,28 @@ nav img {
 
 .nav-dropdown-wrapper::after { display: none !important; }
 
+.nav-dropdown-trigger-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-todos-btn {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Bangers', cursive;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--cor-destaque);
+  cursor: pointer;
+  padding: 0;
+  text-shadow: 0.5px 0.5px 0.5px black;
+}
+
+.nav-todos-btn:hover { color: var(--cor-destaque); opacity: 0.8; }
+
 .nav-dropdown-trigger {
   background: none;
   border: none;

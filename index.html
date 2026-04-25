@@ -114,9 +114,12 @@
     <ul>
       <!-- Dropdown Categorias -->
       <li class="nav-dropdown-wrapper" id="nav-dropdown-wrapper">
-        <button class="nav-dropdown-trigger" id="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
-          <span class="nav-dropdown-trigger__icone">☰</span> Todos
-        </button>
+        <div class="nav-dropdown-trigger-wrap">
+          <button class="nav-dropdown-trigger" id="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" title="Categorias">
+            <span class="nav-dropdown-trigger__icone">☰</span>
+          </button>
+          <button class="nav-todos-btn" onclick="filtrarDropdown('tudo')" title="Voltar ao início">Todos</button>
+        </div>
         <div class="nav-dropdown-painel" id="nav-dropdown-painel" aria-hidden="true">
           <ul class="nav-dropdown-lista">
             <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('lancamentos')">🆕 Lançamentos</button></li>
