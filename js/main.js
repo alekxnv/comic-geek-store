@@ -1759,14 +1759,6 @@ function _mostrarResultadosBusca(resultados) {
       </article>`;
   }).join("");
 
-  lista.querySelectorAll(".card-produto__btn").forEach(btn => {
-    btn.addEventListener("click", function(e) {
-      e.stopPropagation();
-      const card = this.closest(".card-produto");
-      if (card.dataset.esgotado) return;
-      adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img);
-    });
-  });
   lista.querySelectorAll(".card-produto").forEach(card => {
     card.addEventListener("click", function(e) {
       if (e.target.closest(".card-produto__btn")) return;
@@ -1821,7 +1813,6 @@ function carregarProdutosAPI() {
         const grupoEl = listaEl.closest(".secao-grupo");
         if (grupoEl) grupoEl.style.display = "";
       });
-      inicializarBotoesCarrinho();
     })
     .catch(() => {});
 }
@@ -1887,14 +1878,6 @@ function _mostrarResultadosMarvel(resultados, query) {
       </article>`;
   }).join("");
 
-  // Reativar cliques nos novos cards
-  lista.querySelectorAll(".card-produto__btn").forEach(btn => {
-    btn.addEventListener("click", function(e) {
-      e.stopPropagation();
-      const card = this.closest(".card-produto");
-      adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img);
-    });
-  });
   lista.querySelectorAll(".card-produto").forEach(card => {
     card.addEventListener("click", function(e) {
       if (e.target.closest(".card-produto__btn")) return;
@@ -1907,15 +1890,17 @@ function _mostrarResultadosMarvel(resultados, query) {
 // BOTÕES "ADICIONAR AO CARRINHO"
 // =========================
 function inicializarBotoesCarrinho() {
-  document.querySelectorAll(".card-produto__btn").forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      const card = this.closest(".card-produto");
-      if (card.dataset.estoque === "0") return;
-      const origText = card.querySelector(".card-produto__preco h3")?.textContent?.replace("R$","").replace(",",".").trim();
-      const precoOriginal = origText ? parseFloat(origText) : null;
-      adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img, 1, precoOriginal);
-    });
+  // Usa event delegation para evitar listeners duplicados em cards dinâmicos
+  document.addEventListener("click", function(e) {
+    const btn = e.target.closest(".card-produto__btn");
+    if (!btn) return;
+    e.stopPropagation();
+    const card = btn.closest(".card-produto");
+    if (!card) return;
+    if (card.dataset.estoque === "0" || btn.disabled) return;
+    const origText = card.querySelector(".card-produto__preco h3")?.textContent?.replace("R$","").replace(",",".").trim();
+    const precoOriginal = origText ? parseFloat(origText) : null;
+    adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img, 1, precoOriginal);
   });
 
   // Badge de desconto + badge Esgotado em cada card
