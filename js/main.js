@@ -1890,17 +1890,16 @@ function _mostrarResultadosMarvel(resultados, query) {
 // BOTÕES "ADICIONAR AO CARRINHO"
 // =========================
 function inicializarBotoesCarrinho() {
-  // Usa event delegation para evitar listeners duplicados em cards dinâmicos
-  document.addEventListener("click", function(e) {
-    const btn = e.target.closest(".card-produto__btn");
-    if (!btn) return;
-    e.stopPropagation();
-    const card = btn.closest(".card-produto");
-    if (!card) return;
-    if (card.dataset.estoque === "0" || btn.disabled) return;
-    const origText = card.querySelector(".card-produto__preco h3")?.textContent?.replace("R$","").replace(",",".").trim();
-    const precoOriginal = origText ? parseFloat(origText) : null;
-    adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img, 1, precoOriginal);
+  document.querySelectorAll(".card-produto__btn:not([data-listener])").forEach((btn) => {
+    btn.dataset.listener = "1";
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const card = this.closest(".card-produto");
+      if (card.dataset.estoque === "0") return;
+      const origText = card.querySelector(".card-produto__preco h3")?.textContent?.replace("R$","").replace(",",".").trim();
+      const precoOriginal = origText ? parseFloat(origText) : null;
+      adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img, 1, precoOriginal);
+    });
   });
 
   // Badge de desconto + badge Esgotado em cada card
