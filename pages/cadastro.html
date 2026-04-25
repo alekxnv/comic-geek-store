@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta | Comic Geek Store</title>
+  <meta name="description" content="Crie sua conta na Comic Geek Store e tenha acesso a ofertas exclusivas, histórico de pedidos e muito mais.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/cadastro.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- MAIN -->
+  <main class="cadastro">
+    <div class="cadastro-page">
+
+      <h1 class="cadastro-titulo">Criar Nova Conta</h1>
+
+      <form id="form-cadastro" novalidate>
+
+        <!-- ==============================
+             SEÇÃO: INFORMAÇÕES PESSOAIS
+        =============================== -->
+        <div class="cad-secao">
+          <h2 class="cad-secao__titulo">Informações Pessoais</h2>
+
+          <!-- Tipo de conta -->
+          <div class="cad-tipo-conta">
+            <label class="cad-radio">
+              <input type="radio" name="tipo-conta" value="fisica" checked onchange="alternarTipoConta(this.value)">
+              Pessoa Física
+            </label>
+            <label class="cad-radio">
+              <input type="radio" name="tipo-conta" value="juridica" onchange="alternarTipoConta(this.value)">
+              Pessoa Jurídica
+            </label>
+          </div>
+
+          <!-- Campos PJ (ocultos por padrão) -->
+          <div id="campo-razao" style="display:none">
+            <div class="cad-campo">
+              <label class="cad-label">Razão Social <span class="cad-obrig">*</span></label>
+              <input type="text" id="razao-social" class="cad-input" placeholder="Nome da empresa">
+              <span class="campo-erro"></span>
+            </div>
+            <div class="cad-campo">
+              <label class="cad-label">CNPJ <span class="cad-obrig">*</span></label>
+              <input type="text" id="cnpj" class="cad-input" placeholder="00.000.000/0000-00" maxlength="18">
+              <span class="campo-erro"></span>
+            </div>
+
+            <h3 class="cad-subsecao">Endereço Comercial</h3>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--cep">
+                <label class="cad-label" for="cep-pj">CEP</label>
+                <input type="text" id="cep-pj" class="cad-input" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+                <p id="cep-pj-msg" class="cep-msg"></p>
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="rua-pj">Rua / Logradouro</label>
+                <input type="text" id="rua-pj" class="cad-input" placeholder="Nome da rua">
+              </div>
+              <div class="cad-campo cad-campo--num">
+                <label class="cad-label" for="numero-pj">Número</label>
+                <input type="text" id="numero-pj" class="cad-input" placeholder="Nº">
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="complemento-pj">Complemento <span class="cad-opcional">(opcional)</span></label>
+                <input type="text" id="complemento-pj" class="cad-input" placeholder="Apto, bloco, sala...">
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="bairro-pj">Bairro</label>
+                <input type="text" id="bairro-pj" class="cad-input" placeholder="Bairro">
+              </div>
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="cidade-pj">Cidade</label>
+                <input type="text" id="cidade-pj" class="cad-input" placeholder="Cidade">
+              </div>
+              <div class="cad-campo cad-campo--uf">
+                <label class="cad-label" for="estado-pj">UF</label>
+                <input type="text" id="estado-pj" class="cad-input" placeholder="PR" maxlength="2">
+              </div>
+            </div>
+          </div>
+
+          <!-- Nome -->
+          <div class="cad-campo">
+            <label class="cad-label" for="nome">Nome <span class="cad-obrig">*</span></label>
+            <input type="text" id="nome" class="cad-input" placeholder="Seu nome completo" required>
+            <span class="campo-erro"></span>
+          </div>
+
+          <!-- CPF (apenas PF) -->
+          <div id="campo-cpf" class="cad-campo">
+            <label class="cad-label" for="cpf">CPF <span class="cad-obrig">*</span></label>
+            <input type="text" id="cpf" class="cad-input" placeholder="000.000.000-00" maxlength="14">
+            <span class="campo-erro"></span>
+          </div>
+
+          <!-- Data de Nascimento (apenas PF) -->
+          <div id="campo-nascimento" class="cad-campo">
+            <label class="cad-label" for="nascimento">Data de Nascimento</label>
+            <input type="date" id="nascimento" class="cad-input">
+            <span class="campo-erro" id="erro-nascimento"></span>
+          </div>
+
+          <!-- Endereço (apenas PF) -->
+          <div id="campo-endereco">
+            <h3 class="cad-subsecao">Endereço de Entrega</h3>
+
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--cep">
+                <label class="cad-label" for="cep">CEP</label>
+                <input type="text" id="cep" class="cad-input" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+                <p id="cep-msg" class="cep-msg"></p>
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="rua">Rua / Logradouro</label>
+                <input type="text" id="rua" class="cad-input" placeholder="Nome da rua">
+              </div>
+              <div class="cad-campo cad-campo--num">
+                <label class="cad-label" for="numero">Número</label>
+                <input type="text" id="numero" class="cad-input" placeholder="Nº">
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="complemento">Complemento <span class="cad-opcional">(opcional)</span></label>
+                <input type="text" id="complemento" class="cad-input" placeholder="Apto, bloco...">
+              </div>
+            </div>
+            <div class="cad-linha">
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="bairro">Bairro</label>
+                <input type="text" id="bairro" class="cad-input" placeholder="Seu bairro">
+              </div>
+              <div class="cad-campo cad-campo--flex">
+                <label class="cad-label" for="cidade">Cidade</label>
+                <input type="text" id="cidade" class="cad-input" placeholder="Sua cidade">
+              </div>
+              <div class="cad-campo cad-campo--uf">
+                <label class="cad-label" for="estado">UF</label>
+                <input type="text" id="estado" class="cad-input" placeholder="PR" maxlength="2">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================
+             SEÇÃO: INFORMAÇÕES DE ACESSO
+        =============================== -->
+        <div class="cad-secao">
+          <h2 class="cad-secao__titulo">Informações de Acesso</h2>
+
+          <!-- Login -->
+          <div class="cad-campo">
+            <label class="cad-label" for="login-usuario">Login (nome de usuário) <span class="cad-obrig">*</span></label>
+            <input type="text" id="login-usuario" class="cad-input" placeholder="Ex: batman_fan (sem espaços)"
+              required pattern="[a-zA-Z0-9_\-]{3,30}" autocomplete="username">
+            <small class="cad-hint">Usado para entrar no site no lugar do e-mail. Letras, números, _ ou - (3 a 30 caracteres).</small>
+            <span class="campo-erro"></span>
+          </div>
+
+          <!-- E-mail -->
+          <div class="cad-campo">
+            <label class="cad-label" for="email">E-mail <span class="cad-obrig">*</span></label>
+            <input type="email" id="email" class="cad-input" placeholder="seu@email.com" required autocomplete="email">
+            <span class="campo-erro"></span>
+          </div>
+
+          <!-- Senha -->
+          <div class="cad-campo">
+            <label class="cad-label" for="senha">Senha <span class="cad-obrig">*</span></label>
+            <div class="cad-senha-wrap">
+              <input type="password" id="senha" class="cad-input" placeholder="Mínimo 6 caracteres" required autocomplete="new-password">
+              <button type="button" class="cad-toggle-senha" onclick="toggleSenhaVisivel('senha', this)" tabindex="-1">👁</button>
+            </div>
+            <span class="campo-erro"></span>
+          </div>
+
+          <!-- Confirmar Senha -->
+          <div class="cad-campo">
+            <label class="cad-label" for="confirmar-senha">Confirmar Senha <span class="cad-obrig">*</span></label>
+            <div class="cad-senha-wrap">
+              <input type="password" id="confirmar-senha" class="cad-input" placeholder="Repita a senha" required autocomplete="new-password">
+              <button type="button" class="cad-toggle-senha" onclick="toggleSenhaVisivel('confirmar-senha', this)" tabindex="-1">👁</button>
+            </div>
+            <span class="campo-erro"></span>
+          </div>
+        </div>
+
+        <!-- RODAPÉ DO FORM -->
+        <div class="cad-rodape">
+          <p class="cad-obrig-nota"><span class="cad-obrig">*</span> Campos obrigatórios</p>
+          <button type="submit" class="cad-btn">Criar Conta</button>
+          <p class="cad-ja-conta">Já tem conta? <a href="/login">Entrar</a></p>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2><h3>Enviamos para todo o Brasil</h3></li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca">
+          <h2>TROCA DE PRODUTOS</h2><h3>Fale conosco</h3></li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2><h3>Para compras acima de R$150</h3></li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Pix">
+          <h2>BOLETO E PIX</h2><h3>Pague com toda comodidade</h3></li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2>Minha Conta</h2></li>
+          <li><h2>Cupons/Descontos</h2></li>
+          <li><h2>Contato</h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ Seg–Sex, 9h–11h e 13h–17h</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

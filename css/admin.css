@@ -1,0 +1,1136 @@
+﻿/* =========================
+   ADMIN — LOGIN
+========================= */
+
+.admin-login-overlay {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 60%, #2d1557 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.admin-login-box {
+  background: white;
+  border-radius: 20px;
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,47,201,0.2);
+}
+
+.admin-login-logo {
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.admin-login-box h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  letter-spacing: 1px;
+  margin: 0 0 6px;
+}
+
+.admin-login-box p {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.admin-login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.admin-login-box label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.admin-login-box input {
+  height: 42px;
+  padding: 0 14px;
+  font-size: 15px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Bangers', cursive;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.admin-login-box input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(139,47,201,0.12);
+}
+
+.admin-login-erro {
+  color: #e74c3c;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 18px;
+  margin: 0;
+}
+
+.btn-admin-entrar {
+  margin-top: 6px;
+  height: 46px;
+  background: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.btn-admin-entrar:hover {
+  background: #6e1fa8;
+  transform: translateY(-1px);
+}
+
+.admin-voltar-link {
+  display: block;
+  margin-top: 18px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.admin-voltar-link:hover {
+  color: var(--cor-primaria);
+}
+
+/* =========================
+   ADMIN — LAYOUT PAINEL
+========================= */
+
+#admin-painel {
+  display: flex;
+  min-height: 100vh;
+  background: #f0edf8;
+  font-family: 'Bangers', cursive;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #1a0a2e 0%, #2d1557 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  box-shadow: 4px 0 30px rgba(0,0,0,0.3);
+}
+
+.admin-sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.2);
+}
+
+.admin-sidebar__logo img {
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(139,47,201,0.5));
+}
+
+.admin-sidebar__logo span {
+  color: var(--cor-destaque);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.admin-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 10px;
+  gap: 4px;
+}
+
+.admin-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 22px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 1px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  border-radius: 0 8px 8px 0;
+  margin-right: 12px;
+}
+
+.admin-nav__item:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+  transform: none !important;
+  border-left-color: rgba(255,255,255,0.3);
+}
+
+.admin-nav__item.ativo {
+  background: rgba(139,47,201,0.35);
+  color: white;
+  border-left-color: var(--cor-destaque);
+  font-weight: 700;
+  box-shadow: inset 0 0 20px rgba(139,47,201,0.2);
+}
+
+.admin-nav__icone {
+  font-size: 20px;
+  width: 26px;
+  text-align: center;
+}
+
+/* Botão voltar ao site */
+.admin-voltar-site {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 12px 8px;
+  padding: 11px 16px;
+  background: rgba(255,216,77,0.1);
+  border: 1px solid rgba(255,216,77,0.3);
+  color: var(--cor-destaque);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: center;
+  justify-content: center;
+}
+
+.admin-voltar-site:hover {
+  background: var(--cor-destaque);
+  color: #1a0a2e;
+  border-color: var(--cor-destaque);
+}
+
+.admin-logout {
+  margin: 0 12px 16px;
+  padding: 11px;
+  background: rgba(231,76,60,0.12);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: #e74c3c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-logout:hover {
+  background: #e74c3c;
+  color: white;
+  transform: none !important;
+  border-color: #e74c3c;
+}
+
+.admin-main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 36px;
+  min-height: 100vh;
+}
+
+/* =========================
+   ABAS
+========================= */
+
+.admin-aba__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.admin-aba__header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a0a2e;
+  margin: 0;
+  letter-spacing: 2px;
+  font-family: 'Bangers', cursive;
+}
+
+.btn-admin-novo {
+  background: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-admin-novo:hover {
+  background: #6e1fa8;
+  transform: translateY(-1px) !important;
+  border-color: transparent;
+}
+
+/* =========================
+   ESTATÍSTICAS
+========================= */
+
+.admin-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.admin-stat {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 28px;
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(139,47,201,0.08);
+  border-top: 4px solid var(--cor-primaria);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(139,47,201,0.15);
+}
+
+.admin-stat__num {
+  display: block;
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  color: var(--cor-primaria);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.admin-stat__label {
+  font-size: 11px;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   FORMULÁRIO DE PRODUTO
+========================= */
+
+.admin-form-box {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 30px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 20px rgba(139,47,201,0.08);
+  border-left: 5px solid var(--cor-primaria);
+}
+
+.admin-form-box h3 {
+  font-size: 20px;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 2px;
+  color: var(--cor-primaria);
+  margin: 0 0 20px;
+}
+
+.admin-form__linha {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-form__grupo {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-form__grupo label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-form__grupo input,
+.admin-form__grupo select {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 7px;
+  font-family: 'Bangers', cursive;
+  outline: none;
+  transition: border-color 0.2s;
+  background: white;
+}
+
+.admin-form__grupo input:focus,
+.admin-form__grupo select:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(139,47,201,0.1);
+}
+
+.admin-form__acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btn-admin-salvar {
+  padding: 11px 28px;
+  background: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-admin-salvar:hover {
+  background: #6e1fa8;
+  transform: none !important;
+  border-color: transparent;
+}
+
+.btn-admin-cancelar {
+  padding: 11px 22px;
+  background: white;
+  color: #888;
+  border: 1.5px solid #ddd;
+  border-radius: 7px;
+  font-size: 14px;
+  font-family: 'Bangers', cursive;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-admin-cancelar:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+  transform: none !important;
+  background: white;
+}
+
+/* =========================
+   TABELA DE PRODUTOS
+========================= */
+
+.admin-tabela-wrapper {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(139,47,201,0.08);
+  overflow: hidden;
+}
+
+.admin-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-tabela thead {
+  background: #1a0a2e;
+}
+
+.admin-tabela th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.admin-tabela td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.admin-tabela tbody tr:hover {
+  background: #faf8ff;
+}
+
+.admin-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-tabela__img {
+  width: 44px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  background: #f0f0f0;
+}
+
+.admin-tabela__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-marvel { background: #ffeaea; color: #c0392b; }
+.badge-dc     { background: #eaf0ff; color: #2563eb; }
+
+.badge-secao {
+  background: #f3ebff;
+  color: var(--cor-primaria);
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.admin-tabela__acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar-prod,
+.btn-excluir-prod {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-editar-prod {
+  background: #eaf0ff;
+  color: #2563eb;
+}
+
+.btn-editar-prod:hover {
+  background: #2563eb;
+  color: white;
+  transform: none !important;
+  border-color: transparent;
+}
+
+.btn-excluir-prod {
+  background: #ffeaea;
+  color: #e74c3c;
+}
+
+.btn-excluir-prod:hover {
+  background: #e74c3c;
+  color: white;
+  transform: none !important;
+  border-color: transparent;
+}
+
+/* =========================
+   ABA PEDIDOS
+========================= */
+
+.admin-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-pedido-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.admin-pedido-card__header {
+  background: #1a0a2e;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-pedido-card__header span {
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+}
+
+.admin-pedido-card__header strong {
+  color: var(--cor-destaque);
+  font-size: 15px;
+}
+
+.admin-pedido-card__body {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-pedido-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #555;
+  padding: 4px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.admin-pedido-item:last-child {
+  border-bottom: none;
+}
+
+.admin-pedido-total {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+/* =========================
+   VAZIO / RESPONSIVO
+========================= */
+
+.admin-vazio {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 64px;
+  }
+
+  .admin-sidebar__logo span,
+  .admin-nav__item span:not(.admin-nav__icone),
+  .admin-voltar-site span {
+    display: none;
+  }
+
+  .admin-sidebar__logo {
+    justify-content: center;
+    padding: 16px 8px;
+  }
+
+  .admin-sidebar__logo img {
+    height: 34px;
+  }
+
+  .admin-nav__item {
+    justify-content: center;
+    padding: 14px 8px;
+    margin-right: 6px;
+  }
+
+  .admin-voltar-site {
+    margin: 0 6px 6px;
+    padding: 10px;
+    font-size: 0;
+  }
+
+  .admin-voltar-site::before {
+    content: "🏠";
+    font-size: 18px;
+  }
+
+  .admin-logout {
+    font-size: 0;
+    padding: 11px;
+    margin: 0 6px 12px;
+  }
+
+  .admin-logout::before {
+    content: "🚪";
+    font-size: 18px;
+  }
+
+  .admin-main {
+    margin-left: 64px;
+    padding: 16px;
+  }
+
+  .admin-tabela th:nth-child(3),
+  .admin-tabela td:nth-child(3),
+  .admin-tabela th:nth-child(4),
+  .admin-tabela td:nth-child(4) {
+    display: none;
+  }
+
+  .admin-aba__header h2 {
+    font-size: 20px;
+  }
+
+  .admin-stats {
+    gap: 10px;
+  }
+
+  .admin-stat {
+    padding: 16px 12px;
+  }
+
+  .admin-stat__num {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-main {
+    margin-left: 0;
+    padding: 12px;
+  }
+
+  .admin-sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  #admin-painel {
+    flex-direction: column;
+  }
+
+  .admin-sidebar__logo {
+    padding: 10px 14px;
+    border-bottom: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    flex: 1;
+    padding: 0;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .admin-nav__item {
+    padding: 12px 14px;
+    margin-right: 0;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    flex-shrink: 0;
+  }
+
+  .admin-nav__item.ativo {
+    border-left-color: transparent;
+    border-bottom-color: var(--cor-destaque);
+  }
+
+  .admin-voltar-site,
+  .admin-logout {
+    display: none;
+  }
+
+  .admin-aba__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn-admin-novo {
+    width: 100%;
+  }
+
+  .admin-form__linha {
+    flex-direction: column;
+  }
+
+  .admin-form__grupo {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .admin-form__grupo--cep,
+  .admin-form__grupo--num,
+  .admin-form__grupo--uf {
+    max-width: 100%;
+  }
+
+  .admin-tabela th:nth-child(1),
+  .admin-tabela td:nth-child(1) {
+    display: none;
+  }
+
+  .admin-tabela th,
+  .admin-tabela td {
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+
+  .admin-form-box {
+    padding: 18px 16px;
+  }
+}
+
+/* Título de sub-seção no formulário de usuário */
+.admin-form__secao {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cor-primaria);
+  border-top: 1px solid rgba(139,47,201,0.25);
+  padding-top: 14px;
+  margin: 14px 0 6px;
+}
+
+.admin-form__grupo--cep { max-width: 130px; }
+.admin-form__grupo--num { max-width: 90px; }
+.admin-form__grupo--uf  { max-width: 70px; }
+
+/* Badge origem vendedor */
+/* =========================
+   APROVAÇÕES PJ
+========================= */
+
+.admin-aprovacoes-desc {
+  font-size: 13px;
+  color: #888;
+  margin: -8px 0 20px;
+}
+
+.admin-aprovacoes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.aprovacao-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  border-left: 4px solid var(--cor-primaria);
+}
+
+.aprovacao-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cor-primaria), #b05ee0);
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.aprovacao-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.aprovacao-card__info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 6px;
+}
+
+.aprovacao-card__info p {
+  font-size: 13px;
+  color: #666;
+  margin: 3px 0;
+}
+
+.aprovacao-label {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #888;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-right: 6px;
+}
+
+.aprovacao-secao {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.aprovacao-secao__titulo {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cor-primaria);
+  margin-bottom: 6px;
+}
+
+.aprovacao-card__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-aprovar-vend {
+  padding: 9px 20px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-aprovar-vend:hover {
+  background: #219a52 !important;
+  transform: none !important;
+  color: white !important;
+}
+
+.btn-rejeitar-vend {
+  padding: 9px 20px;
+  background: white;
+  color: #e74c3c;
+  border: 2px solid #e74c3c;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-rejeitar-vend:hover {
+  background: #e74c3c !important;
+  color: white !important;
+  transform: none !important;
+}
+
+/* Badge de pendentes no nav */
+.admin-badge-pendentes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e74c3c;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Estados vender pendente/rejeitado */
+.vender-pendente h2 { color: #e67e22; }
+.vender-rejeitado h2 { color: #e74c3c; }
+
+.vender-pendente__icone {
+  font-size: 40px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.badge-vendedor {
+  display: inline-block;
+  background: rgba(0, 184, 148, 0.15);
+  border: 1px solid rgba(0, 184, 148, 0.4);
+  color: #00b894;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.input-preco-venda {
+  background: #2a2a2a;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.label-opcional {
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+  margin-left: 4px;
+}
+
+/* Preview de imagem no formulário */
+.img-preview-wrap {
+  margin-top: 10px;
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px dashed rgba(139,47,201,0.35);
+  background: #1e1e2e;
+}
+
+.img-preview-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.img-preview-icon {
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.img-preview-texto {
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+.img-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #1e1e2e;
+}
+
+@media (max-width: 360px) {
+  .admin-main {
+    padding: 8px;
+  }
+
+  .admin-nav__item {
+    padding: 10px 10px;
+    font-size: 13px;
+  }
+
+  .admin-tabela th,
+  .admin-tabela td {
+    padding: 8px 8px;
+    font-size: 11px;
+  }
+
+  .admin-stats {
+    flex-direction: column;
+  }
+}
+
+/* Telas grandes / Projetores */
+@media (min-width: 1400px) {
+  .admin-sidebar {
+    width: 280px;
+  }
+
+  .admin-main {
+    margin-left: 280px;
+    padding: 36px 48px;
+  }
+
+  .admin-sidebar__logo img {
+    height: 60px;
+  }
+
+  .admin-nav__item {
+    font-size: 16px;
+    padding: 16px 24px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .admin-sidebar {
+    width: 300px;
+  }
+
+  .admin-main {
+    margin-left: 300px;
+    padding: 48px 80px;
+  }
+
+  .admin-aba__header h2 {
+    font-size: 32px;
+  }
+
+  .admin-stat__num {
+    font-size: 48px;
+  }
+}
+

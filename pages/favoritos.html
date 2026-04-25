@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favoritos | Comic Geek Store</title>
+  <meta name="description" content="Seus produtos favoritos na Comic Geek Store.">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+  <style>
+    .favoritos-header {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      padding: 0 20px;
+    }
+    .favoritos-header h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 2.2rem;
+      color: var(--cor-primaria);
+      letter-spacing: 2px;
+    }
+    .favoritos-header p { color: #666; font-size: 14px; margin-top: 4px; }
+    .favoritos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 24px auto 48px;
+      padding: 0 20px;
+      justify-content: flex-start;
+    }
+    .favoritos-vazio {
+      max-width: 600px;
+      margin: 60px auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .favoritos-vazio h2 { font-family: 'Bangers', cursive; font-size: 2rem; color: #333; }
+    .favoritos-vazio p { color: #666; margin: 10px 0 24px; }
+    .favoritos-vazio a {
+      background: var(--cor-primaria);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      text-decoration: none;
+    }
+
+    /* Adapta card-produto ao fundo escuro dos favoritos */
+    .favoritos-grid .card-produto {
+      background: #1a1027 !important;
+      border-color: rgba(139,47,201,0.25) !important;
+      width: 175px;
+    }
+    .favoritos-grid .card-produto:hover {
+      border-color: var(--cor-primaria) !important;
+    }
+    .favoritos-grid .card-produto__nome h3 { color: #fff !important; }
+    .favoritos-grid .card-produto__preco h2 { color: #ffd84d !important; }
+    .favoritos-grid .card-produto__preco h3 { color: #aaa !important; }
+    .favoritos-grid .btn-remover-fav {
+      background: transparent !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      color: rgba(255,255,255,0.45) !important;
+      margin-top: 4px;
+    }
+    .favoritos-grid .btn-remover-fav:hover {
+      color: #e74c3c !important;
+      border-color: rgba(231,76,60,0.5) !important;
+      background: rgba(231,76,60,0.08) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos...">
+          <button type="submit" class="pesquisa-btn"><span>Buscar</span></button>
+        </div>
+      </form>
+    </div>
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil">
+        </a>
+      </li>
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Pedidos">
+        </a>
+      </li>
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <div class="favoritos-header">
+    <h1>❤ Meus Favoritos</h1>
+    <p id="favoritos-contagem"></p>
+  </div>
+
+  <div class="favoritos-grid" id="favoritos-grid"></div>
+
+  <div class="favoritos-vazio" id="favoritos-vazio" style="display:none">
+    <h2>Nenhum favorito ainda</h2>
+    <p>Clique no coração ♡ em qualquer produto para salvá-lo aqui.</p>
+    <a href="/">Explorar a Loja</a>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (function() {
+      const favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+      const grid = document.getElementById("favoritos-grid");
+      const vazio = document.getElementById("favoritos-vazio");
+      const contagem = document.getElementById("favoritos-contagem");
+
+      if (favs.length === 0) {
+        vazio.style.display = "block";
+        contagem.textContent = "0 produtos salvos";
+        return;
+      }
+
+      contagem.textContent = favs.length + " produto" + (favs.length > 1 ? "s" : "") + " salvo" + (favs.length > 1 ? "s" : "");
+
+      grid.innerHTML = favs.map(f => {
+        const precoOriginal = f.precoOriginal && parseFloat(f.precoOriginal) > parseFloat(f.preco)
+          ? `<h3 style="text-decoration:line-through;color:#aaa;font-size:13px">R$${parseFloat(f.precoOriginal).toFixed(2).replace(".",",")}</h3>` : "";
+        return `
+        <article class="card-produto" data-nome="${f.nome}" data-preco="${f.preco}" data-img="${f.img}" data-editora="${f.editora || 'marvel'}">
+          <div class="card-produto__imagem">
+            <img src="../${f.img}" alt="${f.nome}" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>${f.nome}</h3></div>
+          <div class="card-produto__preco">
+            ${precoOriginal}
+            <h2>R$${parseFloat(f.preco).toFixed(2).replace(".",",")}</h2>
+          </div>
+          <button class="card-produto__btn btn-fav-carrinho" data-nome="${f.nome}">+ Adicionar ao Carrinho</button>
+          <button class="btn-remover-fav" onclick="removerFavorito('${f.nome}',this)">✕ Remover dos favoritos</button>
+        </article>`;
+      }).join("");
+
+      grid.querySelectorAll(".btn-fav-carrinho").forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          const card = this.closest(".card-produto");
+          adicionarAoCarrinho(card.dataset.nome, card.dataset.preco, card.dataset.img, 1, null);
+        });
+      });
+
+      grid.querySelectorAll(".card-produto").forEach(card => {
+        card.addEventListener("click", function(e) {
+          if (e.target.closest(".btn-fav-carrinho") || e.target.closest(".btn-remover-fav")) return;
+          const nome = this.dataset.nome;
+          window.location = "/?open=" + encodeURIComponent(nome);
+        });
+      });
+    })();
+
+    function removerFavorito(nome, btn) {
+      let favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+      favs = favs.filter(f => f.nome !== nome);
+      localStorage.setItem("favoritos", JSON.stringify(favs));
+      btn.closest(".card-produto").remove();
+      const restantes = document.querySelectorAll(".card-produto").length;
+      document.getElementById("favoritos-contagem").textContent =
+        restantes + " produto" + (restantes !== 1 ? "s" : "") + " salvo" + (restantes !== 1 ? "s" : "");
+      if (restantes === 0) document.getElementById("favoritos-vazio").style.display = "block";
+    }
+  </script>
+</body>
+</html>

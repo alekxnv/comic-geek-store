@@ -1,0 +1,513 @@
+/* =========================
+   LOGIN — PÁGINA
+========================= */
+
+main.login {
+  background: #fff;
+  min-height: 70vh;
+  padding: 40px 0 60px;
+}
+
+.login-page {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.login-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+/* =========================
+   CONTAINER DUAS COLUNAS
+========================= */
+
+.login-container {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.login-col {
+  flex: 1;
+  padding: 0 40px 0 0;
+}
+
+.login-col--novo {
+  padding: 0 0 0 40px;
+}
+
+.login-divisor-vertical {
+  width: 1px;
+  background: #ddd;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* =========================
+   TÍTULOS E DESCRIÇÃO
+========================= */
+
+.login-col h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.login-divider {
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  margin-bottom: 18px;
+}
+
+.login-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* =========================
+   CAMPOS DO FORMULÁRIO
+========================= */
+
+.login-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.login-campo label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.login-campo input {
+  width: 100%;
+  max-width: 420px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  color: #222;
+  font-family: 'Montserrat', sans-serif !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.login-campo input:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.login-obrigatorio {
+  color: #c00;
+  font-size: 13px;
+}
+
+/* =========================
+   MOSTRAR SENHA (ÍCONE OLHO)
+========================= */
+
+/* Row senha + botão olho */
+.login-senha-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.login-senha-row input {
+  width: 100%;
+  max-width: 420px;
+}
+/* Botão olho fora do input */
+.login-campo .cad-toggle-senha,
+.login-senha-row .cad-toggle-senha {
+  flex-shrink: 0;
+}
+
+/* Botão olho fora do input */
+.login-campo .cad-toggle-senha {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+  padding: 0 4px;
+  line-height: 1;
+}
+.login-campo .cad-toggle-senha:hover { color: #444; }
+
+/* Esconde o botão nativo de revelar senha do Edge/Chrome */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* =========================
+   AÇÕES (BOTÃO + LINK)
+========================= */
+
+.login-acoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.login-btn-entrar {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.login-btn-entrar:hover {
+  background: #444;
+}
+
+.login-forgot {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #222;
+  text-decoration: none;
+}
+
+.login-forgot:hover {
+  text-decoration: underline;
+}
+
+.login-campos-obrig {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #c00;
+  margin-top: 18px;
+}
+
+/* =========================
+   COLUNA DIREITA — CRIAR CONTA
+========================= */
+
+.login-criar-opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-btn-criar {
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.2s;
+  text-align: center;
+  max-width: 280px;
+}
+
+.login-btn-criar:hover {
+  background: #444;
+}
+
+.login-btn-criar--pj {
+  background: #555;
+}
+
+.login-btn-criar--pj:hover {
+  background: #333;
+}
+
+/* =========================
+   VALIDAÇÃO
+========================= */
+
+.campo-erro {
+  display: block;
+  color: #c00;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 16px;
+}
+
+.input-erro {
+  border-color: #c00 !important;
+}
+
+.input-ok {
+  border-color: #4caf50 !important;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .login-col {
+    padding: 0;
+  }
+
+  .login-col--novo {
+    padding: 0;
+  }
+
+  .login-divisor-vertical {
+    display: none;
+  }
+
+  .login-titulo {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    width: 95%;
+  }
+
+  .login-campo input {
+    max-width: 100%;
+  }
+
+  .login-acoes {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =========================
+   MODAL ESQUECEU A SENHA
+========================= */
+
+.modal-esqueci-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-esqueci-box {
+  background: #fff;
+  color: #222;
+  border-radius: 6px;
+  padding: 36px 40px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-esqueci-fechar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.modal-esqueci-fechar:hover { color: #222; }
+
+.modal-esqueci-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.modal-esqueci-desc {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-esqueci-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-esqueci-input {
+  width: 100%;
+  height: 38px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-esqueci-input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.modal-esqueci-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 11px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.2s;
+}
+
+.modal-esqueci-btn:hover { background: #444; }
+
+.esqueci-link-box {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+
+.esqueci-link-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  color: #166534;
+  margin: 0 0 6px;
+}
+
+.esqueci-link-url {
+  display: block;
+  font-size: 12px;
+  color: #1d4ed8;
+  word-break: break-all;
+  text-decoration: underline;
+}
+
+.esqueci-link-aviso {
+  font-size: 11px;
+  color: #888;
+  margin: 6px 0 0;
+}
+
+/* =========================
+   PÁGINA REDEFINIR SENHA
+========================= */
+
+.redefinir-container {
+  max-width: 480px;
+  width: 90%;
+  display: block;
+}
+
+.redefinir-box {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.redefinir-icone {
+  font-size: 52px;
+  margin-bottom: 14px;
+}
+
+.redefinir-box h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.redefinir-box p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.redefinir-email-info {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.redefinir-btn-voltar {
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+/* =========================
+   PERFIL — BOTÃO RESET SENHA
+========================= */
+
+.perfil-senha-desc {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 16px;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.perfil-btn-reset-senha {
+  padding: 10px 24px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.perfil-btn-reset-senha:hover { background: #444; }
+.perfil-btn-reset-senha:disabled { opacity: 0.5; cursor: default; }

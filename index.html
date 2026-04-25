@@ -1,0 +1,1190 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  <title>Comic Geek Store | Sua loja de quadrinhos favorita</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Comic Geek Store — A melhor loja de quadrinhos do Brasil. Marvel, DC, lançamentos, pré-vendas e edições especiais com os melhores preços.">
+  <meta name="keywords" content="quadrinhos, HQ, Marvel, DC, comics, mangá, lançamentos, pré-venda, edições especiais, loja de quadrinhos">
+  <meta name="author" content="Comic Geek Store">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.comicgeek.com.br/">
+
+  <!-- Open Graph (Google, Facebook, WhatsApp) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.comicgeek.com.br/">
+  <meta property="og:title" content="Comic Geek Store | Sua loja de quadrinhos favorita">
+  <meta property="og:description" content="A melhor loja de quadrinhos do Brasil. Marvel, DC, lançamentos, pré-vendas e edições especiais.">
+  <meta property="og:image" content="https://www.comicgeek.com.br/img/logos/logo.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Comic Geek Store">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.comicgeek.com.br/">
+  <meta name="twitter:title" content="Comic Geek Store | Sua loja de quadrinhos favorita">
+  <meta name="twitter:description" content="A melhor loja de quadrinhos do Brasil. Marvel, DC, lançamentos, pré-vendas e edições especiais.">
+  <meta name="twitter:image" content="https://www.comicgeek.com.br/img/logos/logo.png">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/"><img src="img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form id="form-pesquisa" autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" id="input-pesquisa" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar">
+            <span>Buscar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+
+      <li>
+        <a href="/favoritos">
+          <h3>Favoritos</h3>
+          <img src="img/icons/pedidos.png" class="header-icone-pedidos" alt="Favoritos" style="filter:invert(30%) sepia(80%) saturate(600%) hue-rotate(320deg)">
+        </a>
+      </li>
+
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <!-- Dropdown Categorias -->
+      <li class="nav-dropdown-wrapper" id="nav-dropdown-wrapper">
+        <button class="nav-dropdown-trigger" id="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          <span class="nav-dropdown-trigger__icone">☰</span> Todos
+        </button>
+        <div class="nav-dropdown-painel" id="nav-dropdown-painel" aria-hidden="true">
+          <ul class="nav-dropdown-lista">
+            <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('lancamentos')">🆕 Lançamentos</button></li>
+            <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('prevenda')">⏳ Pré-Vendas</button></li>
+            <li class="nav-dropdown-item nav-dropdown-item--destaque"><button type="button" onclick="filtrarDropdown('especiais')">⭐ Edições Especiais</button></li>
+            <li class="nav-dropdown-divider"></li>
+            <li class="nav-dropdown-item nav-dropdown-item--sub" id="drop-marvel">
+              <button type="button" class="nav-dropdown-sub-trigger" onclick="toggleSubMenu('marvel-sub')">
+                <img src="img/logos/marvel.png" alt="Marvel" class="nav-drop-logo"> Marvel <span class="nav-drop-plus" id="plus-marvel">+</span>
+              </button>
+              <ul class="nav-dropdown-sub" id="marvel-sub">
+                <li><button type="button" onclick="filtrarDropdown('marvel')">Todos Marvel</button></li>
+                <li><button type="button" onclick="filtrarDropdown('marvel')">Vingadores</button></li>
+                <li><button type="button" onclick="filtrarDropdown('marvel')">X-Men</button></li>
+                <li><button type="button" onclick="filtrarDropdown('marvel')">Spider-Man</button></li>
+                <li><button type="button" onclick="filtrarDropdown('marvel')">Guardiões da Galáxia</button></li>
+              </ul>
+            </li>
+            <li class="nav-dropdown-item nav-dropdown-item--sub" id="drop-dc">
+              <button type="button" class="nav-dropdown-sub-trigger" onclick="toggleSubMenu('dc-sub')">
+                <img src="img/logos/dc.png" alt="DC" class="nav-drop-logo"> DC Comics <span class="nav-drop-plus" id="plus-dc">+</span>
+              </button>
+              <ul class="nav-dropdown-sub" id="dc-sub">
+                <li><button type="button" onclick="filtrarDropdown('dc')">Todos DC</button></li>
+                <li><button type="button" onclick="filtrarDropdown('dc')">Batman</button></li>
+                <li><button type="button" onclick="filtrarDropdown('dc')">Superman</button></li>
+                <li><button type="button" onclick="filtrarDropdown('dc')">Liga da Justiça</button></li>
+                <li><button type="button" onclick="filtrarDropdown('dc')">Lanterna Verde</button></li>
+              </ul>
+            </li>
+            <li class="nav-dropdown-item nav-dropdown-item--sub">
+              <button type="button" class="nav-dropdown-sub-trigger" onclick="toggleSubMenu('panini-sub')">
+                Panini Comics <span class="nav-drop-plus" id="plus-panini">+</span>
+              </button>
+              <ul class="nav-dropdown-sub" id="panini-sub">
+                <li><button type="button" onclick="filtrarDropdown('panini')">Todos Panini</button></li>
+                <li><button type="button" onclick="filtrarDropdown('panini')">Dragon Ball</button></li>
+                <li><button type="button" onclick="filtrarDropdown('panini')">Naruto</button></li>
+              </ul>
+            </li>
+            <li class="nav-dropdown-item nav-dropdown-item--sub">
+              <button type="button" class="nav-dropdown-sub-trigger" onclick="toggleSubMenu('image-sub')">
+                Image Comics <span class="nav-drop-plus" id="plus-image">+</span>
+              </button>
+              <ul class="nav-dropdown-sub" id="image-sub">
+                <li><button type="button" onclick="filtrarDropdown('image')">Todos Image</button></li>
+                <li><button type="button" onclick="filtrarDropdown('image')">The Walking Dead</button></li>
+                <li><button type="button" onclick="filtrarDropdown('image')">Spawn</button></li>
+              </ul>
+            </li>
+            <li class="nav-dropdown-item nav-dropdown-item--sub">
+              <button type="button" class="nav-dropdown-sub-trigger" onclick="toggleSubMenu('darkhorse-sub')">
+                Dark Horse <span class="nav-drop-plus" id="plus-darkhorse">+</span>
+              </button>
+              <ul class="nav-dropdown-sub" id="darkhorse-sub">
+                <li><button type="button" onclick="filtrarDropdown('darkhorse')">Todos Dark Horse</button></li>
+                <li><button type="button" onclick="filtrarDropdown('darkhorse')">Hellboy</button></li>
+              </ul>
+            </li>
+            <li class="nav-dropdown-divider"></li>
+            <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('oferta')" style="color:#e74c3c;font-weight:700">🏷️ Em Oferta</button></li>
+            <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('especiais')">📦 Box Sets / Coletâneas</button></li>
+            <li class="nav-dropdown-item"><button type="button" onclick="filtrarDropdown('prevenda')">🎁 Pré-Venda Exclusiva</button></li>
+          </ul>
+        </div>
+      </li>
+
+      <li data-filtro="lancamentos" onclick="filtrarDropdown('lancamentos')">Lançamentos</li>
+      <li data-filtro="prevenda" onclick="filtrarDropdown('prevenda')">Pré-Venda</li>
+      <li data-filtro="marvel" onclick="filtrarDropdown('marvel')"><img src="img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
+      <li data-filtro="dc" onclick="filtrarDropdown('dc')"><img src="img/logos/dc.png" class="nav-icone" alt="DC"></li>
+      <li data-filtro="especiais" onclick="filtrarDropdown('especiais')">Especiais</li>
+      <li data-filtro="oferta" onclick="filtrarDropdown('oferta')" style="color:#e74c3c;font-weight:700">🏷️ Em Oferta</li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- BANNER SLIDER -->
+    <div class="banner-slider" id="banner-slider">
+
+      <!-- Slide 1: imagem existente -->
+      <div class="banner-slide ativo">
+        <img src="img/logos/banner.png" alt="Banner Comic Geek Store" class="banner-principal">
+      </div>
+
+      <!-- Slide 2: Marvel temático -->
+      <div class="banner-slide">
+        <div class="banner-css banner-css--marvel">
+          <div class="banner-css__conteudo">
+            <img src="img/logos/marvel.png" alt="Marvel" class="banner-css__logo">
+            <h2 class="banner-css__titulo">OS MAIORES HERÓIS<br>EM UM SÓ LUGAR</h2>
+            <p class="banner-css__sub">Coleções completas · Edições raras · Novidades toda semana</p>
+            <a href="/marvel" class="banner-css__btn">Ver coleção Marvel</a>
+          </div>
+          <div class="banner-css__deco banner-css__deco--marvel"></div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Promoção frete grátis -->
+      <div class="banner-slide">
+        <div class="banner-css banner-css--promo">
+          <div class="banner-css__conteudo">
+            <span class="banner-css__tag">OFERTA ESPECIAL</span>
+            <h2 class="banner-css__titulo">FRETE GRÁTIS<br>ACIMA DE R$ 200</h2>
+            <p class="banner-css__sub">Para todo o Brasil · PAC e SEDEX · Sem código de cupom</p>
+            <a href="/lancamentos" class="banner-css__btn banner-css__btn--amarelo">Aproveitar agora</a>
+          </div>
+          <div class="banner-css__deco banner-css__deco--promo"></div>
+        </div>
+      </div>
+
+      <!-- Bolinhas -->
+      <div class="banner-dots">
+        <button class="banner-dot ativo" onclick="irParaSlide(0)" aria-label="Slide 1"></button>
+        <button class="banner-dot" onclick="irParaSlide(1)" aria-label="Slide 2"></button>
+        <button class="banner-dot" onclick="irParaSlide(2)" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- ÚLTIMOS LANÇAMENTOS -->
+    <div class="secao-grupo" id="grupo-lancamentos">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/exclamacao.png" alt="">
+          <h1>Últimos Lançamentos</h1>
+          <img src="img/icons/exclamacao.png" alt="">
+        </div>
+        <div class="divisor"></div>
+      </section>
+
+      <section class="lista-cards" aria-label="Últimos lançamentos">
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="lancamentos"
+          data-nome="All-Out Avengers (2022) #6"
+          data-preco="24.90"
+          data-img="img/quadrinhos/alloutavengers.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/alloutavengers.jpg" alt="All-Out Avengers (2022) #6" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>All-Out Avengers (2022) #6</h3></div>
+          <div class="card-produto__preco"><h3>R$29,90</h3><h2>R$24,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="lancamentos"
+          data-nome="The Amazing Spider-Man (2022) #20"
+          data-preco="32.50"
+          data-img="img/quadrinhos/spiderman.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/spiderman.jpg" alt="The Amazing Spider-Man (2022) #20" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>The Amazing Spider-Man (2022) #20</h3></div>
+          <div class="card-produto__preco"><h2>R$32,50</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="lancamentos"
+          data-nome="Crise Sombria #1"
+          data-preco="19.90"
+          data-img="img/quadrinhos/crisesombria.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/crisesombria.jpg" alt="Crise Sombria #1" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Crise Sombria #1</h3></div>
+          <div class="card-produto__preco"><h3>R$24,90</h3><h2>R$19,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="lancamentos"
+          data-nome="Liga da Justiça: Origem"
+          data-preco="26.90"
+          data-img="img/quadrinhos/reinodoamanha.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/reinodoamanha.jpg" alt="Liga da Justiça: Origem" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Liga da Justiça: Origem</h3></div>
+          <div class="card-produto__preco"><h3>R$32,90</h3><h2>R$26,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="lancamentos"
+          data-nome="O Coringa (2022) Vol.3"
+          data-preco="29.90"
+          data-img="img/quadrinhos/coringa.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/coringa.jpg" alt="O Coringa (2022) Vol.3" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>O Coringa (2022) Vol.3</h3></div>
+          <div class="card-produto__preco"><h2>R$29,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="lancamentos"
+          data-nome="Carnificina (2022) #10"
+          data-preco="17.90"
+          data-estoque="0"
+          data-img="img/quadrinhos/carnage.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/carnage.jpg" alt="Carnificina (2022) #10" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Carnificina (2022) #10</h3></div>
+          <div class="card-produto__preco"><h2>R$17,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="lancamentos"
+          data-nome="Thor: Deus do Trovão Vol.1"
+          data-preco="26.90"
+          data-img="img/quadrinhos/conflitodoseculo.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/conflitodoseculo.jpg" alt="Thor: Deus do Trovão Vol.1" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Thor: Deus do Trovão Vol.1</h3></div>
+          <div class="card-produto__preco"><h3>R$34,90</h3><h2>R$26,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="lancamentos"
+          data-nome="Venom: Caçada Letal"
+          data-preco="19.90"
+          data-img="img/quadrinhos/carnage.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/carnage.jpg" alt="Venom: Caçada Letal" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Venom: Caçada Letal</h3></div>
+          <div class="card-produto__preco"><h2>R$19,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="lancamentos"
+          data-nome="Superman: Preso no Amanhã"
+          data-preco="23.90"
+          data-img="img/quadrinhos/superman.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/superman.jpg" alt="Superman: Preso no Amanhã" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Superman: Preso no Amanhã</h3></div>
+          <div class="card-produto__preco"><h3>R$29,90</h3><h2>R$23,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- SÉRIE MARVEL -->
+    <div class="secao-grupo" id="grupo-marvel">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/martelo.png" alt="Martelo do Thor">
+          <h1>Série Marvel</h1>
+          <img src="img/icons/escudo.png" alt="Escudo do Capitão América">
+        </div>
+        <div class="divisor"></div>
+      </section>
+
+      <section class="lista-cards" aria-label="Série Marvel">
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Vingadores - Desafio Infinito"
+          data-preco="19.90"
+          data-img="img/quadrinhos/desafioinfinito.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/desafioinfinito.jpg" alt="Vingadores - Desafio Infinito" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Vingadores - Desafio Infinito</h3></div>
+          <div class="card-produto__preco"><h3>R$29,90</h3><h2>R$19,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Guardiões da Galáxia - A Queda"
+          data-preco="24.90"
+          data-img="img/quadrinhos/guarioesdagalaxia.webp">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guarioesdagalaxia.webp" alt="Guardiões da Galáxia - A Queda" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Guardiões da Galáxia - A Queda</h3></div>
+          <div class="card-produto__preco"><h3>R$32,90</h3><h2>R$24,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Guerra Civil"
+          data-preco="21.90"
+          data-estoque="0"
+          data-img="img/quadrinhos/guerracivil.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerracivil.jpg" alt="Guerra Civil" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Guerra Civil</h3></div>
+          <div class="card-produto__preco"><h3>R$28,90</h3><h2>R$21,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Wolverine: O Arquivo Weapon X"
+          data-preco="27.90"
+          data-img="img/quadrinhos/conflitodoseculo.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/conflitodoseculo.jpg" alt="Wolverine: O Arquivo Weapon X" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Wolverine: O Arquivo Weapon X</h3></div>
+          <div class="card-produto__preco"><h3>R$33,90</h3><h2>R$27,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Guerras Secretas"
+          data-preco="29.90"
+          data-img="img/quadrinhos/guerrassecretas.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerrassecretas.jpg" alt="Guerras Secretas" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Guerras Secretas</h3></div>
+          <div class="card-produto__preco"><h2>R$29,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Deadpool - Eixo"
+          data-preco="24.90"
+          data-img="img/quadrinhos/deadpooleixo.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/deadpooleixo.jpg" alt="Deadpool - Eixo" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Deadpool - Eixo</h3></div>
+          <div class="card-produto__preco"><h2>R$24,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Miles Morales: Spider-Man Vol.1"
+          data-preco="22.90"
+          data-img="img/quadrinhos/spiderman.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/spiderman.jpg" alt="Miles Morales: Spider-Man Vol.1" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Miles Morales: Spider-Man Vol.1</h3></div>
+          <div class="card-produto__preco"><h3>R$29,90</h3><h2>R$22,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Capitão América: Soldado Invernal"
+          data-preco="25.90"
+          data-img="img/quadrinhos/guerracivil.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerracivil.jpg" alt="Capitão América: Soldado Invernal" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Capitão América: Soldado Invernal</h3></div>
+          <div class="card-produto__preco"><h2>R$25,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="marvel"
+          data-nome="Iron Man: Extremis"
+          data-preco="21.90"
+          data-img="img/quadrinhos/desafioinfinito.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/desafioinfinito.jpg" alt="Iron Man: Extremis" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Iron Man: Extremis</h3></div>
+          <div class="card-produto__preco"><h3>R$27,90</h3><h2>R$21,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- APENAS DC -->
+    <div class="secao-grupo" id="grupo-dc">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/superman.png" alt="Superman">
+          <h1>Apenas DC</h1>
+          <img src="img/icons/batman.png" alt="Batman">
+        </div>
+        <div class="divisor"></div>
+      </section>
+
+      <section class="lista-cards" aria-label="Apenas DC">
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Batman - A Piada Mortal"
+          data-preco="29.90"
+          data-img="img/quadrinhos/batmanapiadamortal.webp">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/batmanapiadamortal.webp" alt="Batman - A Piada Mortal" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Batman - A Piada Mortal</h3></div>
+          <div class="card-produto__preco"><h3>R$39,90</h3><h2>R$29,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Lanterna Verde - A Guerra Dos Anéis"
+          data-preco="19.90"
+          data-img="img/quadrinhos/lanternaverde.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/lanternaverde.jpg" alt="Lanterna Verde - A Guerra Dos Anéis" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Lanterna Verde - A Guerra Dos Anéis</h3></div>
+          <div class="card-produto__preco"><h3>R$27,90</h3><h2>R$19,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Flashpoint (Ponto de Ignição)"
+          data-preco="24.90"
+          data-img="img/quadrinhos/flash.png">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/flash.png" alt="Flashpoint (Ponto de Ignição)" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Flashpoint (Ponto de Ignição)</h3></div>
+          <div class="card-produto__preco"><h2>R$24,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="A Morte do Superman - Vol.1"
+          data-preco="29.90"
+          data-img="img/quadrinhos/superman.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/superman.jpg" alt="A Morte do Superman - Vol.1" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>A Morte do Superman - Vol.1</h3></div>
+          <div class="card-produto__preco"><h3>R$34,90</h3><h2>R$29,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Harley Quinn: Roleta Russa (2021)"
+          data-preco="25.90"
+          data-img="img/quadrinhos/coringa.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/coringa.jpg" alt="Harley Quinn: Roleta Russa (2021)" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Harley Quinn: Roleta Russa (2021)</h3></div>
+          <div class="card-produto__preco"><h3>R$31,90</h3><h2>R$25,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Crise nas Infinitas Terras"
+          data-preco="25.90"
+          data-img="img/quadrinhos/crisesinfinitas.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/crisesinfinitas.jpg" alt="Crise nas Infinitas Terras" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Crise nas Infinitas Terras</h3></div>
+          <div class="card-produto__preco"><h2>R$25,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Batman: Cavaleiro das Trevas"
+          data-preco="28.90"
+          data-img="img/quadrinhos/batman.png">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/batman.png" alt="Batman: Cavaleiro das Trevas" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Batman: Cavaleiro das Trevas</h3></div>
+          <div class="card-produto__preco"><h3>R$36,90</h3><h2>R$28,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Wonder Woman: Ano Um"
+          data-preco="22.90"
+          data-img="img/quadrinhos/flash.png">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/flash.png" alt="Wonder Woman: Ano Um" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Wonder Woman: Ano Um</h3></div>
+          <div class="card-produto__preco"><h2>R$22,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="dc"
+          data-nome="Nightwing: Renascimento"
+          data-preco="20.90"
+          data-img="img/quadrinhos/reinodoamanha.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/reinodoamanha.jpg" alt="Nightwing: Renascimento" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Nightwing: Renascimento</h3></div>
+          <div class="card-produto__preco"><h3>R$26,90</h3><h2>R$20,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- PRÉ-VENDA -->
+    <div class="secao-grupo" id="grupo-prevenda">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/exclamacao.png" alt="">
+          <h1>Pré-Venda</h1>
+          <img src="img/icons/exclamacao.png" alt="">
+        </div>
+        <div class="divisor"></div>
+      </section>
+
+      <section class="lista-cards" aria-label="Pré-Venda">
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="prevenda"
+          data-nome="Vingadores: Segredo Absoluto"
+          data-preco="39.90"
+          data-img="img/quadrinhos/guerrassecretas.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerrassecretas.jpg" alt="Vingadores: Segredo Absoluto" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Vingadores: Segredo Absoluto</h3></div>
+          <div class="card-produto__preco"><h2>R$39,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="prevenda"
+          data-nome="Batman: Corte das Corujas"
+          data-preco="34.90"
+          data-img="img/quadrinhos/batman.png">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/batman.png" alt="Batman: Corte das Corujas" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Batman: Corte das Corujas</h3></div>
+          <div class="card-produto__preco"><h2>R$34,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="prevenda"
+          data-nome="X-Men: Fênix Negra"
+          data-preco="36.90"
+          data-img="img/quadrinhos/carnage.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/carnage.jpg" alt="X-Men: Fênix Negra" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>X-Men: Fênix Negra</h3></div>
+          <div class="card-produto__preco"><h3>R$46,90</h3><h2>R$36,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="prevenda"
+          data-nome="Spider-Man: Clone Saga"
+          data-preco="38.90"
+          data-img="img/quadrinhos/spiderman.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/spiderman.jpg" alt="Spider-Man: Clone Saga" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Spider-Man: Clone Saga</h3></div>
+          <div class="card-produto__preco"><h2>R$38,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="prevenda"
+          data-nome="Liga da Justiça: Guerra de Darkseid"
+          data-preco="33.90"
+          data-img="img/quadrinhos/coringa.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/coringa.jpg" alt="Liga da Justiça: Guerra de Darkseid" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Liga da Justiça: Guerra de Darkseid</h3></div>
+          <div class="card-produto__preco"><h2>R$33,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="prevenda"
+          data-nome="Batman: Gotham by Gaslight"
+          data-preco="41.90"
+          data-img="img/quadrinhos/batmanapiadamortal.webp">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/batmanapiadamortal.webp" alt="Batman: Gotham by Gaslight" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Batman: Gotham by Gaslight</h3></div>
+          <div class="card-produto__preco"><h2>R$41,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="prevenda"
+          data-nome="X-Force: Missão Final"
+          data-preco="37.90"
+          data-img="img/quadrinhos/desafioinfinito.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/desafioinfinito.jpg" alt="X-Force: Missão Final" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>X-Force: Missão Final</h3></div>
+          <div class="card-produto__preco"><h2>R$37,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="prevenda"
+          data-nome="Doctor Strange: O Juramento"
+          data-preco="32.90"
+          data-img="img/quadrinhos/guerracivil.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerracivil.jpg" alt="Doctor Strange: O Juramento" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Doctor Strange: O Juramento</h3></div>
+          <div class="card-produto__preco"><h3>R$42,90</h3><h2>R$32,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="prevenda"
+          data-nome="Aquaman: Trono do Atlântico"
+          data-preco="35.90"
+          data-img="img/quadrinhos/lanternaverde.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/lanternaverde.jpg" alt="Aquaman: Trono do Atlântico" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Aquaman: Trono do Atlântico</h3></div>
+          <div class="card-produto__preco"><h2>R$35,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- ESPECIAIS -->
+    <div class="secao-grupo" id="grupo-especiais">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/escudo.png" alt="">
+          <h1>Edições Especiais</h1>
+          <img src="img/icons/martelo.png" alt="">
+        </div>
+        <div class="divisor"></div>
+      </section>
+
+      <section class="lista-cards" aria-label="Edições Especiais">
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="especiais"
+          data-nome="Box Marvel - Era do Apocalipse"
+          data-preco="149.90"
+          data-img="img/quadrinhos/guerracivil.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guerracivil.jpg" alt="Box Marvel - Era do Apocalipse" loading="lazy">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Box Marvel - Era do Apocalipse</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h3>R$199,90</h3>
+            <h2>R$149,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="especiais"
+          data-nome="Coleção DC - Histórias Épicas"
+          data-preco="139.90"
+          data-img="img/quadrinhos/crisesinfinitas.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/crisesinfinitas.jpg" alt="Coleção DC - Histórias Épicas" loading="lazy">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Coleção DC - Histórias Épicas</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$139,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="especiais"
+          data-nome="Edição de Luxo - Watchmen"
+          data-preco="79.90"
+          data-img="img/quadrinhos/flash.png">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/flash.png" alt="Edição de Luxo - Watchmen" loading="lazy">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Edição de Luxo - Watchmen</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$79,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="especiais"
+          data-nome="Box - Saga do Infinito Completa"
+          data-preco="89.90"
+          data-img="img/quadrinhos/desafioinfinito.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/desafioinfinito.jpg" alt="Box - Saga do Infinito Completa" loading="lazy">
+          </div>
+          <div class="card-produto__nome">
+            <h3>Box - Saga do Infinito Completa</h3>
+          </div>
+          <div class="card-produto__preco">
+            <h2>R$89,90</h2>
+          </div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="especiais"
+          data-nome="Edição Especial - O Cavaleiro das Trevas"
+          data-preco="69.90"
+          data-img="img/quadrinhos/batmanapiadamortal.webp">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/batmanapiadamortal.webp" alt="Edição Especial - O Cavaleiro das Trevas" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Edição Especial - O Cavaleiro das Trevas</h3></div>
+          <div class="card-produto__preco"><h2>R$69,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="especiais"
+          data-nome="Marvel Omnibus - Clássicos Vol.1"
+          data-preco="99.90"
+          data-img="img/quadrinhos/dinastiakang.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/dinastiakang.jpg" alt="Marvel Omnibus - Clássicos Vol.1" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Marvel Omnibus - Clássicos Vol.1</h3></div>
+          <div class="card-produto__preco"><h3>R$129,90</h3><h2>R$99,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="especiais"
+          data-nome="Box Marvel — X-Men Omnibus"
+          data-preco="139.90"
+          data-img="img/quadrinhos/guarioesdagalaxia.webp">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/guarioesdagalaxia.webp" alt="Box Marvel — X-Men Omnibus" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Box Marvel — X-Men Omnibus</h3></div>
+          <div class="card-produto__preco"><h3>R$179,90</h3><h2>R$139,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="dc"
+          data-secao="especiais"
+          data-nome="Box DC — Renascimento Completo"
+          data-preco="119.90"
+          data-img="img/quadrinhos/lanternaverde.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/lanternaverde.jpg" alt="Box DC — Renascimento Completo" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Box DC — Renascimento Completo</h3></div>
+          <div class="card-produto__preco"><h3>R$159,90</h3><h2>R$119,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+        <article class="card-produto"
+          data-editora="marvel"
+          data-secao="especiais"
+          data-nome="Box Vingadores — Saga Completa"
+          data-preco="149.90"
+          data-img="img/quadrinhos/desafioinfinito.jpg">
+          <div class="card-produto__imagem">
+            <img src="img/quadrinhos/desafioinfinito.jpg" alt="Box Vingadores — Saga Completa" loading="lazy">
+          </div>
+          <div class="card-produto__nome"><h3>Box Vingadores — Saga Completa</h3></div>
+          <div class="card-produto__preco"><h2>R$149,90</h2></div>
+          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- PRODUTOS DE VENDEDORES -->
+    <div class="secao-grupo" id="grupo-vendedores" style="display:none">
+      <section>
+        <div class="divisor"></div>
+        <div class="titulo-secao">
+          <img src="img/icons/exclamacao.png" alt="">
+          <h1>De Nossos Vendedores</h1>
+          <img src="img/icons/exclamacao.png" alt="">
+        </div>
+        <div class="divisor"></div>
+      </section>
+      <section class="lista-cards" id="lista-vendedores" aria-label="Produtos de vendedores"></section>
+    </div>
+
+    <!-- GRUPOS DINÂMICOS (produtos do admin com editoras adicionais) -->
+    <div class="secao-grupo" id="grupo-panini" style="display:none">
+      <section class="titulo-secao">
+        <h1>Panini Comics</h1>
+        <div class="divisor"></div>
+      </section>
+      <section class="lista-cards" id="lista-panini" aria-label="Panini Comics"></section>
+    </div>
+
+    <div class="secao-grupo" id="grupo-image" style="display:none">
+      <section class="titulo-secao">
+        <h1>Image Comics</h1>
+        <div class="divisor"></div>
+      </section>
+      <section class="lista-cards" id="lista-image" aria-label="Image Comics"></section>
+    </div>
+
+    <div class="secao-grupo" id="grupo-darkhorse" style="display:none">
+      <section class="titulo-secao">
+        <h1>Dark Horse</h1>
+        <div class="divisor"></div>
+      </section>
+      <section class="lista-cards" id="lista-darkhorse" aria-label="Dark Horse Comics"></section>
+    </div>
+
+    <!-- ESTADO VAZIO (busca sem resultado) -->
+    <div id="estado-vazio" class="estado-vazio" style="display:none">
+      <h2>Nenhum produto encontrado</h2>
+      <p>Tente buscar por outro título ou selecione outra categoria.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li><h1>INFORMAÇÕES</h1></li>
+          <li><h2>Sobre nós</h2></li>
+          <li><h2>Minha Conta</h2></li>
+          <li><h2><a href="/privacidade">Política de Privacidade</a></h2></li>
+          <li><h2><a href="/termos">Termos de Uso</a></h2></li>
+          <li><h2><a href="/contato">Fale Conosco</a></h2></li>
+        </ul>
+        <ul>
+          <li><h1>ATENDIMENTO AO CLIENTE</h1></li>
+          <li><h2>Trocas e Devoluções</h2></li>
+          <li><h2>Direito de Arrependimento</h2></li>
+          <li><h2>Dúvidas Frequentes</h2></li>
+          <li><h2>Consulta de Pedidos e Cancelamentos</h2></li>
+        </ul>
+        <ul>
+          <li><h1>LOJA VIRTUAL</h1></li>
+          <li><h2>☎️ (41) 4002-8922</h2></li>
+          <li><h2>📧 loja@comicgeekstore.com.br</h2></li>
+          <li><h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2></li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li><h3>Siga-nos nas redes sociais:</h3></li>
+        <li><img src="img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <!-- MODAL DETALHE DO PRODUTO -->
+  <div id="modal-produto" class="produto-modal-overlay" style="display:none" onclick="fecharModalProduto(event)">
+    <div class="produto-modal">
+      <button class="produto-modal__fechar" onclick="fecharModalProduto()">✕</button>
+
+      <div class="produto-modal__inner">
+        <div class="produto-modal__corpo">
+
+          <!-- Imagem -->
+          <div class="produto-modal__esquerda">
+            <div class="produto-modal__badge-off" id="modal-badge-off"></div>
+            <div class="produto-modal__img-box">
+              <img id="modal-img" src="" alt="">
+            </div>
+          </div>
+
+          <!-- Informações -->
+          <div class="produto-modal__direita">
+            <h1 id="modal-nome"></h1>
+            <p id="modal-descricao" class="produto-modal__descricao"></p>
+
+            <div class="produto-modal__divisor"></div>
+
+            <!-- Preço -->
+            <div class="produto-modal__preco-box">
+              <div class="produto-modal__preco">
+                <span class="preco-original">De: <s id="modal-preco-original"></s></span>
+                <span class="preco-venda">Por: <strong id="modal-preco-venda"></strong></span>
+              </div>
+              <p class="produto-modal__parcela" id="modal-parcela"></p>
+            </div>
+
+            <!-- Quantidade + Total -->
+            <div class="produto-modal__qtd-row">
+              <div class="produto-modal__qtd-label">Quantidade:</div>
+              <div class="produto-modal__qtd">
+                <button onclick="mudarQtdModal(-1)">−</button>
+                <span id="modal-qtd">1</span>
+                <button onclick="mudarQtdModal(1)">+</button>
+              </div>
+              <div class="produto-modal__total">
+                Total: <strong id="modal-total-preco"></strong>
+              </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="produto-modal__botoes">
+              <button class="btn-comprar-modal" onclick="comprarModal()">COMPRAR AGORA</button>
+              <button class="btn-carrinho-modal" onclick="adicionarCarrinhoModal()">+ Adicionar ao Carrinho</button>
+            </div>
+            <a id="modal-link-pagina" href="#" class="produto-modal__ver-pagina" onclick="fecharModalProduto()">Ver página completa do produto →</a>
+          </div>
+
+        </div>
+
+        <!-- PRODUTOS RELACIONADOS -->
+        <div class="produto-modal__relacionados" id="modal-relacionados-area" style="display:none">
+          <div class="produto-modal__divisor"></div>
+          <h3 class="relacionados-titulo">Você também pode gostar</h3>
+          <div class="relacionados-lista" id="relacionados-lista"></div>
+        </div>
+
+        <!-- AVALIAÇÕES -->
+        <div class="produto-modal__avaliacoes" id="modal-avaliacoes-area">
+          <div class="produto-modal__divisor"></div>
+          <div class="avaliacao-header">
+            <h3 class="avaliacao-titulo">Avaliações</h3>
+            <div class="avaliacao-media" id="avaliacao-media-box" style="display:none">
+              <span class="avaliacao-estrelas-media" id="avaliacao-estrelas-media"></span>
+              <span class="avaliacao-nota-media" id="avaliacao-nota-media"></span>
+            </div>
+          </div>
+
+          <!-- Formulário para nova avaliação (só logado) -->
+          <div class="avaliacao-form-area" id="avaliacao-form-area">
+            <p class="avaliacao-login-aviso" id="avaliacao-login-aviso" style="display:none">
+              <a href="/login">Faça login</a> para deixar sua avaliação.
+            </p>
+            <form class="avaliacao-form" id="avaliacao-form" style="display:none" onsubmit="enviarAvaliacao(event)">
+              <div class="avaliacao-stars-input" id="avaliacao-stars-input">
+                <button type="button" class="avaliacao-star" data-val="1">★</button>
+                <button type="button" class="avaliacao-star" data-val="2">★</button>
+                <button type="button" class="avaliacao-star" data-val="3">★</button>
+                <button type="button" class="avaliacao-star" data-val="4">★</button>
+                <button type="button" class="avaliacao-star" data-val="5">★</button>
+              </div>
+              <input type="hidden" id="avaliacao-nota" value="0">
+              <textarea id="avaliacao-comentario" class="avaliacao-textarea" placeholder="Deixe seu comentário (opcional)" maxlength="300" rows="3"></textarea>
+              <button type="submit" class="avaliacao-btn-enviar">Enviar avaliação</button>
+            </form>
+          </div>
+
+          <!-- Lista de avaliações -->
+          <div class="avaliacao-lista" id="avaliacao-lista">
+            <p class="avaliacao-vazio">Seja o primeiro a avaliar este produto!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/apis.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

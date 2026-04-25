@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>Entrar | Comic Geek Store</title>
+  <meta name="description" content="Faça login na sua conta Comic Geek Store e aproveite os melhores quadrinhos Marvel e DC do Brasil.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://www.comicgeek.com.br/login">
+  <meta property="og:title" content="Entrar | Comic Geek Store">
+  <meta property="og:url" content="https://www.comicgeek.com.br/login">
+  <meta property="og:site_name" content="Comic Geek Store">
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/login.css">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+<!-- HEADER -->
+  <header>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+
+    <div class="header-pesquisa">
+      <form autocomplete="off" aria-label="Pesquisar produtos">
+        <div class="pesquisa-wrapper">
+          <img src="../img/icons/lupinha.png" alt="" class="pesquisa-icone-esq" aria-hidden="true">
+          <input type="text" class="header-pesquisa-input" placeholder="Buscar quadrinhos, autores...">
+          <button type="submit" class="pesquisa-btn" aria-label="Buscar">
+            <span>Buscar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+      <li id="li-perfil">
+        <a href="/login" id="link-perfil">
+          <h3 id="perfil-nome">Entre ou Cadastre-se</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Perfil do usuário">
+        </a>
+      </li>
+
+      <li id="li-logout" style="display:none">
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </li>
+
+      <li id="li-vender" style="display:none">
+        <a href="/vender">
+          <h3>Meus Produtos</h3>
+          <img src="../img/icons/perfil.png" class="header-icone-perfil" alt="Meus Produtos">
+        </a>
+      </li>
+
+      <li id="li-admin" style="display:none">
+        <a href="/admin" class="btn-admin-header">⚙ Admin</a>
+      </li>
+
+      <li>
+        <a href="/pedidos">
+          <h3>Meus pedidos</h3>
+          <img src="../img/icons/pedidos.png" class="header-icone-pedidos" alt="Meus Pedidos">
+        </a>
+      </li>
+
+      <li id="li-carrinho">
+        <a href="/carrinho">
+          <h3>Meu carrinho</h3>
+          <img src="../img/icons/carrinho.png" class="header-icone-carrinho" alt="Carrinho de Compras">
+          <span class="carrinho-badge" id="carrinho-badge">0</span>
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="risco"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Categorias da loja">
+    <ul>
+      <li><a href="/">Tudo</a></li>
+      <li><a href="/?filtro=lancamentos">Lançamentos</a></li>
+      <li><a href="/?filtro=prevenda">Pré-Venda</a></li>
+      <li><a href="/?filtro=marvel"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></a></li>
+      <li><a href="/?filtro=dc"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></a></li>
+      <li><a href="/?filtro=especiais">Especiais</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="login">
+    <div class="login-page">
+      <h1 class="login-titulo">Fazer Login</h1>
+
+      <div class="login-container">
+
+        <!-- COLUNA ESQUERDA: LOGIN -->
+        <section class="login-col login-col--entrar">
+          <h2>Clientes Registrados</h2>
+          <div class="login-divider"></div>
+          <p class="login-desc">Se você já tem uma conta, acesse com seu e-mail ou login e senha.</p>
+
+          <form id="dados-entrar" novalidate>
+            <div class="login-campo">
+              <label for="email">E-mail ou Login <span class="login-obrigatorio">*</span></label>
+              <input type="text" id="email" name="email" required autocomplete="username" placeholder="seu@email.com ou seu_login">
+              <span class="campo-erro" id="erro-email"></span>
+            </div>
+
+            <div class="login-campo">
+              <label for="senha">Senha <span class="login-obrigatorio">*</span></label>
+              <div class="login-senha-row">
+                <input type="password" id="senha" name="senha" required autocomplete="current-password">
+                <button type="button" class="cad-toggle-senha" onclick="toggleSenhaVisivel('senha', this)" tabindex="-1">👁</button>
+              </div>
+              <span class="campo-erro" id="erro-senha"></span>
+            </div>
+
+            <div class="login-acoes">
+              <button type="submit" class="login-btn-entrar">Entrar</button>
+              <a href="#" class="login-forgot" onclick="abrirModalResetSenha(); return false;">Esqueceu a sua senha?</a>
+            </div>
+          </form>
+
+        </section>
+
+        <!-- DIVISOR VERTICAL -->
+        <div class="login-divisor-vertical"></div>
+
+        <!-- COLUNA DIREITA: CRIAR CONTA -->
+        <section class="login-col login-col--novo">
+          <h2>Novos Clientes</h2>
+          <div class="login-divider"></div>
+          <p class="login-desc">Criar uma nova conta tem muitos benefícios: fechar pedidos mais rapidamente, registrar mais endereços, acompanhar pedidos e muito mais.</p>
+
+          <div class="login-criar-opcoes">
+            <a href="/cadastro" class="login-btn-criar">Criar Conta</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="footer-pagamentos">
+      <ul>
+        <li><img src="../img/icons/caminhao.png" class="icone-entrega" alt="Entrega">
+          <h2>ENTREGA</h2>
+          <h3>Enviamos para todo o Brasil</h3>
+        </li>
+        <li><img src="../img/icons/troca.png" class="footer-icone" alt="Troca de Produtos">
+          <h2>TROCA DE PRODUTOS</h2>
+          <h3>Fale conosco</h3>
+        </li>
+        <li><img src="../img/icons/cartao.png" class="footer-icone" alt="Parcelamento">
+          <h2>EM ATÉ 3X SEM JUROS</h2>
+          <h3>Para compras acima de R$150</h3>
+        </li>
+        <li><img src="../img/icons/pix.png" class="footer-icone" alt="Boleto e Pix">
+          <h2>BOLETO E PIX</h2>
+          <h3>Pague com toda comodidade</h3>
+        </li>
+      </ul>
+    </section>
+    <section class="footer-sobre">
+      <img src="../img/logos/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-colunas">
+        <ul>
+          <li>
+            <h1>INFORMAÇÕES</h1>
+          </li>
+          <li>
+            <h2>Sobre nós</h2>
+          </li>
+          <li>
+            <h2>Minha Conta</h2>
+          </li>
+          <li>
+            <h2>Cupons/Descontos</h2>
+          </li>
+          <li>
+            <h2>Contato</h2>
+          </li>
+          <li>
+            <h2>Fale Conosco</h2>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <h1>ATENDIMENTO AO CLIENTE</h1>
+          </li>
+          <li>
+            <h2>Trocas e Devoluções</h2>
+          </li>
+          <li>
+            <h2>Direito de Arrependimento</h2>
+          </li>
+          <li>
+            <h2>Dúvidas Frequentes</h2>
+          </li>
+          <li>
+            <h2>Consulta de Pedidos e Cancelamentos</h2>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <h1>LOJA VIRTUAL</h1>
+          </li>
+          <li>
+            <h2>☎️ (41) 4002-8922</h2>
+          </li>
+          <li>
+            <h2>📧 loja@comicgeekstore.com.br</h2>
+          </li>
+          <li>
+            <h2>⏰ De Segunda a Sexta, 9h às 11h e das 13h às 17h.</h2>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div class="risco"></div>
+    <div class="footer-sociais">
+      <ul>
+        <li>
+          <h3>Siga-nos nas redes sociais:</h3>
+        </li>
+        <li><img src="../img/icons/twitter.png" class="icone-social" alt="Twitter"></li>
+        <li><img src="../img/icons/instagram.png" class="icone-social" alt="Instagram"></li>
+        <li><img src="../img/icons/facebook.png" class="icone-social" alt="Facebook"></li>
+        <li><img src="../img/icons/whatsapp.png" class="icone-social" alt="WhatsApp"></li>
+      </ul>
+    </div>
+    
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

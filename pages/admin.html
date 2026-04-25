@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin — Comic Geek Store</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;400;600;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/logos/logo.png">
+</head>
+
+<body>
+
+  <!-- Redireciona para login se não autenticado como admin -->
+  <script>
+    (function() {
+      const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+      if (!u || u.tipo !== "admin") {
+        window.location.href = "/login?redirect=admin";
+      }
+    })();
+  </script>
+  <div id="admin-login" style="display:none"></div>
+
+  <!-- PAINEL ADMIN -->
+  <div id="admin-painel" style="display:none">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">
+        <img src="../img/logos/logo.png" alt="Logo">
+        <span>Admin</span>
+      </div>
+      <nav class="admin-nav">
+        <button class="admin-nav__item ativo" onclick="mostrarAba('produtos')">
+          <span class="admin-nav__icone">📦</span> Produtos
+        </button>
+        <button class="admin-nav__item" onclick="mostrarAba('pedidos')">
+          <span class="admin-nav__icone">🛒</span> Pedidos
+        </button>
+        <button class="admin-nav__item" onclick="mostrarAba('usuarios')">
+          <span class="admin-nav__icone">👥</span> Usuários
+        </button>
+        <button class="admin-nav__item" onclick="mostrarAba('aprovacoes')">
+          <span class="admin-nav__icone">✅</span> Aprovações
+          <span class="admin-badge-pendentes" id="badge-pendentes" style="display:none">0</span>
+        </button>
+        <button class="admin-nav__item" onclick="mostrarAba('admins')">
+          <span class="admin-nav__icone">🔑</span> Admins
+        </button>
+        <button class="admin-nav__item" onclick="mostrarAba('cupons')">
+          <span class="admin-nav__icone">🏷️</span> Cupons
+        </button>
+      </nav>
+      <a href="/" class="admin-voltar-site">← Voltar ao Site</a>
+      <button class="admin-logout" onclick="logoutAdmin()">Sair do painel</button>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="admin-main">
+
+      <!-- ABA: PRODUTOS -->
+      <section id="aba-produtos" class="admin-aba">
+        <div class="admin-aba__header">
+          <h2>Gerenciamento de Produtos</h2>
+          <button class="btn-admin-novo" onclick="toggleFormProduto()">+ Novo Produto</button>
+          <button class="btn-admin-novo" onclick="toggleMarvelBusca()" style="background:#6c3baa;margin-left:8px">🔎 Buscar HQ/Quadrinho</button>
+        </div>
+
+        <!-- Busca Open Library -->
+        <div id="marvel-busca-box" class="admin-form-box" style="display:none;margin-bottom:16px">
+          <h3 style="margin:0 0 12px">🔎 Buscar HQ / Graphic Novel</h3>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="text" id="marvel-busca-input" placeholder="Ex: Batman, Spider-Man, Watchmen..." style="flex:1;padding:8px 12px;border-radius:6px;border:1px solid #444;background:#111;color:#fff">
+            <button type="button" onclick="buscarMarvel()" style="padding:8px 16px;background:#6c3baa;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700">Buscar</button>
+          </div>
+          <div id="marvel-resultados" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px"></div>
+        </div>
+
+        <!-- Formulário de cadastro -->
+        <div id="admin-form-produto" class="admin-form-box" style="display:none">
+          <h3 id="admin-form-titulo">Cadastrar Novo Produto</h3>
+          <form id="form-admin-produto" class="admin-form">
+            <input type="hidden" id="admin-prod-id">
+
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Nome do Produto *</label>
+                <input type="text" id="admin-prod-nome" placeholder="Ex: Batman Vol.1" required>
+              </div>
+              <div class="admin-form__grupo">
+                <label>Editora *</label>
+                <select id="admin-prod-editora">
+                  <option value="marvel">Marvel</option>
+                  <option value="dc">DC</option>
+                  <option value="panini">Panini Comics</option>
+                  <option value="image">Image Comics</option>
+                  <option value="darkhorse">Dark Horse</option>
+                  <option value="outros">Outros</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Preço Original (riscado) *</label>
+                <input type="number" id="admin-prod-preco-original" placeholder="0.00" min="0" step="0.01" required oninput="calcularPrecoAdmin()">
+              </div>
+              <div class="admin-form__grupo">
+                <label>Desconto (%) <span class="label-opcional">opcional</span></label>
+                <input type="number" id="admin-prod-desconto" placeholder="0" min="0" max="99" step="1" oninput="calcularPrecoAdmin()">
+              </div>
+              <div class="admin-form__grupo">
+                <label>Preço de Venda *</label>
+                <input type="number" id="admin-prod-preco" placeholder="— calculado —" min="0" step="0.01" class="input-preco-venda" readonly>
+              </div>
+            </div>
+
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Seção *</label>
+                <select id="admin-prod-secao">
+                  <option value="lancamentos">Lançamentos</option>
+                  <option value="marvel">Série Marvel</option>
+                  <option value="dc">Apenas DC</option>
+                  <option value="prevenda">Pré-Venda</option>
+                  <option value="especiais">Especiais</option>
+                </select>
+              </div>
+              <div class="admin-form__grupo">
+                <label>Estoque <span class="label-opcional">deixe vazio = ilimitado</span></label>
+                <input type="number" id="admin-prod-estoque" placeholder="Ex: 10" min="0" step="1">
+              </div>
+              <div class="admin-form__grupo">
+                <label>Data de Lançamento <span class="label-opcional">pré-venda</span></label>
+                <input type="date" id="admin-prod-data-lancamento">
+              </div>
+            </div>
+
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>URL da Imagem *</label>
+                <input type="text" id="admin-prod-img" placeholder="img/quadrinhos/batman.png ou https://..." oninput="atualizarPreviewImgAdmin(this.value)">
+                <div class="img-preview-wrap" id="admin-img-preview-wrap">
+                  <div class="img-preview-placeholder" id="admin-img-placeholder">
+                    <span class="img-preview-icon">📚</span>
+                    <span class="img-preview-texto">Prévia da capa</span>
+                  </div>
+                  <img id="admin-img-preview" src="" alt="Prévia" class="img-preview-img" style="display:none" onerror="this.style.display='none';document.getElementById('admin-img-placeholder').style.display='flex'">
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-form__acoes">
+              <button type="submit" class="btn-admin-salvar">Salvar Produto</button>
+              <button type="button" class="btn-admin-cancelar" onclick="toggleFormProduto()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Estatísticas rápidas -->
+        <div class="admin-stats">
+          <div class="admin-stat">
+            <span id="stat-total-produtos" class="admin-stat__num">0</span>
+            <span class="admin-stat__label">Produtos cadastrados</span>
+          </div>
+          <div class="admin-stat">
+            <span id="stat-total-pedidos" class="admin-stat__num">0</span>
+            <span class="admin-stat__label">Pedidos realizados</span>
+          </div>
+          <div class="admin-stat">
+            <span id="stat-total-usuarios" class="admin-stat__num">0</span>
+            <span class="admin-stat__label">Usuários cadastrados</span>
+          </div>
+        </div>
+
+        <!-- Tabela de produtos -->
+        <div class="admin-tabela-wrapper">
+          <table class="admin-tabela">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Editora</th>
+                <th>Seção</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tabela-produtos"></tbody>
+          </table>
+          <p id="admin-produtos-vazio" class="admin-vazio" style="display:none">Nenhum produto cadastrado pelo admin ainda.</p>
+        </div>
+      </section>
+
+      <!-- ABA: PEDIDOS -->
+      <section id="aba-pedidos" class="admin-aba" style="display:none">
+        <div class="admin-aba__header">
+          <h2>Pedidos Realizados</h2>
+        </div>
+        <div id="admin-lista-pedidos" class="admin-pedidos"></div>
+        <p id="admin-pedidos-vazio" class="admin-vazio" style="display:none">Nenhum pedido realizado ainda.</p>
+      </section>
+
+      <!-- ABA: USUÁRIOS -->
+      <section id="aba-usuarios" class="admin-aba" style="display:none">
+        <div class="admin-aba__header">
+          <h2>Usuários Cadastrados</h2>
+        </div>
+
+        <!-- Formulário de edição de usuário -->
+        <div id="admin-form-usuario" class="admin-form-box" style="display:none">
+          <h3 id="admin-form-usuario-titulo">Editar Usuário</h3>
+          <form id="form-admin-usuario" class="admin-form" onsubmit="salvarEdicaoUsuario(event)">
+            <input type="hidden" id="admin-user-email-original">
+
+            <!-- Tipo de conta -->
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Tipo de conta</label>
+                <select id="admin-user-tipo" onchange="toggleCamposUsuarioAdmin()">
+                  <option value="fisica">Pessoa Física</option>
+                  <option value="juridica">Pessoa Jurídica</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Pessoa Jurídica -->
+            <div id="admin-user-campo-razao" style="display:none">
+              <div class="admin-form__secao">Dados Empresariais</div>
+              <div class="admin-form__linha">
+                <div class="admin-form__grupo">
+                  <label>Razão Social</label>
+                  <input type="text" id="admin-user-razao" placeholder="Nome da empresa">
+                </div>
+                <div class="admin-form__grupo">
+                  <label>CNPJ</label>
+                  <input type="text" id="admin-user-cnpj" placeholder="00.000.000/0001-00" maxlength="18">
+                </div>
+              </div>
+            </div>
+
+            <!-- Dados Pessoais -->
+            <div class="admin-form__secao">Dados Pessoais</div>
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Nome *</label>
+                <input type="text" id="admin-user-nome" placeholder="Nome completo" required>
+              </div>
+              <div id="admin-user-campo-cpf" class="admin-form__grupo">
+                <label>CPF</label>
+                <input type="text" id="admin-user-cpf" placeholder="000.000.000-00" maxlength="14">
+              </div>
+            </div>
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>E-mail *</label>
+                <input type="email" id="admin-user-email" placeholder="email@exemplo.com" required>
+              </div>
+            </div>
+
+            <!-- Endereço (apenas Física) -->
+            <div id="admin-user-campo-endereco" style="display:none">
+              <div class="admin-form__secao">Endereço de Entrega</div>
+              <div class="admin-form__linha">
+                <div class="admin-form__grupo admin-form__grupo--cep">
+                  <label>CEP</label>
+                  <input type="text" id="admin-user-cep" placeholder="00000-000" maxlength="9">
+                </div>
+                <div class="admin-form__grupo">
+                  <label>Rua / Logradouro</label>
+                  <input type="text" id="admin-user-rua" placeholder="Nome da rua">
+                </div>
+                <div class="admin-form__grupo admin-form__grupo--num">
+                  <label>Número</label>
+                  <input type="text" id="admin-user-numero" placeholder="Nº">
+                </div>
+              </div>
+              <div class="admin-form__linha">
+                <div class="admin-form__grupo">
+                  <label>Complemento</label>
+                  <input type="text" id="admin-user-complemento" placeholder="Apto, bloco...">
+                </div>
+                <div class="admin-form__grupo">
+                  <label>Bairro</label>
+                  <input type="text" id="admin-user-bairro" placeholder="Seu bairro">
+                </div>
+                <div class="admin-form__grupo">
+                  <label>Cidade</label>
+                  <input type="text" id="admin-user-cidade" placeholder="Sua cidade">
+                </div>
+                <div class="admin-form__grupo admin-form__grupo--uf">
+                  <label>UF</label>
+                  <input type="text" id="admin-user-estado" placeholder="PR" maxlength="2">
+                </div>
+              </div>
+            </div>
+
+            <!-- Redefinir Senha -->
+            <div class="admin-form__secao">Senha do Usuário</div>
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Senha Atual</label>
+                <input type="text" id="admin-user-senha-atual" readonly style="opacity:0.6;cursor:default;letter-spacing:4px;" placeholder="Nenhuma senha cadastrada">
+              </div>
+            </div>
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Nova Senha <span style="font-size:11px;opacity:0.6">(deixe em branco para não alterar)</span></label>
+                <input type="password" id="admin-user-senha-nova" placeholder="Mínimo 6 caracteres">
+              </div>
+              <div class="admin-form__grupo">
+                <label>Confirmar Nova Senha</label>
+                <input type="password" id="admin-user-senha-confirmar" placeholder="Repita a nova senha">
+              </div>
+            </div>
+
+            <div class="admin-form__acoes">
+              <button type="submit" class="btn-admin-salvar">Salvar Usuário</button>
+              <button type="button" class="btn-admin-cancelar" onclick="fecharFormUsuario()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="admin-tabela-wrapper">
+          <table class="admin-tabela">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Tipo</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tabela-usuarios"></tbody>
+          </table>
+          <p id="admin-usuarios-vazio" class="admin-vazio" style="display:none">Nenhum usuário cadastrado ainda.</p>
+        </div>
+      </section>
+
+      <!-- ABA: ADMINS -->
+      <section id="aba-admins" class="admin-aba" style="display:none">
+        <div class="admin-aba__header">
+          <h2>Administradores</h2>
+          <button class="btn-admin-novo" onclick="toggleFormAdmin()">+ Novo Admin</button>
+        </div>
+        <p class="admin-aprovacoes-desc">Admins cadastrados aqui têm acesso total ao painel. O admin master (<strong>env</strong>) não aparece nesta lista.</p>
+
+        <div id="admin-form-novo-admin" class="admin-form-box" style="display:none">
+          <h3>Cadastrar Novo Admin</h3>
+          <form id="form-novo-admin" class="admin-form" onsubmit="salvarNovoAdmin(event)">
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Nome *</label>
+                <input type="text" id="admin-novo-nome" placeholder="Ex: João Silva" required>
+              </div>
+              <div class="admin-form__grupo">
+                <label>Login * <small style="font-weight:400;color:#999">(usado para entrar)</small></label>
+                <input type="text" id="admin-novo-login" placeholder="Ex: joao_admin" required>
+              </div>
+            </div>
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Senha * <small style="font-weight:400;color:#999">(mín. 6 caracteres)</small></label>
+                <input type="password" id="admin-novo-senha" placeholder="Senha" required>
+              </div>
+              <div class="admin-form__grupo">
+                <label>Confirmar Senha *</label>
+                <input type="password" id="admin-novo-senha-confirm" placeholder="Repita a senha" required>
+              </div>
+            </div>
+            <div class="admin-form__acoes">
+              <button type="submit" class="btn-admin-salvar">Cadastrar Admin</button>
+              <button type="button" class="btn-admin-cancelar" onclick="toggleFormAdmin()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="admin-tabela-wrapper">
+          <table class="admin-tabela">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Login</th>
+                <th>Criado em</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tabela-admins"></tbody>
+          </table>
+          <p id="admin-admins-vazio" class="admin-vazio" style="display:none">Nenhum admin extra cadastrado ainda.</p>
+        </div>
+      </section>
+
+      <!-- ABA: CUPONS -->
+      <section id="aba-cupons" class="admin-aba" style="display:none">
+        <div class="admin-aba__header">
+          <h2>Cupons de Desconto</h2>
+          <button class="btn-admin-novo" onclick="toggleFormCupom()">+ Novo Cupom</button>
+        </div>
+
+        <div id="admin-form-cupom" class="admin-form-box" style="display:none">
+          <h3>Criar Cupom</h3>
+          <form id="form-admin-cupom" class="admin-form" onsubmit="salvarCupom(event)">
+            <div class="admin-form__linha">
+              <div class="admin-form__grupo">
+                <label>Código *</label>
+                <input type="text" id="admin-cupom-codigo" placeholder="Ex: GEEK20" required style="text-transform:uppercase">
+              </div>
+              <div class="admin-form__grupo">
+                <label>Desconto (%) *</label>
+                <input type="number" id="admin-cupom-desconto" placeholder="Ex: 20" min="1" max="99" required>
+              </div>
+            </div>
+            <div class="admin-form__acoes">
+              <button type="submit" class="btn-admin-salvar">Salvar Cupom</button>
+              <button type="button" class="btn-admin-cancelar" onclick="toggleFormCupom()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="admin-tabela-wrapper">
+          <table class="admin-tabela">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Desconto</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tabela-cupons"></tbody>
+          </table>
+          <p id="admin-cupons-vazio" class="admin-vazio" style="display:none">Nenhum cupom cadastrado ainda.</p>
+        </div>
+      </section>
+
+      <!-- ABA: APROVAÇÕES PJ -->
+      <section id="aba-aprovacoes" class="admin-aba" style="display:none">
+        <div class="admin-aba__header">
+          <h2>Aprovação de Vendedores PJ</h2>
+        </div>
+        <p class="admin-aprovacoes-desc">Cadastros de Pessoa Jurídica aguardando liberação para vender na plataforma.</p>
+        <div id="admin-lista-aprovacoes" class="admin-aprovacoes-lista"></div>
+        <p id="admin-aprovacoes-vazio" class="admin-vazio" style="display:none">Nenhum cadastro aguardando aprovação no momento.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/apis.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function toggleMarvelBusca() {
+      const box = document.getElementById("marvel-busca-box");
+      box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    async function buscarMarvel() {
+      const q = document.getElementById("marvel-busca-input").value.trim();
+      if (!q) return;
+      const res = document.getElementById("marvel-resultados");
+      res.innerHTML = "<p style='color:#aaa'>Buscando...</p>";
+      try {
+        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(q)}&subject=comic&limit=12&fields=key,title,author_name,cover_i,subject,first_publish_year`;
+        const r = await fetch(url);
+        const data = await r.json();
+        const docs = (data.docs || []).filter(d => d.cover_i);
+        if (!docs.length) { res.innerHTML = "<p style='color:#aaa'>Nenhum resultado com capa encontrado.</p>"; return; }
+        res.innerHTML = docs.map(d => {
+          const img = `https://covers.openlibrary.org/b/id/${d.cover_i}-M.jpg`;
+          const nome = d.title || "Sem título";
+          const autor = (d.author_name || [])[0] || "";
+          const safe = JSON.stringify({ nome, img, autor, key: d.key }).replace(/'/g, "\\'");
+          return `<div style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:10px;width:130px;cursor:pointer;text-align:center;flex-shrink:0" onclick='preencherProdutoMarvel(${safe})'>
+            <img src="${img}" style="width:110px;height:155px;object-fit:cover;border-radius:4px;margin-bottom:6px" onerror="this.style.display='none'">
+            <div style="font-size:10px;color:#eee;line-height:1.3;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${nome}</div>
+            ${autor ? `<div style="font-size:9px;color:#888">${autor}</div>` : ""}
+            <button type="button" style="margin-top:7px;background:#8b2fc9;color:#fff;border:none;border-radius:4px;padding:4px 10px;font-size:11px;cursor:pointer;width:100%">+ Usar</button>
+          </div>`;
+        }).join("");
+        res.style.display = "flex";
+        res.style.flexWrap = "wrap";
+        res.style.gap = "10px";
+      } catch { res.innerHTML = "<p style='color:#f55'>Erro ao buscar. Tente novamente.</p>"; }
+    }
+
+    function preencherProdutoMarvel(comic) {
+      document.getElementById("admin-form-produto").style.display = "block";
+      document.getElementById("admin-prod-nome").value = comic.nome;
+      document.getElementById("admin-prod-img").value = comic.img || "";
+      // detecta editora pelo nome
+      const nomeLower = (comic.nome || "").toLowerCase();
+      let editora = "especiais";
+      if (nomeLower.includes("marvel") || nomeLower.includes("spider") || nomeLower.includes("avenger") || nomeLower.includes("x-men")) editora = "marvel";
+      else if (nomeLower.includes("batman") || nomeLower.includes("superman") || nomeLower.includes("dc ") || nomeLower.includes("wonder woman") || nomeLower.includes("flash") || nomeLower.includes("justice")) editora = "dc";
+      document.getElementById("admin-prod-editora").value = editora;
+      document.getElementById("admin-form-titulo").textContent = "Novo Produto (Open Library)";
+      document.getElementById("marvel-busca-box").style.display = "none";
+      document.getElementById("admin-form-produto").scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>

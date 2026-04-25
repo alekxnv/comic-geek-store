@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Teste — Cadastro de Produto Admin</title>
+  <style>
+    body { font-family: monospace; background: #0d0d1a; color: #fff; padding: 30px; }
+    h2 { color: #8B2FC9; }
+    .ok  { color: #27ae60; }
+    .err { color: #e74c3c; }
+    .info { color: #ffd84d; }
+    pre { background: #1a1a2e; padding: 14px; border-radius: 8px; overflow-x: auto; }
+    button {
+      margin: 6px 4px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .btn-cadastrar { background: #8B2FC9; color: #fff; }
+    .btn-limpar    { background: #e74c3c; color: #fff; }
+    .btn-ver       { background: #27ae60; color: #fff; }
+    #log { margin-top: 20px; }
+    .linha { margin: 4px 0; }
+  </style>
+</head>
+<body>
+
+<h2>🧪 Teste de Cadastro de Produto — Admin</h2>
+<p class="info">Este arquivo simula exatamente o que o formulário do admin faz.</p>
+
+<button class="btn-cadastrar" onclick="cadastrarProdutoTeste()">▶ Cadastrar produto de teste</button>
+<button class="btn-ver"       onclick="listarProdutos()">📋 Ver produtos salvos</button>
+<button class="btn-limpar"    onclick="limparTeste()">🗑 Remover produto de teste</button>
+
+<div id="log"></div>
+
+<script>
+  const PRODUTO_TESTE = {
+    nome:          "Batman: Ano Um (TESTE)",
+    editora:       "dc",
+    precoOriginal: 89.90,
+    preco:         59.90,
+    secao:         "lancamentos",
+    img:           "img/quadrinhos/batman.png"
+  };
+
+  function log(msg, tipo = "info") {
+    const div = document.getElementById("log");
+    div.innerHTML += `<div class="linha ${tipo}">${msg}</div>`;
+  }
+
+  function limparLog() {
+    document.getElementById("log").innerHTML = "";
+  }
+
+  // Replica exata da função salvarProdutoAdmin em main.js
+  function cadastrarProdutoTeste() {
+    limparLog();
+    log("=== Iniciando cadastro de produto de teste ===");
+
+    const { nome, editora, precoOriginal, preco, secao, img } = PRODUTO_TESTE;
+
+    // Validação (igual ao main.js)
+    if (!nome || !preco || !precoOriginal || !img) {
+      log("❌ ERRO: campos obrigatórios em branco.", "err");
+      return;
+    }
+    log(`✔ Validação passou: todos os campos preenchidos.`, "ok");
+
+    const produtos = JSON.parse(localStorage.getItem("produtosAdmin")) || [];
+    log(`ℹ Produtos já salvos antes do teste: ${produtos.length}`, "info");
+
+    // Gera ID como o main.js faz
+    const novoId = Date.now();
+    const novoProduto = {
+      id: novoId,
+      nome,
+      editora,
+      precoOriginal: parseFloat(precoOriginal),
+      preco:         parseFloat(preco),
+      secao,
+      img
+    };
+
+    produtos.push(novoProduto);
+    localStorage.setItem("produtosAdmin", JSON.stringify(produtos));
+
+    // Verifica se foi salvo
+    const salvo = JSON.parse(localStorage.getItem("produtosAdmin")) || [];
+    const encontrado = salvo.find(p => p.id === novoId);
+
+    if (encontrado) {
+      log(`✅ SUCESSO! Produto salvo no localStorage.`, "ok");
+      log(`   ID: ${encontrado.id}`, "ok");
+      log(`   Nome: ${encontrado.nome}`, "ok");
+      log(`   Seção: ${encontrado.secao}`, "ok");
+      log(`   Preço: R$ ${encontrado.preco.toFixed(2)}`, "ok");
+      log(`   Editora: ${encontrado.editora}`, "ok");
+      log(`   Imagem: ${encontrado.img}`, "ok");
+      log("");
+      log(`📦 Total de produtos em produtosAdmin: ${salvo.length}`, "info");
+      log("");
+      log(`🔗 Abra o <a href="index.html" style="color:#ffd84d">index.html</a> e veja o produto aparecer em "Lançamentos".`, "info");
+      log(`🔗 Abra o <a href="pages/admin.html" style="color:#ffd84d">admin.html</a> e veja na tabela de produtos.`, "info");
+    } else {
+      log("❌ FALHA: produto não encontrado após salvar.", "err");
+    }
+  }
+
+  function listarProdutos() {
+    limparLog();
+    const produtos = JSON.parse(localStorage.getItem("produtosAdmin")) || [];
+    log(`=== Produtos em produtosAdmin (${produtos.length} total) ===`);
+    if (produtos.length === 0) {
+      log("Nenhum produto cadastrado ainda.", "err");
+      return;
+    }
+    produtos.forEach((p, i) => {
+      log(`--- Produto ${i + 1} ---`, "info");
+      log(`<pre>${JSON.stringify(p, null, 2)}</pre>`);
+    });
+  }
+
+  function limparTeste() {
+    limparLog();
+    const produtos = JSON.parse(localStorage.getItem("produtosAdmin")) || [];
+    const antes = produtos.length;
+    const filtrados = produtos.filter(p => !p.nome.includes("TESTE"));
+    localStorage.setItem("produtosAdmin", JSON.stringify(filtrados));
+    log(`🗑 Removidos ${antes - filtrados.length} produto(s) de teste. Restam ${filtrados.length}.`, "ok");
+  }
+</script>
+
+</body>
+</html>

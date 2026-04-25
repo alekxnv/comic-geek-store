@@ -1,0 +1,313 @@
+﻿/* ============================================================
+   COMIC GEEK STORE — ANIMAÇÕES GLOBAIS
+   ============================================================ */
+
+/* -------------------------
+   KEYFRAMES BASE
+------------------------- */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulsoGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,47,201,0); }
+  50%       { box-shadow: 0 0 18px 6px rgba(139,47,201,0.35); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+@keyframes flutuarBanner {
+  0%, 100% { transform: scale(1.02) translateY(0px); }
+  50%       { transform: scale(1.04) translateY(-6px); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+  50%       { filter: drop-shadow(0 0 12px rgba(139,47,201,0.6)); }
+}
+
+@keyframes navUnderline {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes badgeEntrar {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  70%  { transform: scale(1.2) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes tituloEntrar {
+  from { opacity: 0; letter-spacing: 8px; transform: translateY(10px); }
+  to   { opacity: 1; letter-spacing: 3px; transform: translateY(0); }
+}
+
+/* -------------------------
+   CLASSES DE ANIMAÇÃO (scroll-triggered via JS)
+------------------------- */
+
+.animar {
+  opacity: 0;
+  transition: opacity 0.05s;
+}
+
+.animar.visivel {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.6s;
+}
+
+.animar-up.visivel        { animation-name: fadeUp; }
+.animar-esq.visivel       { animation-name: slideInLeft; }
+.animar-dir.visivel       { animation-name: slideInRight; }
+.animar-scale.visivel     { animation-name: scaleIn; }
+.animar-fade.visivel      { animation-name: fadeIn; }
+
+/* Delays de stagger para listas de cards */
+.animar-delay-1  { animation-delay: 0.05s !important; }
+.animar-delay-2  { animation-delay: 0.1s  !important; }
+.animar-delay-3  { animation-delay: 0.15s !important; }
+.animar-delay-4  { animation-delay: 0.2s  !important; }
+.animar-delay-5  { animation-delay: 0.25s !important; }
+.animar-delay-6  { animation-delay: 0.3s  !important; }
+.animar-delay-7  { animation-delay: 0.35s !important; }
+.animar-delay-8  { animation-delay: 0.4s  !important; }
+
+/* -------------------------
+   HEADER ANIMADO
+------------------------- */
+
+header {
+  animation: fadeIn 0.5s ease both;
+}
+
+.header-logo {
+  animation: logoPulse 3.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.header-pesquisa {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.header-pesquisa:focus-within {
+  border-color: var(--cor-destaque) !important;
+  box-shadow: 0 0 0 3px rgba(255, 216, 77, 0.25);
+}
+
+/* -------------------------
+   NAV ANIMADA
+------------------------- */
+
+nav {
+  animation: fadeIn 0.5s 0.15s both;
+}
+
+nav ul li {
+  position: relative;
+  transition: color 0.2s;
+}
+
+nav ul li::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--cor-primaria), var(--cor-destaque));
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+nav ul li:hover::after,
+nav ul li.nav-ativo::after {
+  width: 100%;
+}
+
+/* -------------------------
+   BANNER ANIMADO
+------------------------- */
+
+.banner-principal {
+  animation: scaleIn 0.7s 0.1s both;
+  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+/* -------------------------
+   TÍTULOS DE SEÇÃO
+------------------------- */
+
+.titulo-secao {
+  animation: tituloEntrar 0.7s ease both;
+}
+
+/* -------------------------
+   CARDS — HOVER MELHORADO
+------------------------- */
+
+.card-produto {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s ease,
+              border-color 0.2s ease;
+}
+
+.card-produto:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(139,47,201,0.3), 0 4px 12px rgba(0,0,0,0.2);
+  border-color: var(--cor-primaria);
+}
+
+.card-produto__imagem img {
+  transition: transform 0.4s ease;
+}
+
+.card-produto:hover .card-produto__imagem img {
+  transform: scale(1.06);
+}
+
+.card-produto__btn {
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-produto__btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 6px 20px rgba(139,47,201,0.45) !important;
+}
+
+/* Efeito ripple nos botões */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  margin-left: -4px;
+  animation: ripple 0.55s linear;
+  pointer-events: none;
+}
+
+/* -------------------------
+   BADGE DE DESCONTO — ENTRADA
+------------------------- */
+
+.card-produto__badge-desconto {
+  animation: badgeEntrar 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* -------------------------
+   SEÇÕES — ENTRADA
+------------------------- */
+
+.secao-grupo {
+  overflow: hidden;
+}
+
+/* -------------------------
+   MODAL — ABERTURA
+------------------------- */
+
+.produto-modal-overlay {
+  animation: fadeIn 0.2s ease both;
+}
+
+/* -------------------------
+   MENSAGENS TOAST
+------------------------- */
+
+.mensagem {
+  animation: slideInRight 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* -------------------------
+   RISCO DIVISOR — BRILHO
+------------------------- */
+
+.risco {
+  position: relative;
+  overflow: hidden;
+}
+
+.risco::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* -------------------------
+   CARRINHO BADGE — PULSO
+------------------------- */
+
+.carrinho-badge {
+  animation: pulsoGlow 2s ease-in-out infinite;
+}
+
+/* -------------------------
+   BOTÃO FINALIZAR COMPRA
+------------------------- */
+
+.btn-finalizar {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.btn-finalizar:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(139,47,201,0.5) !important;
+}
+
+/* -------------------------
+   FOOTER — ÍCONES SOCIAIS
+------------------------- */
+
+.icone-social {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s;
+}
+
+.icone-social:hover {
+  transform: translateY(-5px) scale(1.15);
+  filter: brightness(1.3);
+}
+
