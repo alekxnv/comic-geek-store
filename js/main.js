@@ -4374,8 +4374,6 @@ function inicializarNavDropdown() {
     const aberto = painel.classList.toggle("aberto");
     trigger.setAttribute("aria-expanded", aberto);
     painel.setAttribute("aria-hidden", !aberto);
-    filtrarProdutos("tudo");
-    document.querySelectorAll("nav > ul > li[data-filtro]").forEach(n => n.classList.remove("nav-ativo"));
   });
 
   document.addEventListener("click", function() {
