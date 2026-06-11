@@ -260,10 +260,10 @@ FRONTEND_URL       ← URL pública do seu serviço (ex: https://seu-app.up.rail
 
 Desenvolvido por:
 
-| Nome | GitHub |
-|---|---|
-| Alexsander Neneve | [@alekxnv](https://github.com/alekxnv) |
-| Vinicius Rigobelo de Oliveira | [@viniciusrigobelo](https://github.com/viniciusrigobelo) |
+| Nome | GitHub | LinkedIn |
+|---|---|---|
+| Alexsander Neneve | [@alekxnv](https://github.com/alekxnv) | [linkedin.com/in/alexsanderneneve](https://linkedin.com/in/alexsanderneneve) |
+| Vinicius Rigobelo de Oliveira | [@viniciusrigobelo](https://github.com/viniciusrigobelo) | [linkedin.com/in/vinicius-rigobelo-308601383](https://www.linkedin.com/in/vinicius-rigobelo-308601383) |
 
 ---
 
