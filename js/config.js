@@ -60,7 +60,7 @@ window.CGS_CONFIG = {
   // URL DO BACKEND (preencha após hospedar o servidor)
   // Exemplo Railway: https://comic-geek-store.up.railway.app
   // --------------------------------------------------
-  backendUrl: "https://comic-geek-store-production.up.railway.app",
+  backendUrl: "https://comic-geek-store.onrender.com",
 
   // --------------------------------------------------
   // ONESIGNAL (notificações push no navegador — GRÁTIS até 10k assinantes)
