@@ -8,6 +8,7 @@ RUN npm ci --only=production
 
 # Copia o servidor
 COPY server.js ./
+COPY db/ ./db/
 
 # Copia os arquivos do site para a pasta public
 ARG CACHEBUST=1
