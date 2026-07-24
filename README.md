@@ -2,7 +2,7 @@
 
 Loja virtual de quadrinhos full-stack com pagamento real, painel administrativo, suporte a vendedores PJ e notificações push.
 
-> Projeto iniciado como trabalho acadêmico em 2023 e evoluído para uma aplicação completa, com backend em produção no Railway.
+> Projeto iniciado como trabalho acadêmico em 2023 e evoluído para uma aplicação completa, com backend em produção no Render.
 
 ---
 
@@ -23,7 +23,7 @@ Loja virtual de quadrinhos full-stack com pagamento real, painel administrativo,
 
 A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, mangás e colecionáveis. Conta com catálogo de produtos, carrinho de compras, checkout via Mercado Pago, painel administrativo e área exclusiva para vendedores Pessoa Jurídica cadastrarem seus próprios produtos.
 
-**Produção:** [comic-geek-store-production.up.railway.app](https://comic-geek-store-production.up.railway.app)
+**Produção:** [comic-geek-store.onrender.com](https://comic-geek-store.onrender.com)
 
 ---
 
@@ -77,6 +77,7 @@ A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, ma
 | Tecnologia | Uso |
 |---|---|
 | Node.js + Express | API REST |
+| PostgreSQL (Neon) | Persistência de dados em produção |
 | Redis | Persistência de dados em produção |
 | JSON (fallback) | Persistência local em desenvolvimento |
 | JWT (jsonwebtoken) | Autenticação stateless |
@@ -87,7 +88,9 @@ A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, ma
 ### Infraestrutura
 | Serviço | Uso |
 |---|---|
-| Railway | Hospedagem do backend e Redis |
+| Render | Hospedagem do backend (Docker) |
+| Neon | Banco de dados PostgreSQL |
+| Upstash | Redis gerenciado |
 | GitHub | Versionamento e CI/CD |
 | Microsoft Clarity | Heatmaps e gravação de sessão |
 | Google Analytics GA4 | Métricas de acesso |
@@ -102,44 +105,47 @@ A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, ma
 comic-geek-store/
 ├── css/
 │   ├── global.css          # Reset, header, footer, variáveis
-│   ├── home.css            # Banner, cards de produto, modal
-│   ├── admin.css           # Painel administrativo
-│   ├── cadastro.css        # Formulário de cadastro
-│   ├── carrinho.css        # Página do carrinho
-│   ├── login.css           # Página de login
-│   ├── pedidos.css         # Histórico de pedidos
-│   ├── perfil.css          # Página de perfil
-│   ├── vender.css          # Área do vendedor PJ
-│   └── animations.css      # Animações globais
+│   ├── home.css             # Banner, cards de produto, modal
+│   ├── admin.css            # Painel administrativo
+│   ├── cadastro.css         # Formulário de cadastro
+│   ├── carrinho.css         # Página do carrinho
+│   ├── login.css            # Página de login
+│   ├── pedidos.css          # Histórico de pedidos
+│   ├── perfil.css           # Página de perfil
+│   ├── vender.css           # Área do vendedor PJ
+│   └── animations.css       # Animações globais
 ├── img/
-│   ├── icons/              # Ícones da interface
-│   ├── logos/              # Logo e banners
-│   └── quadrinhos/         # Capas dos produtos
+│   ├── icons/               # Ícones da interface
+│   ├── logos/                # Logo e banners
+│   └── quadrinhos/           # Capas dos produtos
 ├── js/
-│   ├── config.js           # Chaves de API e configuração
-│   ├── apis.js             # Helpers de integração
-│   └── main.js             # Lógica principal (frontend)
+│   ├── config.js            # Chaves de API e configuração
+│   ├── apis.js               # Helpers de integração
+│   └── main.js                # Lógica principal (frontend)
+├── db/
+│   ├── index.js              # Conexão PostgreSQL (pg Pool)
+│   └── schema.sql            # Estrutura das tabelas
 ├── pages/
-│   ├── admin.html          # Painel administrativo
-│   ├── cadastro.html       # Criação de conta
-│   ├── carrinho.html       # Carrinho de compras
-│   ├── dc.html             # Categoria DC
-│   ├── especiais.html      # Edições especiais
-│   ├── lancamentos.html    # Lançamentos
-│   ├── login.html          # Login
-│   ├── marvel.html         # Categoria Marvel
-│   ├── pedidos.html        # Histórico de pedidos
-│   ├── perfil.html         # Perfil do usuário
-│   ├── prevenda.html       # Pré-venda
-│   ├── privacidade.html    # Política de privacidade
-│   ├── redefinir-senha.html# Redefinição de senha
-│   ├── termos.html         # Termos de uso
-│   └── vender.html         # Área do vendedor PJ
-├── data/                   # Dados JSON (fallback local)
-├── server.js               # API REST (Express)
+│   ├── admin.html            # Painel administrativo
+│   ├── cadastro.html         # Criação de conta
+│   ├── carrinho.html          # Carrinho de compras
+│   ├── dc.html                 # Categoria DC
+│   ├── especiais.html          # Edições especiais
+│   ├── lancamentos.html        # Lançamentos
+│   ├── login.html              # Login
+│   ├── marvel.html             # Categoria Marvel
+│   ├── pedidos.html            # Histórico de pedidos
+│   ├── perfil.html             # Perfil do usuário
+│   ├── prevenda.html           # Pré-venda
+│   ├── privacidade.html        # Política de privacidade
+│   ├── redefinir-senha.html    # Redefinição de senha
+│   ├── termos.html             # Termos de uso
+│   └── vender.html             # Área do vendedor PJ
+├── data/                       # Dados JSON (fallback local)
+├── server.js                   # API REST (Express)
 ├── package.json
-├── docker-compose.yml      # Redis local para desenvolvimento
-└── .env                    # Variáveis de ambiente (não versionado)
+├── docker-compose.yml           # Redis local para desenvolvimento
+└── .env                          # Variáveis de ambiente (não versionado)
 ```
 
 ---
@@ -150,12 +156,13 @@ comic-geek-store/
 
 - [Node.js](https://nodejs.org/) v18 ou superior
 - [Redis](https://redis.io/) (ou Docker para subir localmente)
+- [PostgreSQL](https://www.postgresql.org/) (ou uma conta gratuita no [Neon](https://neon.tech))
 - Conta no [Mercado Pago](https://mercadopago.com.br) (para pagamentos)
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/viniciusrigobelo/comic-geek-store.git
+git clone https://github.com/alekxnv/comic-geek-store.git
 cd comic-geek-store
 ```
 
@@ -206,12 +213,16 @@ Crie um arquivo `.env` na raiz com as seguintes variáveis:
 ```env
 # Servidor
 PORT=3000
+NODE_ENV=production
 JWT_SECRET=sua_chave_secreta_aqui
 FRONTEND_URL=http://localhost:3000
 
 # Admin master
 ADMIN_USER=admin
 ADMIN_PASS=sua_senha_admin
+
+# PostgreSQL (opcional — sem isso usa arquivos JSON locais)
+DATABASE_URL=postgresql://usuario:senha@host/dbname?sslmode=require
 
 # Redis (opcional — usa JSON local como fallback)
 REDIS_URL=redis://localhost:6379
@@ -228,31 +239,37 @@ EMAILJS_TEMPLATE_ID=template_xxxxxxx
 EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
 ```
 
+> `NODE_ENV=production` é obrigatório em produção — sem ele, a conexão SSL com o Postgres falha silenciosamente.
+
 ---
 
 ## Deploy
 
-O projeto está configurado para deploy no **Railway** com Redis integrado.
+O projeto está configurado para deploy no **Render**, com PostgreSQL no **Neon** e Redis no **Upstash** — todos com tier gratuito.
 
 ### Passos para deploy
 
-1. Faça fork ou push do repositório para o GitHub
-2. Crie um novo projeto no [Railway](https://railway.app)
-3. Conecte ao repositório GitHub
-4. Adicione um serviço **Redis** ao projeto Railway
-5. Configure as variáveis de ambiente no painel do Railway
-6. O deploy acontece automaticamente a cada push na branch `main`
+1. Crie um banco gratuito no [Neon](https://neon.tech) e rode `db/schema.sql` no SQL Editor
+2. Crie um banco Redis gratuito no [Upstash](https://upstash.com) (use a connection string TCP, formato `redis://`)
+3. Crie um Web Service no [Render](https://render.com), conectado ao repositório GitHub (o projeto já tem `Dockerfile`, detectado automaticamente)
+4. Configure as variáveis de ambiente no painel do Render
+5. O deploy acontece automaticamente a cada push na branch `main`
 
-### Variáveis obrigatórias no Railway
+### Variáveis obrigatórias no Render
 
 ```
 JWT_SECRET
 ADMIN_USER
 ADMIN_PASS
 MP_ACCESS_TOKEN
-REDIS_URL          ← gerado automaticamente pelo serviço Redis do Railway
-FRONTEND_URL       ← URL pública do seu serviço (ex: https://seu-app.up.railway.app)
+NODE_ENV=production
+DATABASE_URL       ← connection string do Neon
+REDIS_URL          ← connection string TCP do Upstash
+FRONTEND_URL       ← URL pública do seu serviço (ex: https://seu-app.onrender.com)
+BACKEND_URL        ← mesma URL pública do serviço
 ```
+
+> Free tier do Render "dorme" após inatividade — considere um monitor no [UptimeRobot](https://uptimerobot.com) para manter o site sempre no ar.
 
 ---
 
