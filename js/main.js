@@ -3120,7 +3120,7 @@ function carregarPedidosAdmin() {
               <span>${i.nome} × ${i.qtd}</span>
               <span>R$ ${(i.preco * i.qtd).toFixed(2).replace(".",",")}</span>
             </div>`).join("")}
-          <div class="admin-pedido-total">Total: R$ ${(p.total || 0).toFixed(2).replace(".",",")}</div>
+          <div class="admin-pedido-total">Total: R$ ${Number(p.total || 0).toFixed(2).replace(".",",")}</div>
         </div>
       </div>`;
     }).join("");
