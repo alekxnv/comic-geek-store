@@ -101,11 +101,11 @@
   <!-- NAV -->
   <nav aria-label="Categorias da loja">
     <ul>
-      <li data-filtro="tudo" onclick="window.location='../index.html'">Tudo</li>
-      <li data-filtro="lancamentos" onclick="window.location='lancamentos.html'">Lançamentos</li>
-      <li data-filtro="prevenda" onclick="window.location='prevenda.html'">Pré-Venda</li>
-      <li data-filtro="marvel" onclick="window.location='marvel.html'"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
-      <li data-filtro="dc" onclick="window.location='dc.html'"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></li>
+      <li data-filtro="tudo" onclick="window.location='/'">Tudo</li>
+      <li data-filtro="lancamentos" onclick="window.location='/lancamentos'">Lançamentos</li>
+      <li data-filtro="prevenda" onclick="window.location='/prevenda'">Pré-Venda</li>
+      <li data-filtro="marvel" onclick="window.location='/marvel'"><img src="../img/logos/marvel.png" class="nav-icone-marvel" alt="Marvel"></li>
+      <li data-filtro="dc" onclick="window.location='/dc'"><img src="../img/logos/dc.png" class="nav-icone" alt="DC"></li>
       <li data-filtro="especiais" class="nav-ativo">Especiais</li>
     </ul>
   </nav>
@@ -128,115 +128,6 @@
     <!-- ESPECIAIS -->
     <div class="secao-grupo">
       <section class="lista-cards" id="lista-especiais" aria-label="Edições Especiais">
-
-        <article class="card-produto animar-up"
-          data-editora="marvel"
-          data-secao="especiais"
-          data-nome="Box Marvel - Era do Apocalipse"
-          data-preco="149.90"
-          data-img="../img/quadrinhos/guerracivil.jpg">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/guerracivil.jpg" alt="Box Marvel - Era do Apocalipse">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Box Marvel - Era do Apocalipse</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h3>R$199,90</h3>
-            <h2>R$149,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
-
-        <article class="card-produto animar-up"
-          data-editora="dc"
-          data-secao="especiais"
-          data-nome="Coleção DC - Histórias Épicas"
-          data-preco="139.90"
-          data-img="../img/quadrinhos/crisesinfinitas.jpg">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/crisesinfinitas.jpg" alt="Coleção DC - Histórias Épicas">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Coleção DC - Histórias Épicas</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h2>R$139,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
-
-        <article class="card-produto animar-up"
-          data-editora="dc"
-          data-secao="especiais"
-          data-nome="Edição de Luxo - Watchmen"
-          data-preco="79.90"
-          data-img="../img/quadrinhos/flash.png">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/flash.png" alt="Edição de Luxo - Watchmen">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Edição de Luxo - Watchmen</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h2>R$79,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
-
-        <article class="card-produto animar-up"
-          data-editora="marvel"
-          data-secao="especiais"
-          data-nome="Box - Saga do Infinito Completa"
-          data-preco="89.90"
-          data-img="../img/quadrinhos/desafioinfinito.jpg">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/desafioinfinito.jpg" alt="Box - Saga do Infinito Completa">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Box - Saga do Infinito Completa</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h2>R$89,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
-
-        <article class="card-produto animar-up"
-          data-editora="dc"
-          data-secao="especiais"
-          data-nome="Edição Especial - O Cavaleiro das Trevas"
-          data-preco="69.90"
-          data-img="../img/quadrinhos/batmanapiadamortal.webp">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/batmanapiadamortal.webp" alt="Edição Especial - O Cavaleiro das Trevas">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Edição Especial - O Cavaleiro das Trevas</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h2>R$69,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
-
-        <article class="card-produto animar-up"
-          data-editora="marvel"
-          data-secao="especiais"
-          data-nome="Marvel Omnibus - Clássicos Vol.1"
-          data-preco="99.90"
-          data-img="../img/quadrinhos/alloutavengers.jpg">
-          <div class="card-produto__imagem">
-            <img src="../img/quadrinhos/alloutavengers.jpg" alt="Marvel Omnibus - Clássicos Vol.1">
-          </div>
-          <div class="card-produto__nome">
-            <h3>Marvel Omnibus - Clássicos Vol.1</h3>
-          </div>
-          <div class="card-produto__preco">
-            <h2>R$99,90</h2>
-          </div>
-          <button class="card-produto__btn">+ Adicionar ao Carrinho</button>
-        </article>
 
       </section>
     </div>

@@ -1772,10 +1772,17 @@ function _mostrarResultadosBusca(resultados) {
 // =========================
 function carregarProdutosAPI() {
   if (!_backendUrl()) return;
+  const naHome = window.location.pathname === "/";
+  const LIMITE_HOME = 4;
+
   fetch("/api/produtos")
     .then(r => r.json())
     .then(lista => {
       if (!Array.isArray(lista)) return;
+
+      // Mais recentes primeiro
+      lista.sort((a, b) => new Date(b.criadoEm || 0) - new Date(a.criadoEm || 0));
+
       const gruposEditora = {
         marvel:    document.getElementById("lista-marvel"),
         dc:        document.getElementById("lista-dc"),
@@ -1787,6 +1794,10 @@ function carregarProdutosAPI() {
         lancamentos: document.getElementById("lista-lancamentos"),
         prevenda:    document.getElementById("lista-prevenda"),
         especiais:   document.getElementById("lista-especiais"),
+      };
+      const verMaisBotoes = {
+        marvel: "vermais-marvel", dc: "vermais-dc",
+        lancamentos: "vermais-lancamentos", prevenda: "vermais-prevenda", especiais: "vermais-especiais",
       };
 
       function criarCard(p) {
@@ -1815,21 +1826,31 @@ function carregarProdutosAPI() {
         return card;
       }
 
-      lista.forEach(p => {
-        const listaEditora = gruposEditora[p.editora];
-        if (listaEditora) {
-          listaEditora.appendChild(criarCard(p));
-          const grupoEl = listaEditora.closest(".secao-grupo");
+      function popular(listaEl, produtos, chaveVerMais) {
+        if (!listaEl) return;
+        const exibir = naHome ? produtos.slice(0, LIMITE_HOME) : produtos;
+        exibir.forEach(p => listaEl.appendChild(criarCard(p)));
+        if (produtos.length > 0) {
+          const grupoEl = listaEl.closest(".secao-grupo");
           if (grupoEl) grupoEl.style.display = "";
         }
+        if (naHome && chaveVerMais) {
+          const btn = document.getElementById(verMaisBotoes[chaveVerMais]);
+          if (btn) btn.classList.toggle("oculto", produtos.length <= LIMITE_HOME);
+        }
+      }
 
-        const listaSecao = gruposSecao[p.secao];
-        if (listaSecao) {
-          listaSecao.appendChild(criarCard(p));
-          const grupoEl = listaSecao.closest(".secao-grupo");
-          if (grupoEl) grupoEl.style.display = "";
-        }
+      Object.keys(gruposEditora).forEach(editora => {
+        const produtosDoGrupo = lista.filter(p => p.editora === editora);
+        popular(gruposEditora[editora], produtosDoGrupo, editora);
       });
+      Object.keys(gruposSecao).forEach(secao => {
+        const produtosDoGrupo = lista.filter(p => p.secao === secao);
+        popular(gruposSecao[secao], produtosDoGrupo, secao);
+      });
+
+      if (window._reinicializarScrollProdutos) window._reinicializarScrollProdutos();
+      if (window._reinicializarBotoesCarrinho) window._reinicializarBotoesCarrinho();
     })
     .catch(() => {});
 }
@@ -1988,7 +2009,8 @@ function inicializarBotoesCarrinho() {
   });
 
   // Abre modal ao clicar no card
-  document.querySelectorAll(".card-produto").forEach((card) => {
+  document.querySelectorAll(".card-produto:not([data-modal-ok])").forEach((card) => {
+    card.dataset.modalOk = "1";
     card.addEventListener("click", function (e) {
       if (e.target.closest(".card-produto__btn")) return;
       if (e.target.closest(".btn-favorito-card")) return;
@@ -1996,6 +2018,8 @@ function inicializarBotoesCarrinho() {
     });
   });
 }
+
+window._reinicializarBotoesCarrinho = inicializarBotoesCarrinho;
 
 // =========================
 // MODAL DETALHE DO PRODUTO
@@ -4148,11 +4172,19 @@ function atualizarPreviewImgVendedor(url) {
 
   function criarScrollHorizontal(lista) {
     if (!lista) return;
-    if (lista.dataset.autoScrollOk) return;
+
+    function getTotal() {
+      return lista.querySelectorAll(".card-produto").length;
+    }
+
+    if (lista.dataset.autoScrollOk) {
+      // já inicializado — só atualiza a contagem de bolinhas
+      if (lista._reconstruirDots) lista._reconstruirDots();
+      return;
+    }
     lista.dataset.autoScrollOk = "1";
 
     var timer = null;
-    var total  = lista.querySelectorAll(".card-produto").length;
 
     var dotsWrap = document.createElement("div");
     dotsWrap.className = "produto-dots";
@@ -4165,7 +4197,7 @@ function atualizarPreviewImgVendedor(url) {
     }
 
     function getNumPaginas() {
-      return Math.ceil(total / getVisiveis());
+      return Math.ceil(getTotal() / getVisiveis());
     }
 
     function getPaginaAtual() {
@@ -4193,6 +4225,7 @@ function atualizarPreviewImgVendedor(url) {
         })(i);
       }
     }
+    lista._reconstruirDots = reconstruirDots;
 
     function atualizarDots() {
       var p = Math.max(0, Math.min(getPaginaAtual(), dots.length - 1));

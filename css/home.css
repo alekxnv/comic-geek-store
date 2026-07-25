@@ -1976,4 +1976,8 @@ main {
   .secao-hero__inner {
     max-width: 1200px;
   }
+
+  .oculto {
+  display: none;
+}
 }
