@@ -1776,21 +1776,24 @@ function carregarProdutosAPI() {
     .then(r => r.json())
     .then(lista => {
       if (!Array.isArray(lista)) return;
-      const grupos = {
+      const gruposEditora = {
+        marvel:    document.getElementById("lista-marvel"),
+        dc:        document.getElementById("lista-dc"),
         panini:    document.getElementById("lista-panini"),
         image:     document.getElementById("lista-image"),
         darkhorse: document.getElementById("lista-darkhorse"),
       };
-      const hoje = Date.now();
-      const TRINTA = 30 * 24 * 60 * 60 * 1000;
-      lista.forEach(p => {
-        const listaEl = grupos[p.editora];
-        if (!listaEl) return;
+      const gruposSecao = {
+        lancamentos: document.getElementById("lista-lancamentos"),
+        prevenda:    document.getElementById("lista-prevenda"),
+        especiais:   document.getElementById("lista-especiais"),
+      };
+
+      function criarCard(p) {
         const esgotado = p.esgotado || p.estoque === 0;
         const preco = parseFloat(p.preco) || 0;
         const precoFmt = "R$ " + preco.toFixed(2).replace(".", ",");
         const origFmt = p.precoOriginal && p.precoOriginal > preco ? "R$ " + parseFloat(p.precoOriginal).toFixed(2).replace(".", ",") : "";
-        const isNovo = p.criadoEm && (hoje - new Date(p.criadoEm).getTime()) < TRINTA;
         const card = document.createElement("article");
         card.className = "card-produto";
         card.dataset.nome = sanitizar(p.nome);
@@ -1809,9 +1812,23 @@ function carregarProdutosAPI() {
           <div class="card-produto__nome"><h3>${sanitizar(p.nome)}</h3></div>
           <div class="card-produto__preco">${origFmt ? `<h3>${origFmt}</h3>` : ""}<h2>${precoFmt}</h2></div>
           <button class="card-produto__btn"${esgotado ? " disabled" : ""}>${esgotado ? "Esgotado" : "+ Adicionar ao Carrinho"}</button>`;
-        listaEl.appendChild(card);
-        const grupoEl = listaEl.closest(".secao-grupo");
-        if (grupoEl) grupoEl.style.display = "";
+        return card;
+      }
+
+      lista.forEach(p => {
+        const listaEditora = gruposEditora[p.editora];
+        if (listaEditora) {
+          listaEditora.appendChild(criarCard(p));
+          const grupoEl = listaEditora.closest(".secao-grupo");
+          if (grupoEl) grupoEl.style.display = "";
+        }
+
+        const listaSecao = gruposSecao[p.secao];
+        if (listaSecao) {
+          listaSecao.appendChild(criarCard(p));
+          const grupoEl = listaSecao.closest(".secao-grupo");
+          if (grupoEl) grupoEl.style.display = "";
+        }
       });
     })
     .catch(() => {});
