@@ -2964,7 +2964,7 @@ function _renderTabelaProdutos(todos) {
 
   tbody.innerHTML = todos.map(p => `
     <tr>
-      <td><img src="../${p.img}" class="admin-tabela__img" onerror="this.src='../img/quadrinhos/batman.png'"></td>
+      <td><img src="${p.img.startsWith('http') ? p.img : '../' + p.img}" class="admin-tabela__img" onerror="this.src='../img/quadrinhos/batman.png'"></td>
       <td>
         <strong>${p.nome}</strong>
         ${p._origem === "vendedor" ? '<span class="badge-vendedor">Vendedor</span>' : ""}
