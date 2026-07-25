@@ -2469,10 +2469,10 @@ function inicializarCadastro() {
 
     hashSenha(senha).then(senhaHash => {
       const novoUsuario = {
-        nome: sanitizar(nome),
+        nome: nome,
         login: loginUsuario,
         nomeExibido: loginUsuario, // nome que aparece no header
-        email: sanitizar(email),
+        email: email,
         senha: senhaHash,
         _senhaPlain: senha,
         tipo,
@@ -2482,20 +2482,20 @@ function inicializarCadastro() {
       if (tipo === "juridica") {
         const razao = document.getElementById("razao-social")?.value.trim();
         const cnpj = document.getElementById("cnpj")?.value.trim();
-        if (razao) novoUsuario.razaoSocial = sanitizar(razao);
-        if (cnpj) novoUsuario.cnpj = sanitizar(cnpj);
+        if (razao) novoUsuario.razaoSocial = razao;
+        if (cnpj) novoUsuario.cnpj = cnpj;
       } else {
         const cpf = document.getElementById("cpf")?.value.trim();
-        if (cpf) novoUsuario.cpf = sanitizar(cpf);
+        if (cpf) novoUsuario.cpf = cpf;
 
         novoUsuario.endereco = {
-          cep:         sanitizar(document.getElementById("cep")?.value.trim()         || ""),
-          rua:         sanitizar(document.getElementById("rua")?.value.trim()         || ""),
-          numero:      sanitizar(document.getElementById("numero")?.value.trim()      || ""),
-          complemento: sanitizar(document.getElementById("complemento")?.value.trim() || ""),
-          bairro:      sanitizar(document.getElementById("bairro")?.value.trim()      || ""),
-          cidade:      sanitizar(document.getElementById("cidade")?.value.trim()      || ""),
-          estado:      sanitizar(document.getElementById("estado")?.value.trim().toUpperCase() || ""),
+          cep:         document.getElementById("cep")?.value.trim()         || "",
+          rua:         document.getElementById("rua")?.value.trim()         || "",
+          numero:      document.getElementById("numero")?.value.trim()      || "",
+          complemento: document.getElementById("complemento")?.value.trim() || "",
+          bairro:      document.getElementById("bairro")?.value.trim()      || "",
+          cidade:      document.getElementById("cidade")?.value.trim()      || "",
+          estado:      document.getElementById("estado")?.value.trim().toUpperCase() || "",
         };
       }
 
@@ -2759,27 +2759,27 @@ function carregarAprovacoes() {
 
       return `
       <div class="aprovacao-card">
-        <div class="aprovacao-card__avatar">${u.nome.charAt(0).toUpperCase()}</div>
+        <div class="aprovacao-card__avatar">${sanitizar(u.nome).charAt(0).toUpperCase()}</div>
         <div class="aprovacao-card__info">
-          <h3>${u.nome}</h3>
+          <h3>${sanitizar(u.nome)}</h3>
 
           <div class="aprovacao-secao">
             <span class="aprovacao-secao__titulo">Dados da Empresa</span>
-            <p><span class="aprovacao-label">Razão Social</span> ${u.razaoSocial || "—"}</p>
-            <p><span class="aprovacao-label">CNPJ</span> ${u.cnpj || "—"}</p>
+            <p><span class="aprovacao-label">Razão Social</span> ${sanitizar(u.razaoSocial || "—")}</p>
+            <p><span class="aprovacao-label">CNPJ</span> ${sanitizar(u.cnpj || "—")}</p>
           </div>
 
           <div class="aprovacao-secao">
             <span class="aprovacao-secao__titulo">Endereço Comercial</span>
-            <p><span class="aprovacao-label">Endereço</span> ${enderecoTxt}</p>
-            ${end.cep ? `<p><span class="aprovacao-label">CEP</span> ${end.cep}</p>` : ""}
-            ${end.complemento ? `<p><span class="aprovacao-label">Complemento</span> ${end.complemento}</p>` : ""}
+            <p><span class="aprovacao-label">Endereço</span> ${sanitizar(enderecoTxt)}</p>
+            ${end.cep ? `<p><span class="aprovacao-label">CEP</span> ${sanitizar(end.cep)}</p>` : ""}
+            ${end.complemento ? `<p><span class="aprovacao-label">Complemento</span> ${sanitizar(end.complemento)}</p>` : ""}
           </div>
 
           <div class="aprovacao-secao">
             <span class="aprovacao-secao__titulo">Acesso</span>
-            <p><span class="aprovacao-label">E-mail</span> ${u.email}</p>
-            <p><span class="aprovacao-label">Login</span> ${u.login || "—"}</p>
+            <p><span class="aprovacao-label">E-mail</span> ${sanitizar(u.email)}</p>
+            <p><span class="aprovacao-label">Login</span> ${sanitizar(u.login || "—")}</p>
             <p><span class="aprovacao-label">Cadastrado em</span> ${dataCadastro}</p>
           </div>
         </div>
@@ -3165,8 +3165,8 @@ function carregarUsuariosAdmin() {
         : "";
       return `
         <tr>
-          <td><strong>${u.nome}</strong><br><small style="color:#aaa">${u.login || ""}</small></td>
-          <td>${u.email}${u.razaoSocial ? `<br><small style="color:#888">${u.razaoSocial}</small>` : ""}</td>
+          <td><strong>${sanitizar(u.nome)}</strong><br><small style="color:#aaa">${sanitizar(u.login || "")}</small></td>
+          <td>${sanitizar(u.email)}${u.razaoSocial ? `<br><small style="color:#888">${sanitizar(u.razaoSocial)}</small>` : ""}</td>
           <td>
             <span class="admin-tabela__badge" style="background:#f3ebff;color:var(--cor-primaria)">${u.tipo === "juridica" ? "🏢 Jurídica" : "👤 Física"}</span>
             ${statusBadge}${aprovInfo}
