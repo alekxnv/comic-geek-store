@@ -1,14 +1,18 @@
 # Comic Geek Store
 
-Loja virtual de quadrinhos full-stack com pagamento real, painel administrativo, suporte a vendedores PJ e notificações push.
+Loja virtual de quadrinhos full-stack com checkout real, painel administrativo, área para vendedores PJ e experiências de compra modernas.
 
-> Projeto iniciado como trabalho acadêmico em 2023 e evoluído para uma aplicação completa, com backend em produção no Render.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> Projeto desenvolvido para oferecer uma experiência completa de e-commerce com integração de pagamentos, gestão de pedidos e administração de catálogo.
+
+**Produção:** [comic-geek-store.onrender.com](https://comic-geek-store.onrender.com)
 
 ---
 
 ## Sumário
 
-- [Sobre](#sobre)
+- [Visão Geral](#visão-geral)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias](#tecnologias)
 - [Estrutura do Projeto](#estrutura-do-projeto)
@@ -20,47 +24,32 @@ Loja virtual de quadrinhos full-stack com pagamento real, painel administrativo,
 
 ---
 
-## Sobre
+## Visão Geral
 
-A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, mangás e colecionáveis. Conta com catálogo de produtos, carrinho de compras, checkout via Mercado Pago, painel administrativo e área exclusiva para vendedores Pessoa Jurídica cadastrarem seus próprios produtos.
-
-**Produção:** [comic-geek-store.onrender.com](https://comic-geek-store.onrender.com)
+A **Comic Geek Store** é uma aplicação completa para venda de quadrinhos, mangás e colecionáveis, com foco em usabilidade, segurança e operação real. O projeto reúne frontend, backend, integração com pagamentos e recursos administrativos em uma plataforma única.
 
 ---
 
 ## Funcionalidades
 
-### Loja
-- Catálogo com filtro por categoria (Marvel, DC, Lançamentos, Pré-Venda, Especiais)
+### Para clientes
+- Catálogo com filtros por categoria: Marvel, DC, Lançamentos, Pré-Venda e Especiais
 - Busca por nome de produto
-- Modal de detalhes com seletor de quantidade
-- Carrinho persistido no localStorage
-- Cálculo de frete por CEP (PAC e SEDEX)
-- Cupons de desconto
+- Modal de detalhes com seleção de quantidade
+- Carrinho persistido e cálculo de frete por CEP
+- Cupons de desconto e fluxo de checkout integrado
+- Histórico de pedidos e visualização de status
 
-### Pagamento
-- Integração com **Mercado Pago** (cartão, Pix, boleto — até 12x)
-- Pedidos com expiração automática (link e registro excluídos após 24h sem pagamento)
-- Webhook para confirmação de pagamento
-- Histórico de pedidos por usuário
-
-### Autenticação e Cadastro
-- Cadastro Pessoa Física e Pessoa Jurídica
-- Login por e-mail ou nome de usuário
-- JWT com expiração de 7 dias (usuários) ou 8 horas (admins)
-- Recuperação de senha por e-mail (EmailJS)
-- Bloqueio por tentativas excessivas de login
-
-### Painel Admin
-- Gerenciamento completo de produtos, pedidos e usuários
-- Aprovação/rejeição de vendedores PJ com rastreio de qual admin aprovou
+### Para administradores
+- Gestão completa de produtos, pedidos e usuários
+- Aprovação e acompanhamento de vendedores Pessoa Jurídica
 - Cadastro de múltiplas contas administrativas
-- Barra de administração ao navegar no site como admin
+- Painel administrativo integrado ao fluxo do site
 
-### Vendedores PJ
-- Área exclusiva "Minha Loja" após aprovação
-- Cadastro de produtos com imagem, preço, desconto e categoria
-- Gerenciamento de envios com nota fiscal (NF-e)
+### Para vendedores PJ
+- Área exclusiva para cadastro e gerenciamento de produtos
+- Upload de imagem, preço, desconto e categoria
+- Organização de envios e acompanhamento de vendas
 
 ---
 
@@ -69,84 +58,48 @@ A **Comic Geek Store** é uma loja virtual completa para venda de quadrinhos, ma
 ### Frontend
 | Tecnologia | Uso |
 |---|---|
-| HTML5 semântico | Estrutura das páginas |
-| CSS3 modularizado | Estilização por componente |
-| JavaScript (ES6+) | Lógica client-side, SPA-like |
-| Google Fonts (Bangers, Montserrat) | Tipografia temática |
+| HTML5 | Estrutura das páginas |
+| CSS3 | Estilização modular e responsiva |
+| JavaScript (ES6+) | Lógica de interface e interações |
+| Google Fonts | Tipografia temática |
 
 ### Backend
 | Tecnologia | Uso |
 |---|---|
-| Node.js + Express | API REST |
-| PostgreSQL (Neon) | Persistência de dados em produção |
-| Redis | Persistência de dados em produção |
-| JSON (fallback) | Persistência local em desenvolvimento |
-| JWT (jsonwebtoken) | Autenticação stateless |
+| Node.js + Express | API REST e serviços do sistema |
+| PostgreSQL | Persistência em produção |
+| Redis | Cache e persistência auxiliar |
+| JWT | Autenticação segura |
 | bcryptjs | Hash de senhas |
 | Mercado Pago SDK | Processamento de pagamentos |
-| EmailJS | Envio de e-mails sem SMTP |
+| EmailJS | Envio de e-mails |
 
 ### Infraestrutura
 | Serviço | Uso |
 |---|---|
-| Render | Hospedagem do backend (Docker) |
+| Render | Hospedagem do backend |
 | Neon | Banco de dados PostgreSQL |
 | Upstash | Redis gerenciado |
-| GitHub | Versionamento e CI/CD |
-| Microsoft Clarity | Heatmaps e gravação de sessão |
-| Google Analytics GA4 | Métricas de acesso |
-| OneSignal | Notificações push |
-| Tidio | Chat ao vivo |
+| GitHub | Versionamento e deploy contínuo |
+| Clarity / GA4 | Métricas e análise de uso |
+| OneSignal / Tidio | Notificações e atendimento |
 
 ---
 
 ## Estrutura do Projeto
 
-```
+```text
 comic-geek-store/
-├── css/
-│   ├── global.css          # Reset, header, footer, variáveis
-│   ├── home.css             # Banner, cards de produto, modal
-│   ├── admin.css            # Painel administrativo
-│   ├── cadastro.css         # Formulário de cadastro
-│   ├── carrinho.css         # Página do carrinho
-│   ├── login.css            # Página de login
-│   ├── pedidos.css          # Histórico de pedidos
-│   ├── perfil.css           # Página de perfil
-│   ├── vender.css           # Área do vendedor PJ
-│   └── animations.css       # Animações globais
-├── img/
-│   ├── icons/               # Ícones da interface
-│   ├── logos/                # Logo e banners
-│   └── quadrinhos/           # Capas dos produtos
-├── js/
-│   ├── config.js            # Chaves de API e configuração
-│   ├── apis.js               # Helpers de integração
-│   └── main.js                # Lógica principal (frontend)
-├── db/
-│   ├── index.js              # Conexão PostgreSQL (pg Pool)
-│   └── schema.sql            # Estrutura das tabelas
-├── pages/
-│   ├── admin.html            # Painel administrativo
-│   ├── cadastro.html         # Criação de conta
-│   ├── carrinho.html          # Carrinho de compras
-│   ├── dc.html                 # Categoria DC
-│   ├── especiais.html          # Edições especiais
-│   ├── lancamentos.html        # Lançamentos
-│   ├── login.html              # Login
-│   ├── marvel.html             # Categoria Marvel
-│   ├── pedidos.html            # Histórico de pedidos
-│   ├── perfil.html             # Perfil do usuário
-│   ├── prevenda.html           # Pré-venda
-│   ├── privacidade.html        # Política de privacidade
-│   ├── redefinir-senha.html    # Redefinição de senha
-│   ├── termos.html             # Termos de uso
-│   └── vender.html             # Área do vendedor PJ
-├── data/                       # Dados JSON (fallback local)
-├── server.js                   # API REST (Express)
-├── package.json
-├── docker-compose.yml           # Redis local para desenvolvimento
-└── .env                          # Variáveis de ambiente (não versionado)
+├── css/                 # Estilos do frontend
+├── img/                 # Imagens, ícones e capas
+├── js/                  # Configuração e lógica do frontend
+├── db/                  # Conexão e schema do banco de dados
+├── pages/               # Páginas HTML do site
+├── data/                # Dados JSON usados como fallback local
+├── server.js            # API REST e regras de negócio
+├── package.json         # Dependências e scripts
+├── docker-compose.yml   # Redis local para desenvolvimento
+└── .env                 # Variáveis de ambiente (não versionado)
 ```
 
 ---
@@ -154,123 +107,87 @@ comic-geek-store/
 ## Como Executar
 
 ### Pré-requisitos
+- Node.js 18+
+- Redis (ou Docker para subir localmente)
+- PostgreSQL (ou conta gratuita no Neon)
+- Conta no Mercado Pago para pagamentos reais
 
-- [Node.js](https://nodejs.org/) v18 ou superior
-- [Redis](https://redis.io/) (ou Docker para subir localmente)
-- [PostgreSQL](https://www.postgresql.org/) (ou uma conta gratuita no [Neon](https://neon.tech))
-- Conta no [Mercado Pago](https://mercadopago.com.br) (para pagamentos)
+### Passos
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/alekxnv/comic-geek-store.git
+   cd comic-geek-store
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Configure as variáveis de ambiente criando um arquivo `.env` na raiz. Consulte [“.env.example”](.env.example) e a seção abaixo.
+4. Inicie o Redis localmente, se necessário:
+   ```bash
+   docker-compose up -d
+   ```
+5. Rode a aplicação:
+   ```bash
+   # Produção
+   npm start
 
-### 1. Clone o repositório
-
-```bash
-git clone https://github.com/alekxnv/comic-geek-store.git
-cd comic-geek-store
-```
-
-### 2. Instale as dependências
-
-```bash
-npm install
-```
-
-### 3. Configure as variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto (veja a seção [Variáveis de Ambiente](#variáveis-de-ambiente)).
-
-### 4. Suba o Redis localmente (opcional, via Docker)
-
-```bash
-docker-compose up -d
-```
-
-> Sem Redis configurado, o servidor usa arquivos JSON na pasta `data/` como fallback.
-
-### 5. Inicie o servidor
-
-```bash
-# Produção
-npm start
-
-# Desenvolvimento (hot reload)
-npm run dev
-```
-
-### 6. Acesse o frontend
-
-Abra o arquivo `index.html` no navegador ou sirva a pasta com qualquer servidor estático:
-
-```bash
-npx serve .
-```
-
-> O frontend consome a API definida em `js/config.js` → `backendUrl`.
+   # Desenvolvimento
+   npm run dev
+   ```
+6. Acesse o frontend abrindo o arquivo `index.html` no navegador ou servindo a pasta com um servidor estático:
+   ```bash
+   npx serve .
+   ```
 
 ---
 
 ## Variáveis de Ambiente
 
-Crie um arquivo `.env` na raiz com as seguintes variáveis:
+Crie um arquivo `.env` na raiz do projeto com as variáveis abaixo:
 
 ```env
-# Servidor
 PORT=3000
 NODE_ENV=production
 JWT_SECRET=sua_chave_secreta_aqui
 FRONTEND_URL=http://localhost:3000
-
-# Admin master
 ADMIN_USER=admin
 ADMIN_PASS=sua_senha_admin
-
-# PostgreSQL (opcional — sem isso usa arquivos JSON locais)
 DATABASE_URL=postgresql://usuario:senha@host/dbname?sslmode=require
-
-# Redis (opcional — usa JSON local como fallback)
 REDIS_URL=redis://localhost:6379
-
-# Mercado Pago
 MP_ACCESS_TOKEN=APP_USR-xxxxxxxxxxxxxxxxxxxx
-
-# Expiração de pedidos pendentes (padrão: 24h)
 PEDIDO_EXPIRACAO_HORAS=24
-
-# EmailJS (envio de e-mails)
 EMAILJS_SERVICE_ID=service_xxxxxxx
 EMAILJS_TEMPLATE_ID=template_xxxxxxx
 EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
 ```
 
-> `NODE_ENV=production` é obrigatório em produção — sem ele, a conexão SSL com o Postgres falha silenciosamente.
+> `NODE_ENV=production` é obrigatório em produção para evitar falhas na conexão com o PostgreSQL.
 
 ---
 
 ## Deploy
 
-O projeto está configurado para deploy no **Render**, com PostgreSQL no **Neon** e Redis no **Upstash** — todos com tier gratuito.
+O projeto está preparado para deploy no Render, com PostgreSQL no Neon e Redis no Upstash.
 
-### Passos para deploy
-
-1. Crie um banco gratuito no [Neon](https://neon.tech) e rode `db/schema.sql` no SQL Editor
-2. Crie um banco Redis gratuito no [Upstash](https://upstash.com) (use a connection string TCP, formato `redis://`)
-3. Crie um Web Service no [Render](https://render.com), conectado ao repositório GitHub (o projeto já tem `Dockerfile`, detectado automaticamente)
-4. Configure as variáveis de ambiente no painel do Render
-5. O deploy acontece automaticamente a cada push na branch `main`
+### Passos principais
+1. Crie um banco PostgreSQL no Neon e aplique o schema de [db/schema.sql](db/schema.sql)
+2. Crie um banco Redis no Upstash
+3. Configure as variáveis de ambiente no painel do Render
+4. Conecte o repositório GitHub ao serviço Web e faça o deploy
 
 ### Variáveis obrigatórias no Render
-
-```
+```text
 JWT_SECRET
 ADMIN_USER
 ADMIN_PASS
 MP_ACCESS_TOKEN
 NODE_ENV=production
-DATABASE_URL       ← connection string do Neon
-REDIS_URL          ← connection string TCP do Upstash
-FRONTEND_URL       ← URL pública do seu serviço (ex: https://seu-app.onrender.com)
-BACKEND_URL        ← mesma URL pública do serviço
+DATABASE_URL
+REDIS_URL
+FRONTEND_URL
+BACKEND_URL
 ```
-
-> Free tier do Render "dorme" após inatividade — considere um monitor no [UptimeRobot](https://uptimerobot.com) para manter o site sempre no ar.
 
 ---
 
