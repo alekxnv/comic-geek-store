@@ -15,6 +15,7 @@ Loja virtual de quadrinhos full-stack com pagamento real, painel administrativo,
 - [Como Executar](#como-executar)
 - [Variáveis de Ambiente](#variáveis-de-ambiente)
 - [Deploy](#deploy)
+- [Licença](#licença)
 - [Autores](#autores)
 
 ---
@@ -270,6 +271,14 @@ BACKEND_URL        ← mesma URL pública do serviço
 ```
 
 > Free tier do Render "dorme" após inatividade — considere um monitor no [UptimeRobot](https://uptimerobot.com) para manter o site sempre no ar.
+
+---
+
+## Licença
+
+Este projeto está licenciado sob a MIT License. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+Copyright © 2026 Alexsander Neneve e Vinicius Rigobelo de Oliveira.
 
 ---
 
