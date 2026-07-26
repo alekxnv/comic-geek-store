@@ -42,7 +42,7 @@
 
   <!-- HEADER -->
   <header>
-    <a href="../index.html"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
+    <a href="/"><img src="../img/logos/logo.png" alt="Logo" class="header-logo"></a>
 
     <div class="header-pesquisa">
       <form id="form-pesquisa" autocomplete="off" aria-label="Pesquisar produtos">
@@ -221,6 +221,7 @@
                 <span class="preco-original">De: <s id="modal-preco-original"></s></span>
                 <span class="preco-venda">Por: <strong id="modal-preco-venda"></strong></span>
               </div>
+              <p class="produto-modal__parcela" id="modal-parcela"></p>
             </div>
 
             <div class="produto-modal__qtd-row">
@@ -239,9 +240,17 @@
               <button class="btn-comprar-modal" onclick="comprarModal()">COMPRAR AGORA</button>
               <button class="btn-carrinho-modal" onclick="adicionarCarrinhoModal()">+ Adicionar ao Carrinho</button>
             </div>
+            <a id="modal-link-pagina" href="#" class="produto-modal__ver-pagina" onclick="fecharModalProduto()">Ver página completa do produto →</a>
           </div>
 
         </div>
+
+        <div class="produto-modal__relacionados" id="modal-relacionados-area" style="display:none">
+          <div class="produto-modal__divisor"></div>
+          <h3 class="relacionados-titulo">Você também pode gostar</h3>
+          <div class="relacionados-lista" id="relacionados-lista"></div>
+        </div>
+
       </div>
     </div>
   </div>

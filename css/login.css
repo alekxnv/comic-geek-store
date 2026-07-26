@@ -152,6 +152,9 @@ main.login {
   color: #888;
   padding: 0 4px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .login-campo .cad-toggle-senha:hover { color: #444; }
 

@@ -154,6 +154,7 @@
       font-weight: 700;
       min-width: 20px;
       text-align: center;
+      color: #222;
     }
     /* Avaliações */
     .produto-avaliacoes {
@@ -304,7 +305,7 @@
           <div class="produto-layout">
             <div class="produto-img-col">
               ${desconto > 0 ? `<div class="produto-img-badge" style="display:block">-${desconto}% OFF</div>` : ""}
-              <img src="../${produto.img}" alt="${produto.nome}">
+              <img src="${produto.img.startsWith('http') ? produto.img : '../' + produto.img}" alt="${produto.nome}">
             </div>
             <div class="produto-info-col">
               <h1 class="produto-titulo">${produto.nome}</h1>
@@ -343,14 +344,36 @@
         _carregarAvaliacoesPagina(produto.nome);
       }
 
-      // Busca o produto a partir dos dados da home via fetch estático
-      fetch("/")
-        .then(r => r.text())
-        .then(html => {
+      // Busca o produto na API (fonte principal agora) e, como reforço, também na vitrine estática
+      Promise.all([
+        fetch("/api/produtos").then(r => r.json()).catch(() => []),
+        fetch("/").then(r => r.text())
+      ]).then(([apiLista, html]) => {
+        let produto = null;
+
+        if (Array.isArray(apiLista)) {
+          const match = apiLista.find(p => {
+            const nomeP = p.nome || "";
+            return pathSlug
+              ? slugify(nomeP) === decodeURIComponent(pathSlug)
+              : nomeP.toLowerCase() === nomeBuscado.toLowerCase();
+          });
+          if (match) {
+            produto = {
+              nome: match.nome,
+              preco: parseFloat(match.preco),
+              img: match.img,
+              editora: match.editora || "marvel",
+              secao: match.secao || "",
+              precoOriginal: match.precoOriginal ? parseFloat(match.precoOriginal) : null,
+            };
+          }
+        }
+
+        if (!produto) {
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, "text/html");
           const cards = doc.querySelectorAll(".card-produto");
-          let produto = null;
           cards.forEach(card => {
             const cardNome = card.dataset.nome || "";
             const match = pathSlug
@@ -370,19 +393,20 @@
               };
             }
           });
-          if (produto) {
-            renderProduto(produto);
-          } else {
-            container.innerHTML = `
-              <div class="produto-nao-encontrado">
-                <h2>Produto não encontrado</h2>
-                <p><a href="/">Voltar para a loja</a></p>
-              </div>`;
-          }
-        })
-        .catch(() => {
-          container.innerHTML = `<div class="produto-nao-encontrado"><h2>Erro ao carregar produto.</h2><p><a href="/">Voltar</a></p></div>`;
-        });
+        }
+
+        if (produto) {
+          renderProduto(produto);
+        } else {
+          container.innerHTML = `
+            <div class="produto-nao-encontrado">
+              <h2>Produto não encontrado</h2>
+              <p><a href="/">Voltar para a loja</a></p>
+            </div>`;
+        }
+      }).catch(() => {
+        container.innerHTML = `<div class="produto-nao-encontrado"><h2>Erro ao carregar produto.</h2><p><a href="/">Voltar</a></p></div>`;
+      });
 
       window.mudarQtdPagina = function(delta) {
         window._qtdPaginaProduto = Math.max(1, (window._qtdPaginaProduto || 1) + delta);

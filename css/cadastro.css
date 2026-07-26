@@ -194,6 +194,7 @@ main.cadastro {
   line-height: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .cad-toggle-senha:hover { color: #555; transform: none; }
